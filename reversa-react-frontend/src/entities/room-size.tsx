@@ -1,0 +1,1 @@
+export type RoomSize = "small" | "medium" | "large"
