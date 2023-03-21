@@ -1,0 +1,7 @@
+---
+Student:
+  $ref: "./Student.yaml"
+Room:
+  $ref: "./Room.yaml"
+Group:
+  $ref: "./Group.yaml"
