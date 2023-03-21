@@ -1,6 +1,3 @@
 {
-    "yaml.schemas": {
-        "openapi:v3": "file:///home/eharvey/GitHub/Reversa/api/routes/all.yaml"
-    },
     "files.eol": "\n"
 }
