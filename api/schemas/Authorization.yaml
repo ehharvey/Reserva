@@ -1,0 +1,11 @@
+# After logging in, the client will receive an Authorization Token
+# to use on privileged requests.
+---
+type: object
+properties:
+  accessToken:
+    type: string
+    example: aaa-bbb-ccc
+  expiresAt:
+    type: string
+    format: date-time
