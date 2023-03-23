@@ -1,0 +1,44 @@
+openapi: '3.0.2'
+info:
+  title: Authentication Microservice
+  version: '0.0.1'
+servers:
+  - url: https://auth.reserva.emilharvey.ca
+paths:
+  /login:
+    post:
+      responses:
+        '201':
+          description: Authentication Passed
+          content:
+            application/json:
+              schema:
+                properties:
+                  authorization:
+                    $ref: "#/components/schemas/Authorization"
+        '401':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                usernamePasswordPair:
+                  $ref: "#/components/schemas/UsernamePasswordPair"
+  /validate:
+    put:
+      responses:
+        '200':
+          description: Authentication Token is valid
+        '401':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorization:
+                  $ref: "#/components/schemas/Authorization"
+components:
+  schemas:
+    $ref: "../schemas/_index.yaml"
