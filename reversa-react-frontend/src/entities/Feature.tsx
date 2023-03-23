@@ -3,5 +3,5 @@ import { Path } from "typescript"
 export type Feature = {
     name: string
     icon_path: Path
-    quantity: bigint | null
+    quantity: number | null
 }

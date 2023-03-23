@@ -1,3 +1,5 @@
-import { RoomSize } from "./room-size";
-import { Room } from "./room";
-import { Feature } from "./feature";
+import { RoomSize } from "./RoomSize";
+import { Room } from "./Room";
+import { Feature } from "./Feature";
+import { Location } from "./Location";
+import { Student } from "./Student";
