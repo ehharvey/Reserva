@@ -1,8 +1,14 @@
 import React from 'react';
 import logo from './assets/logo.svg';
 import './App.css';
+import { Room } from './entities/room';
+import { Feature } from './entities/feature';
 
 function App() {
+  var features = {} as Feature;
+  var room = {name: "TestRoom", id: 1, } as Room;
+  
+
   return (
     <div className="App">
       <header className="App-header">
