@@ -5,16 +5,80 @@ info:
 servers:
   - url: https://room-booking.reserva.emilharvey.ca
 paths:
-  /test:
+  /bookings/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
     get:
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
           description: OK
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+    post:
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Student"
+      responses:
+        '201':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Created
+          description: Created
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+
+  /bookings:
+    get:
+      parameters:
+        - name: student-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of student object. Mutually exclusive with room-id.
+        - name: room-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of room object. Mutually exclusive with student-id.
+
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Availability"
+          description: When provided with `object ID` of `student`/`room`, return all bookings associate with that `student`/`room`.
+        
+        '400':
+          description: Either `student-id` or `room-id` are required.
+
+
 components:
   schemas:
     $ref: "../schemas/_index.yaml"
