@@ -25,6 +25,20 @@ paths:
               properties:
                 usernamePasswordPair:
                   $ref: "#/components/schemas/UsernamePasswordPair"
+  /validate:
+    put:
+      responses:
+        '200':
+          description: Authentication Token is valid
+        '401':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorization:
+                  $ref: "#/components/schemas/Authorization"
 components:
   schemas:
     $ref: "../schemas/_index.yaml"
