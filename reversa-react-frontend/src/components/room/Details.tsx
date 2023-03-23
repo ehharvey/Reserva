@@ -1,9 +1,4 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
 import { Room } from "../../entities/Room";
-import { Calendar } from "./Calendar";
 import { Card, ListGroup, Image, Button, Badge } from 'react-bootstrap';
 
 export function Details(room: Room) {
