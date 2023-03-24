@@ -38,11 +38,7 @@ paths:
         - Room Management
       summary: Updates a Room object
       description: >
-        ## More Information
-
-        Request for `PUT /rooms/{id}` requires a body that contains all information of the Room except for its id. 
-        (The id of the room will be auto-incremented).
-        Response body shows the body that contains 
+        Updates an existing room (identified by `id`).
       operationId: putRoomId
       parameters:
         - name: id
