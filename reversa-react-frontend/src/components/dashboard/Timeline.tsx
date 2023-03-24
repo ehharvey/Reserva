@@ -1,5 +1,4 @@
 import { Card, Container, Stack } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
 import { Student } from "../../entities/Student"
 
 

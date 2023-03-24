@@ -5,7 +5,6 @@ import meeting_room from "./assets/meeting_room.jpg"
 import { Room } from './entities/Room';
 import { Feature } from './entities/Feature';
 import { Location } from './entities/Location';
-import { Details } from './components/room/Details';
 import { ScheduleItem } from './entities/ScheduleItem';
 import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
