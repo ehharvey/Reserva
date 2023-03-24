@@ -9,14 +9,11 @@ properties:
   description:
     type: string
     example: Large Room with Low Ceilings
-  numberOfOccupants:
-    type: int64
-    example: 4
-  accessibleFriendly:
-    type: boolean
-    example: true
-  powerAvailable: 
-    type: boolean
-    example: true
+  features:
+    type: array
+    items: 
+      anyOf:
+        - $ref: "./BooleanFeature.yaml"
+        - $ref: "./NumericalFeature.yaml"
   
   
