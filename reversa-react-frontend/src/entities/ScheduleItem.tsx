@@ -1,6 +1,7 @@
 import { Room } from "./Room"
 
 export type ScheduleItem = {
-    datetime: Date
+    startDate: Date
+    endDate: Date
     room: Room
 }
