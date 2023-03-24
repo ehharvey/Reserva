@@ -1,4 +1,3 @@
-import { Url } from "url"
 import { Feature } from "./Feature"
 import { Location } from "./Location"
 import { RoomSize } from "./RoomSize"
@@ -10,4 +9,5 @@ export interface Room {
     size: RoomSize
     image_url: string
     features: Array<Feature>
+    
 }
