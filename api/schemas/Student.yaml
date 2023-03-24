@@ -5,7 +5,7 @@ properties:
     type: integer
     format: int64
     example: 10
-    "readOnly": true
+    readOnly: true
   firstName:
     type: string
     example: Taylor
