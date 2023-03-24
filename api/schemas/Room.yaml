@@ -4,7 +4,7 @@ properties:
   id:
     type: integer
     format: int64
-    "readOnly": true
+    readOnly: true
     example: 10
   description:
     type: string
