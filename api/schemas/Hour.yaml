@@ -1,0 +1,11 @@
+---
+type: object
+properties:
+  hour:
+    type: string
+  available:
+    type: boolean
+    readOnly: true
+  booked:
+    type: boolean
+    readOnly: true

@@ -8,4 +8,6 @@ Group:
 Booking:
   $ref: "./Booking.yaml"
 Availability:
-    $ref: "./Availability.yaml"
+  $ref: "./Availability.yaml"
+Hours:
+  $ref: "./Hour.yaml"

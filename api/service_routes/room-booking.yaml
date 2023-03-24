@@ -15,12 +15,15 @@ paths:
         minimum: 1
       description: The user ID
     get:
+      tags: 
+        - Booking
+      description: Retrieves information about a specific booking identified by the `id` parameter.
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Student"
+                $ref: "#/components/schemas/Booking"
           description: OK
         '400':
           content:
@@ -29,20 +32,36 @@ paths:
                 type: string
                 example: Bad Request
           description: Bad Request
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Student"
+    put:
+      tags: 
+        - Booking
+      description: Update a specific booking identified by the `id` parameter with the information provided in the request body.
       responses:
-        '201':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+          description: OK
+        '400':
           content:
             text/plain:
               schema:
                 type: string
-                example: Created
-          description: Created
+                example: Bad Request
+          description: Bad Request
+    delete:
+      tags: 
+        - Booking
+      description: Delete a booking specified by `Booking ID`.
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Deleted
+          description: Deleted
         '400':
           content:
             text/plain:
@@ -51,8 +70,10 @@ paths:
                 example: Bad Request
           description: Bad Request
 
+
   /bookings:
     get:
+      description: Retrieve all bookings associated with a student or a room.
       parameters:
         - name: student-id
           in: query
@@ -72,11 +93,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Availability"
-          description: When provided with `object ID` of `student`/`room`, return all bookings associate with that `student`/`room`.
+                $ref: "#/components/schemas/Booking"
+          description: " "
         
         '400':
           description: Either `student-id` or `room-id` are required.
+    
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
+      responses:
+        '201':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Created
+          description: Created
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
 
 
 components:

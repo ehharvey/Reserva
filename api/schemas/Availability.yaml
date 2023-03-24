@@ -14,25 +14,22 @@ properties:
     format: int64
     example: 100
     readOnly: true
+    description: 
   room-id:
     type: integer
     format: int64
     example: 100
+    description: 
   date:
     type: string
     format: date
     example: YYYY-mm-dd
+    description: 
   hours:
     type: array
     minItems: 0
     maxItems: 24
     items:
-      type: object
-      properties:
-        hour:
-          type: string
-        Available:
-          type: boolean
-        Booked:
-          type: boolean
+      $ref: "./Hour.yaml"
+    description: 
     
