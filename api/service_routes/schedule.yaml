@@ -5,16 +5,107 @@ info:
 servers:
   - url: https://schedule.reserva.emilharvey.ca
 paths:
-  /test:
+  /schedules:
+    parameters:
+        - name: type
+          in: query
+          required: true
+          description: >
+
+            **Type:**
+
+            - base: The base schedule type applies a schedule to all dates for all rooms.
+
+            - default: The default schedule type applies a schedule to all dates for a specific room.
+
+            - overwrite: The overwrite schedule type applies a schedule to a specific date for a specific room.
+          
+          schema:
+            type: string
+            enum: [base, default, overwrite]
+
+        - name: room-id
+          in: query
+          description: The ID of room object.
+          schema:
+            type: integer
+            format: int64
+          
+        - name: date
+          in: query
+          description: The ID of room object. Mutually exclusive with student-id.
+          schema:
+            type: string
+            format: date
     get:
+      description: Retrieves a specific schedule identified by the `room-id`, `type`, and `date` query parameters.
+
       responses:
         '200':
           description: OK
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Student"
+        '400':
+          description: Bad request
+        '404':
+          description: Item Not Found
+
+    post:
+      description: Create a specific schedule that aply to a specific room identified by the `room-id`, `type`, and `date` query parameters.
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: >
+            **Type:**
+
+            - default: The default schedule type applies a schedule to all dates for a specific room.
+
+            - overwrite: The overwrite schedule type applies a schedule to a specific date for a specific room.
+          
+          schema:
+            type: string
+            enum: [default, overwrite]
+
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+
+    put:
+      description: Update a specific schedule identified by the `room-id`, `type`, and `date` query parameters.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '404':
+          description: Item Not Found
+
+    delete:
+      description: Delete a specific schedule for a room identified by the `room-id`, `type`, and `date` query parameters.
+      parameters:
+        - name: type
+          in: query
+          required: true
+
+          description: >
+            **Type:**
+
+            - default: The default schedule type applies a schedule to all dates for a specific room.
+
+            - overwrite: The overwrite schedule type applies a schedule to a specific date for a specific room.
+       
+          schema:
+            type: string
+            enum: [default, overwrite]
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '404':
+          description: Item Not Found
+        
 components:
   schemas:
     $ref: "../schemas/_index.yaml"
