@@ -1,30 +1,30 @@
-import Table from 'react-bootstrap/Table';
+import { Card, Container, Stack } from 'react-bootstrap';
 import { Student } from "../../entities/Student"
+
 
 export function Timeline({schedule}: Student) {
     return (
-        <Table striped bordered>
-            <thead>
-                <tr>
-                    <th>
-                        Room
-                    </th>
-                    <th>
-                        Time
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {schedule.items.map(i =>
-                    <tr>
-                        <td>
-                            {i.room.location.name}
-                        </td>
-                        <td>
-                            {i.datetime.toLocaleTimeString()}
-                        </td>
-                    </tr>)}
-            </tbody>
-        </Table>
+        <Container style={{ maxWidth: "720px" }}>
+            <h1 className='text-center'>Upcoming</h1>
+            {schedule.items.map(i =>
+                <Card className="text-center" style={{ margin: 10 }}>
+                    <Card.Body>
+                        <Container>
+                            <Stack direction="horizontal" gap={5}>
+                                <div>
+                                    {i.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                                </div>
+                                <div>
+                                    {i.room.name}
+                                </div>
+                                <div className='justify-content-end'>
+                                    {i.room.location.name}
+                                </div>
+                            </Stack>
+                        </Container>
+                    </Card.Body>
+                </Card>
+            )}
+        </Container>
     )
 }
