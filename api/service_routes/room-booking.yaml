@@ -80,13 +80,41 @@ paths:
           schema:
             type: integer
             format: int64
-          description: The ID of student object. Mutually exclusive with room-id.
+          description: The ID of student object.
         - name: room-id
           in: query
           schema:
             type: integer
             format: int64
-          description: The ID of room object. Mutually exclusive with student-id.
+          description: The ID of room object.
+        - name: group-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of group object.
+        - name: start-date
+          in: query
+          schema:
+            type: string
+            format: date
+            example: YYYY-MM-DD
+          description: Filter the bookings by the start date.
+        - name: end-date
+          in: query
+          schema:
+            type: string
+            format: date
+            example: YYYY-MM-DD
+          description: TFilter the bookings by the end date.
+        - name: max-results
+          in: query
+          schema:
+            type: integer
+            format: int64
+            default: 100
+          description: >
+            Limit the number of bookings to retrieve.
 
       responses:
         '200':
