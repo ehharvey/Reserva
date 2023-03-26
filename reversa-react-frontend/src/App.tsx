@@ -10,6 +10,8 @@ import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { Header } from './components/header/Header';
+import { BookingPage } from './components/booking/BookingPage';
+import { Group } from './entities/Group';
 
 function App() {
   var feature = { icon_path: logo, name: "Number of Seats", quantity: 6 } as Feature;
@@ -21,10 +23,15 @@ function App() {
   var schedule = { items: [schedule_item, schedule_item, schedule_item, schedule_item] } as Schedule;
   var student = { schedule: schedule, firstName: "Taylor", lastName: "Jarvis", credits: 5, id: 1  } as Student;
 
+  var group1 = { id: 1, name: "Project 6", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
+  var group2 = { id: 2, name: "Enterprise", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
+  var group3 = { id: 3, name: "SQ4", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
+  var myGroups = [ group1, group2, group3 ] as Group[];
+  
   return (
     <div>
       <Header {...student} />
-      <Dashboard {...student} />
+      <BookingPage groups={myGroups} />
     </div>
   );
 }
