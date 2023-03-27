@@ -5,7 +5,7 @@ export function Dashboard(student: Student) {
     
     return (
         <div >
-            <Timeline {...student} />           
+            <Timeline {...student} />     
         </div>
     )
 }

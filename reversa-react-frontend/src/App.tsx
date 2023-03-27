@@ -16,9 +16,14 @@ function App() {
   var features = [ feature, feature, feature, feature];
   var location = { id: 1, name: "TestLocation", rooms: [1] } as Location;
   var room = { name: "TestRoom", id: 1, location, features: features, image_url: meeting_room, size: "small" } as Room;
-
-  var schedule_item = { room: room, startDate: new Date() } as ScheduleItem;
-  var schedule = { items: [schedule_item, schedule_item, schedule_item, schedule_item] } as Schedule;
+  var now = new Date();
+  var now_plus_1_hour = new Date(now.getTime() + 60 * 60 * 1000);
+  var tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  var tomorrow_plus_1_hour = new Date(tomorrow.getTime() + 60 * 60 * 1000);
+  var schedule_item = { room: room, startDate: now, endDate: now_plus_1_hour } as ScheduleItem;
+  var schedule_item_tomorrow = { room: room, startDate: tomorrow, endDate: tomorrow_plus_1_hour } as ScheduleItem;
+  var schedule_items = [schedule_item, schedule_item, schedule_item_tomorrow, schedule_item_tomorrow];
+  var schedule = { items: schedule_items } as Schedule;
   var student = { schedule: schedule, firstName: "Taylor", lastName: "Jarvis", credits: 5, id: 1  } as Student;
 
   return (
