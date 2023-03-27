@@ -8,9 +8,8 @@ import { Location } from './entities/Location';
 import { ScheduleItem } from './entities/ScheduleItem';
 import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
-import { Dashboard } from './components/dashboard/Dashboard';
 import { Header } from './components/header/Header';
-import { Login } from './components/login/Login';
+
 
 function App() {
   var feature = { icon_path: logo, name: "Number of Seats", quantity: 6 } as Feature;
