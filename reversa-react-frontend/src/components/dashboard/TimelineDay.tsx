@@ -1,6 +1,4 @@
 import { Container, Stack } from "react-bootstrap";
-import { ScheduleItem } from "../../entities/ScheduleItem";
-import { TimelineDayItem } from "./TimelineDayItem";
 
 type TimelineDayProps = {
     children: any
