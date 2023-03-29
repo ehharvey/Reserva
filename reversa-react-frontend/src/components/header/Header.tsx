@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Image } from 'react-bootstrap';
 import { CreditSummary } from './CreditSummary';
 import { Student } from '../../entities/Student';
+import { Profile } from './Profile';
 
 export function Header(student: Student) {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -39,6 +40,7 @@ export function Header(student: Student) {
                         &nbsp;
                         {currentTime.toLocaleTimeString()}
                     </Navbar.Text>
+                    <Profile />
                 </Navbar.Collapse>
             </Container>
         </Navbar>    
