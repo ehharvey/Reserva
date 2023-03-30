@@ -13,7 +13,7 @@ paths:
       schema:
         type: integer
         minimum: 1
-      description: The user ID
+      description: The booking ID
     get:
       tags: 
         - Booking
