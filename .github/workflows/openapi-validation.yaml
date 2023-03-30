@@ -1,0 +1,24 @@
+name: Validate OpenAPI YAML
+
+on:
+  pull_request:
+    paths:
+      - 'api/**/*.yaml'
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+        
+            -   name: Validate Swagger and OpenAPI using Swagger CLI
+                uses: mbowman100/swagger-validator-action@2.0
+                with:
+                    files: |
+                        api/service_routes/authentication.yaml
+                        api/service_routes/group.yaml
+                        api/service_routes/room-booking.yaml
+                        api/service_routes/room-management.yaml
+                        api/service_routes/schedule.yaml
+          
