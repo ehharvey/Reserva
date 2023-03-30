@@ -106,7 +106,7 @@ paths:
               $ref: "#/components/schemas/Group"
 
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
