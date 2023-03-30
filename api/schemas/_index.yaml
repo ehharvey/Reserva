@@ -5,6 +5,12 @@ Room:
   $ref: "./Room.yaml"
 Group:
   $ref: "./Group.yaml"
+Booking:
+  $ref: "./Booking.yaml"
+Availability:
+  $ref: "./Availability.yaml"
+Hours:
+  $ref: "./Hour.yaml"
 UsernamePasswordPair:
   $ref: "./UsernamePasswordPair.yaml"
 Authorization:
