@@ -18,7 +18,7 @@
 				"eamodio.gitlens"
 			]
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -28,6 +28,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "npm install -g @apidevtools/swagger-cli"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
