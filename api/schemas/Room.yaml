@@ -15,3 +15,6 @@ properties:
       anyOf:
         - $ref: "./BooleanFeature.yaml"
         - $ref: "./NumericalFeature.yaml"
+  
+  
+
