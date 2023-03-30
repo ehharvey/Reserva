@@ -4,4 +4,5 @@ properties:
   id:
     type: integer
     format: int64
+    readOnly: true
     example: 100

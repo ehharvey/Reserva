@@ -11,3 +11,7 @@ Availability:
   $ref: "./Availability.yaml"
 Hours:
   $ref: "./Hour.yaml"
+UsernamePasswordPair:
+  $ref: "./UsernamePasswordPair.yaml"
+Authorization:
+  $ref: "./Authorization.yaml"
