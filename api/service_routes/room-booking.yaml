@@ -5,16 +5,163 @@ info:
 servers:
   - url: https://room-booking.reserva.emilharvey.ca
 paths:
-  /test:
+  /bookings/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The booking ID
     get:
+      tags: 
+        - Booking
+      description: Retrieves information about a specific booking identified by the `id` parameter.
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
           description: OK
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+    put:
+      tags: 
+        - Booking
+      description: Update a specific booking identified by the `id` parameter with the information provided in the request body.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
+          description: OK
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+    delete:
+      tags: 
+        - Booking
+      description: Delete a booking specified by `Booking ID`.
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Deleted
+          description: Deleted
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+
+
+  /bookings:
+    get:
+      description: Retrieve all bookings associated with a student or a room.
+      parameters:
+        - name: student-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of student object.
+        - name: room-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of room object.
+        - name: group-id
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: The ID of group object.
+        - name: start-date
+          in: query
+          schema:
+            type: string
+            format: date
+            example: YYYY-MM-DD
+          description: Filter the bookings by the start date.
+        - name: end-date
+          in: query
+          schema:
+            type: string
+            format: date
+            example: YYYY-MM-DD
+          description: TFilter the bookings by the end date.
+        - name: max-results
+          in: query
+          schema:
+            type: integer
+            format: int64
+            default: 100
+          description: >
+            Limit the number of bookings to retrieve.
+
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
+          description: " "
+        
+        '400':
+          description: Either `student-id` or `room-id` are required.
+    
+    post:
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Student"
+              $ref: "#/components/schemas/Booking"
+      responses:
+        '201':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Created
+          description: Created
+        '400':
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Bad Request
+          description: Bad Request
+
+
 components:
   schemas:
     $ref: "../schemas/_index.yaml"
