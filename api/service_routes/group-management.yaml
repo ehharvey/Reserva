@@ -78,7 +78,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
