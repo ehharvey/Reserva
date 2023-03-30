@@ -13,7 +13,7 @@ paths:
       schema:
         type: integer
         minimum: 1
-      description: The user ID
+      description: The booking ID
     get:
       tags: 
         - Booking
@@ -23,7 +23,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Booking"
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
+                  
           description: OK
         '400':
           content:
@@ -41,7 +46,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Booking"
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
           description: OK
         '400':
           content:
@@ -93,7 +102,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Booking"
+                type: object
+                properties:
+                  Booking:
+                    type: object
+                    $ref: "#/components/schemas/Booking"
           description: " "
         
         '400':
