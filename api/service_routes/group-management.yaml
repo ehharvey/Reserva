@@ -15,7 +15,7 @@ paths:
 
         Request for `GET /groups/{id}` requires an id which will be in the search parameter.
         Response will be in JSON format with S
-      operationId: getRoomId
+      operationId: getGroupId
       parameters:
         - name: id
           in: path
