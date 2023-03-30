@@ -15,11 +15,11 @@ paths:
 
         Request for `GET /groups/{id}` requires an id which will be in the search parameter.
         Response will be in JSON format with S
-      operationId: getRoomId
+      operationId: getGroupId
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -47,7 +47,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -78,7 +78,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -106,7 +106,7 @@ paths:
               $ref: "#/components/schemas/Group"
 
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
