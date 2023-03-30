@@ -28,6 +28,8 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+	
+	// Adds Swagger CLI to devcontainer
 	"postCreateCommand": "npm install -g @apidevtools/swagger-cli"
 
 	// Configure tool-specific properties.
