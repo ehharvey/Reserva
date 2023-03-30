@@ -4,5 +4,13 @@ properties:
   id:
     type: integer
     format: int64
+ group-management
     readOnly: true
     example: 100
+  members:
+    type: array
+    items:
+      type: integer
+      format: int64
+      example: 1
+    example: [1,2,3]

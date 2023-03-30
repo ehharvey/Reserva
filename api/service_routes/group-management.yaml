@@ -19,7 +19,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -38,12 +38,16 @@ paths:
         - Group Management
       summary: Updates a Group object
       description: >
-        Updates an existing group (identified by `id`).
-      operationId: putGroupId
+        ## More Information
+
+        Request for `PUT /groups/{id}` requires a body that contains all information of the Group except for its id. 
+        (The id of the room will be auto-incremented).
+        Response body shows the body that contains 
+      operationId: putRoomId
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -74,7 +78,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: Group ID
           required: true
           schema:
             type: integer
@@ -102,7 +106,7 @@ paths:
               $ref: "#/components/schemas/Group"
 
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
