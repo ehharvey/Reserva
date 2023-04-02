@@ -4,7 +4,6 @@ properties:
   id:
     type: integer
     format: int64
- group-management
     readOnly: true
     example: 100
   members:
