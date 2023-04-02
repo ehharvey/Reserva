@@ -17,8 +17,8 @@ jobs:
                 with:
                     files: |
                         api/service_routes/authentication.yaml
-                        api/service_routes/group-management.yaml
-                        api/service_routes/room-booking.yaml
-                        api/service_routes/room-management.yaml
+                        api/service_routes/group.yaml
+                        api/service_routes/booking.yaml
+                        api/service_routes/room.yaml
                         api/service_routes/schedule.yaml
           
