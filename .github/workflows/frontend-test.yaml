@@ -2,6 +2,8 @@ name: Build Frontend
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - 'reversa-react-frontend/**'
 jobs:
   build:
 
