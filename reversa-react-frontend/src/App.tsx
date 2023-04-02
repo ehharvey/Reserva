@@ -24,8 +24,8 @@ function App() {
   var student = { schedule: schedule, firstName: "Taylor", lastName: "Jarvis", credits: 5, id: 1  } as Student;
 
   var group1 = { id: 1, name: "Project 6", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
-  var group2 = { id: 2, name: "Enterprise", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
-  var group3 = { id: 3, name: "SQ4", created_by: 1, member: ["Studnet A", "Studnet B"]} as Group;
+  var group2 = { id: 2, name: "Enterprise", created_by: 1, member: ["Studnet A", "Studnet C"]} as Group;
+  var group3 = { id: 3, name: "SQ4", created_by: 1, member: ["Studnet A", "Studnet D"]} as Group;
   var myGroups = [ group1, group2, group3 ] as Group[];
   
   return (
