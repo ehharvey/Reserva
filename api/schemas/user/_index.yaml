@@ -1,0 +1,11 @@
+---
+NewAdminUser:
+  $ref: "./NewAdminUser.yaml"
+NewStandardUser:
+  $ref: "./NewStandardUser.yaml"
+NewUser:
+  $ref: "./NewUser.yaml"
+User:
+  $ref: "./User.yaml"
+UpdateUser:
+  $ref: "./UpdateUser.yaml"

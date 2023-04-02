@@ -1,0 +1,31 @@
+---
+type: object
+required:
+  - id
+  - username
+  - email
+properties:
+  id:
+    type: integer
+    format: int64
+    description: The unique ID of the user.
+  username:
+    type: string
+    description: The user's username.
+  email:
+    type: string
+    format: email
+    description: The user's email address.
+  password:
+    type: string
+    format: password
+    description: The user's password.
+  credits:
+    type: integer
+    format: int64
+    description: The user's credits.
+  role:
+    type: string
+    enum: [standard, admin]
+    default: user
+    description: The user's role.

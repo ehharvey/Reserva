@@ -21,4 +21,5 @@ jobs:
                         api/service_routes/booking.yaml
                         api/service_routes/room.yaml
                         api/service_routes/schedule.yaml
+                        api/service_routes/user.yaml
           
