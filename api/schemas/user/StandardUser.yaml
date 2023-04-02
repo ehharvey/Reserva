@@ -1,0 +1,13 @@
+allOf:
+  - $ref: User.yaml
+  - type: object
+    properties:
+      role:
+        type: string
+        enum: [standard]
+        default: standard
+        description: The user's role, which is automatically set to "standard".
+      credits:
+        type: array
+        items:
+          $ref: ../credit/Credit.yaml
