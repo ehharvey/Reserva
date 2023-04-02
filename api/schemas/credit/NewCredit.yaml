@@ -1,0 +1,11 @@
+type: object
+properties:
+  user_id:
+    type: integer
+    description: The ID of the user to create the credit for.
+  amount:
+    type: integer
+    description: The amount of the credit to create in units.
+required:
+        - user_id
+        - amount

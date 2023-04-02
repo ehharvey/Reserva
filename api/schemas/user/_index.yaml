@@ -9,3 +9,7 @@ User:
   $ref: "./User.yaml"
 UpdateUser:
   $ref: "./UpdateUser.yaml"
+StandardUser:
+  $ref: "./StandardUser.yaml"
+AdminUser:
+  $ref: "./AdminUser.yaml"

@@ -20,10 +20,6 @@ properties:
     type: string
     format: password
     description: The user's password.
-  credits:
-    type: integer
-    format: int64
-    description: The user's credits.
   role:
     type: string
     enum: [standard, admin]

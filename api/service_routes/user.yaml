@@ -18,7 +18,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  oneOf:
+                    - $ref: "#/components/schemas/User"
+                    - $ref: "#/components/schemas/AdminUser"
+                    - $ref: "#/components/schemas/StandardUser"
     post:
       summary: Create a new user
       description: Creates a new user account.
