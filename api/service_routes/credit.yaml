@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Credit Microservice API
+  version: 0.0.1
+servers:
+  - url: http://localhost:8003
+paths:
+  /credits:
+    get:
+      summary: Get all credits
+      operationId: getCredits
+      responses:
+        '200':
+          description: Successfully retrieved all credits.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Credit'
+        '401':
+          description: Authentication token is missing or invalid.
+    post:
+      summary: Create a new credit
+      operationId: createCredit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCredit'
+      responses:
+        '201':
+          description: Successfully created a new credit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '401':
+          description: Authentication token is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /credits/{creditId}:
+    get:
+      summary: Get a credit by ID
+      operationId: getCreditById
+      parameters:
+        - name: creditId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The ID of the credit to retrieve.
+      responses:
+        '200':
+          description: Successfully retrieved the credit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '401':
+          description: Authentication token is missing or invalid.
+        '404':
+          description: Credit not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update a credit by ID
+      operationId: updateCreditById
+      parameters:
+        - name: creditId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The ID of the credit to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: The new amount of the credit in units.
+              required:
+                - amount
+      responses:
+        '200':
+          description: Successfully updated the credit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '401':
+          description: Authentication token is missing or invalid.
+        '404':
+          description: Credit not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a credit by ID
+      operationId: deleteCreditById
+      parameters:
+        - name: creditId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The ID of the credit to delete.
+      responses:
+        '204':
+          description: Successfully deleted the credit.
+        '401':
+          description: Authentication token is missing or invalid.
+        '404':
+          description: Credit not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Credit:
+      $ref: '../schemas/credit/Credit.yaml'
+    NewCredit:
+      $ref: '../schemas/credit/NewCredit.yaml'
+    Error:
+      $ref: '../schemas/error/Error.yaml'
