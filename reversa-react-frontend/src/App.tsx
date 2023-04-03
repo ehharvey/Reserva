@@ -9,6 +9,7 @@ import { ScheduleItem } from './entities/ScheduleItem';
 import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
 import { Header } from './components/header/Header';
+import { RoomTable } from './components/room/RoomTable';
 
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
   var schedule = { items: [schedule_item, schedule_item, schedule_item, schedule_item] } as Schedule;
   var student = { schedule: schedule, firstName: "Taylor", lastName: "Jarvis", credits: 5, id: 1  } as Student;
 
-  
+
   return (
     <div>
       <Header {...student} />
+      <RoomTable data = {[room, room, room]}/> 
     </div>
   );
 }
