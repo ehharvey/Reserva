@@ -3,7 +3,7 @@ info:
   title: API Title
   version: '1.0'
 servers:
-  - url: https://api.reserva.emilharvey.ca
+  - url: https://group.reserva.emilharvey.ca
 paths:
   /groups/{id}:
     parameters:

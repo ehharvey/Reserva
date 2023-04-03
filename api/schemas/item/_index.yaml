@@ -1,4 +1,6 @@
 ---
+Feature:
+  $ref: "./Feature.yaml"
 BooleanFeature:
   $ref: "./BooleanFeature.yaml"
 Item:

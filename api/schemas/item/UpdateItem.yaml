@@ -20,16 +20,11 @@ properties:
   features:
     type: array
     items: 
-      anyOf:
-        - $ref: "./StringFeature.yaml"
-        - $ref: "./BooleanFeature.yaml"
-        - $ref: "./NumericalFeature.yaml"
-    default: []
+      $ref: "./Feature.yaml"
     example:
-      - name: Size
-        value: Large
-      - name: HDMI
-        value: true
       - name: Style
         value: Modern
-      
+      - name: Size
+        value: 1000
+      - name: Has Windows
+        value: true

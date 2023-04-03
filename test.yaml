@@ -1,0 +1,378 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API Title",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://item.reserva.emilharvey.ca"
+    }
+  ],
+  "paths": {
+    "/items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ItemId"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Gets a Item object by id. For now, the only kind of item is a room.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/Item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an item. For now, the only kind of item is a room.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/UpdateItem"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Room object existing in the Rooms resources",
+        "description": "## More Information\nRequest for `DELETE/rooms/{id}` requires an id\n",
+        "operationId": "deleteRoomId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        }
+      }
+    },
+    "/items": {
+      "post": {
+        "summary": "Posts an item. For now, the only kind of item is a room.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/Item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\n"
+          }
+        }
+      },
+      "get": {
+        "summary": "Gets a list of items. For now, the only kind of item is a room.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Item"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Feature": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the feature."
+          },
+          "value": {
+            "type": [
+              "string",
+              "boolean",
+              "integer"
+            ],
+            "description": "The value of the feature."
+          }
+        }
+      },
+      "BooleanFeature": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StringFeature"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "example": true,
+                "description": "The value of the feature."
+              }
+            },
+            "description": "A feature. This is a boolean feature.\n",
+            "example": {
+              "name": "HDMI",
+              "value": true
+            }
+          }
+        ]
+      },
+      "Item": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/ItemId"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "ItemId": {
+        "example": "item-cc354ffb-fa63-4a67-a67f-a24048c26c3f",
+        "description": "The ID of the item. This is a UUID with a prefix of \"item-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "NewItem": {
+        "required": [
+          "name",
+          "location",
+          "description",
+          "type",
+          "features"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Large Room",
+            "description": "The name of the item. For now, these will be names of rooms"
+          },
+          "location": {
+            "type": "string",
+            "example": "1st Floor",
+            "description": "The location of the item."
+          },
+          "description": {
+            "type": "string",
+            "example": "Large Room with Low Ceilings"
+          },
+          "type": {
+            "type": "string",
+            "example": "Room",
+            "enum": [
+              "Room"
+            ]
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            },
+            "example": [
+              {
+                "name": "Style",
+                "value": "Modern"
+              },
+              {
+                "name": "Size",
+                "value": 1000
+              },
+              {
+                "name": "Has Windows",
+                "value": true
+              }
+            ]
+          }
+        }
+      },
+      "NumericalFeature": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StringFeature"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "example": true,
+                "description": "The value of the feature."
+              }
+            },
+            "description": "A feature. This is a numerical feature.\n",
+            "example": {
+              "name": "Number of outlets",
+              "value": 5
+            }
+          }
+        ]
+      },
+      "StringFeature": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the feature. This is a human-readable name, and should be unique within the group.\n",
+            "example": "Style"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "The value of the feature. This is a human-readable value, and should be unique within the group.\n",
+            "example": "Modern"
+          }
+        },
+        "description": "A feature. This is a string feature.\n"
+      },
+      "UpdateItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Large Room",
+            "description": "The name of the item. For now, these will be names of rooms"
+          },
+          "location": {
+            "type": "string",
+            "example": "1st Floor",
+            "description": "The location of the item."
+          },
+          "description": {
+            "type": "string",
+            "example": "Large Room with Low Ceilings"
+          },
+          "type": {
+            "type": "string",
+            "example": "Room",
+            "enum": [
+              "Room"
+            ]
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            },
+            "example": [
+              {
+                "name": "Style",
+                "value": "Modern"
+              },
+              {
+                "name": "Size",
+                "value": 1000
+              },
+              {
+                "name": "Has Windows",
+                "value": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
