@@ -1,0 +1,7 @@
+---
+allOf:
+- $ref: './NewRecurringUnavailability.yaml'
+- $ref: './Unavailability.yaml'
+description: >
+  A recurring unavailability. This could be a maintenance window, a booking, or something else.
+  The server will send this to clients

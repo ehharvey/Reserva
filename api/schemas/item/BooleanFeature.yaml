@@ -1,0 +1,13 @@
+allOf:
+  - $ref: './StringFeature.yaml'
+  - type: object
+    properties:
+      value:
+        type: boolean
+        example: true
+        description: The value of the feature.
+    description: >
+      A feature. This is a boolean feature.
+    example:
+      name: HDMI
+      value: true

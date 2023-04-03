@@ -1,0 +1,6 @@
+---
+type: object
+properties:
+  message:
+    type: string
+    example: "The request was successful."

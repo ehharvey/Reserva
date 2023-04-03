@@ -1,0 +1,18 @@
+---
+type: object
+properties:
+  id:
+    $ref: '../meta/Id.yaml'
+    example: groupmembership-1b62fba8-c9a8-4751-a6e5-d902098ab418
+    description: >
+      The ID of the group membership itself. This is a UUID with the prefix
+      "groupmembership-". This is not the ID of the group or the user.
+  group:
+    $ref: './GroupId.yaml'
+    description: The ID of the group.
+  user:
+    $ref: '../user/UserId.yaml'
+    description: The ID of the user.
+description: >
+  This is a group membership. It is the intermediate object between a user and a
+  group. It is used to determine which users are members of which groups.
