@@ -37,7 +37,7 @@ paths:
             application/json:
               schema:
                 properties:
-                  "Group":
+                  Group:
                     $ref: "#/components/schemas/Group"
     delete:
       summary: Deletes a Group object

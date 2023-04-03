@@ -1,17 +1,19 @@
 openapi: '3.0.2'
 info:
   title: API Title
-  version: '1.0'
+  version: 0.0.1
 servers:
   - url: https://item.reserva.emilharvey.ca
 paths:
   /items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/ItemId"
     get:
       summary: Gets a Item object by id. For now, the only kind of item is a room.
-      parameters:
-        - name: id
-          in: path
-          $ref: "#/components/schemas/ItemId"
       responses:
         '200':
           description: OK

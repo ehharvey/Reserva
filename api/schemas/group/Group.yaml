@@ -1,11 +1,6 @@
 ---
 allOf:
   - $ref: ./NewGroup.yaml
-    id:
-    type: integer
-    format: int64
-    readOnly: true
-    example: 100
   - type: object
     properties:
       id:
