@@ -1,0 +1,28 @@
+---
+allOf:
+  - $ref: ./NewGroup.yaml
+  - type: object
+    properties:
+      id:
+        $ref: ./GroupId.yaml
+      createdAt:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-01-01T00:00:00Z'
+        description: The date and time the group was created.
+      lastUpdatedAt:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-03-01T00:00:00Z'
+        description: The date and time the group was last updated.
+    required:
+      - id
+      - createdAt
+      - lastUpdatedAt
+    description: >
+      A group. This could be a project group, a team, or something else.
+      The difference between this and NewGroup is that this has an ID, which is
+      assigned by the server. It also has timestamps for when the group was created
+      and last updated.

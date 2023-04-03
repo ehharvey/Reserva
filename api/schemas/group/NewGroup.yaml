@@ -1,0 +1,8 @@
+---
+$ref: UpdateGroup.yaml
+required:
+  - name
+  - createdBy
+description: >
+  A group. This could be a project group, a team, or something else.
+  This is sent by the client when creating a new group.

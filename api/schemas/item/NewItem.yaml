@@ -1,0 +1,8 @@
+---
+$ref: './UpdateItem.yaml'
+required:
+  - name
+  - location
+  - description
+  - type
+  - features

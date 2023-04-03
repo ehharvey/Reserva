@@ -134,4 +134,4 @@ components:
     NewCredit:
       $ref: '../schemas/credit/NewCredit.yaml'
     Error:
-      $ref: '../schemas/error/Error.yaml'
+      $ref: '../schemas/meta/Error.yaml'

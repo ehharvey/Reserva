@@ -1,0 +1,28 @@
+---
+allOf:
+- $ref: './NewUnavailability.yaml'
+- type: object
+  properties:
+    id:
+      $ref: './UnavailabilityId.yaml'
+    createdAt:
+      type: string
+      format: date-time
+      readOnly: true
+      example: '2019-01-01T00:00:00Z'
+      description: The date and time the unavailability was created.
+    lastUpdatedAt:
+      type: string
+      format: date-time
+      readOnly: true
+      example: '2019-03-01T00:00:00Z'
+      description: The date and time the unavailability was last updated.
+  required:
+    - id
+    - createdAt
+    - lastUpdatedAt
+  description: >
+    An unavailability. This could be a maintenance window, a booking, or something else.
+    The difference between this and NewUnavailability is that this has an ID, which is
+    assigned by the server. It also has timestamps for when the unavailability was created
+    and last updated.
