@@ -83,13 +83,21 @@ export function TimelineDayItem(schedule_item: ScheduleItem) {
             <Card.Header>
                 {getTimeUntilFutureDate(schedule_item.startDate)}
             </Card.Header>
-            <Card.Img variant="top" src={schedule_item.room.image_url} />
-            <Card.Title>
+            <Card.Img variant="top" src={schedule_item.room.image_url} style={{ width: "18rem", height: "auto"}} />
+            <Card.Title className="mb-3">
                 {schedule_item.room.name}
             </Card.Title>
-            <Card.Subtitle>
+            <Card.Subtitle className="mb-4">
                 {schedule_item.room.location.name}
             </Card.Subtitle>
+            <Card.Text>
+                Participants:
+                <ul>
+                <li>John Doe</li>
+                <li>Jane Smith</li>
+                <li>Bob Johnson</li>
+                </ul>
+            </Card.Text>
             <Card.Footer>
                 {getTimeRange(schedule_item.startDate, schedule_item.endDate)}
             </Card.Footer>
