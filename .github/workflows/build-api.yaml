@@ -6,7 +6,7 @@ on:
         paths:
             - 'api/**'
             - '.github/workflows/build-api.yaml'
-jobs:
+jobs: # please work
     build-and-deploy:
         runs-on: ubuntu-latest
         permissions:
