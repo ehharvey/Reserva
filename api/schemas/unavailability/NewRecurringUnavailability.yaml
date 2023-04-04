@@ -4,7 +4,7 @@ allOf:
 - type: object
   properties:
     recurrence:
-      $ref: './DateTime15Min.yaml'
+      $ref: "./DateTime15Min.yaml"
       description: The recurrence of the unavailability timed from the start time.
   required:
     - recurrence

@@ -1,0 +1,5 @@
+---
+$ref: '../meta/_index.yaml#/Id'
+example: credit-8fec2234-d8cf-43a7-aaaa-94b1fde42468
+description: >
+  The ID of a credit. This is a UUID with the prefix "credit-".

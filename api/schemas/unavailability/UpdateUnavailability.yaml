@@ -2,7 +2,7 @@
 type: object
 properties:
   item:
-    $ref: "../meta/Id.yaml"
+    $ref: "../item/_index.yaml#/ItemId"
     description: "The ID of the item to be booked. For now, only rooms can be booked."
   startDateTime:
     $ref: "./DateTime15Min.yaml"

@@ -7,3 +7,8 @@ properties:
   value:
     type: [string, boolean, integer]
     description: The value of the feature.
+required:
+  - name
+  - value
+description: >
+  The data required to create a new feature.

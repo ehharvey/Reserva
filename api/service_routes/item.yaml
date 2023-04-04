@@ -9,7 +9,6 @@ paths:
     parameters:
       - name: id
         in: path
-        required: true
         schema:
           $ref: "#/components/schemas/ItemId"
     get:
@@ -110,7 +109,6 @@ paths:
             application/json:
               schema:
                 properties:
-                  items:
                     type: array
                     items:
                       $ref: "#/components/schemas/Item"

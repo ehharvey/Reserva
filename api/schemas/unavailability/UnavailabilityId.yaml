@@ -1,5 +1,5 @@
 ---
-$ref: '../meta/Id.yaml'
+$ref: '../meta/_index.yaml#/Id'
 example: unavailability-cc354ffb-fa63-4a67-a67f-a24048c26c3f
 description: >
   The ID of an unavailability. This is a UUID

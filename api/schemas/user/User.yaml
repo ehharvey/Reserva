@@ -1,27 +1,28 @@
 ---
-type: object
-required:
-  - id
-  - username
-  - email
-properties:
-  id:
-    type: integer
-    format: int64
-    description: The unique ID of the user.
-  username:
-    type: string
-    description: The user's username.
-  email:
-    type: string
-    format: email
-    description: The user's email address.
-  password:
-    type: string
-    format: password
-    description: The user's password.
-  role:
-    type: string
-    enum: [standard, admin]
-    default: user
-    description: The user's role.
+allOf:
+- $ref: './NewUser.yaml'
+- type: object
+  properties:
+    id:
+      $ref: './UserId.yaml'
+    createdAt:
+      type: string
+      format: date-time
+      readOnly: true
+      example: '2019-01-01T00:00:00Z'
+      description: The date and time the user was created.
+    lastUpdatedAt:
+      type: string
+      format: date-time
+      readOnly: true
+      example: '2019-03-01T00:00:00Z'
+      description: The date and time the user was last updated.
+  required:
+    - id
+    - createdAt
+    - lastUpdatedAt
+  description: >
+    A user. This could be a standard user, an admin, or something else (tbd).
+    The difference between this and NewUser is that this has an ID, which is
+    assigned by the server. It also has timestamps for when the user was created
+    and last updated.

@@ -1,17 +1,11 @@
 ---
 Feature:
   $ref: "./Feature.yaml"
-BooleanFeature:
-  $ref: "./BooleanFeature.yaml"
 Item:
   $ref: "./Item.yaml"
 ItemId:
   $ref: "./ItemId.yaml"
 NewItem:
   $ref: "./NewItem.yaml"
-NumericalFeature:
-  $ref: "./NumericalFeature.yaml"
-StringFeature:
-  $ref: "./StringFeature.yaml"
 UpdateItem:
   $ref: "./UpdateItem.yaml"

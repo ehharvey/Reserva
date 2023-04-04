@@ -12,14 +12,16 @@ properties:
   description:
     type: string
     example: Large Room with Low Ceilings
+    description: A description of the item.
   type:
     type: string
     example: Room
     enum:
       - Room
+    description: The type of the item. For now, this will only be Room.
   features:
     type: array
-    items: 
+    items:
       $ref: "./Feature.yaml"
     example:
       - name: Style
@@ -28,3 +30,8 @@ properties:
         value: 1000
       - name: Has Windows
         value: true
+    description: >
+      The features of the item. For now, these will be the features of the room.
+description: >
+  The data required to update an item. This is the base schema for all item
+  updates.
