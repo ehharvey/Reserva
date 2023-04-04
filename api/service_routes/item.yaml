@@ -11,6 +11,7 @@ paths:
         in: path
         schema:
           $ref: "#/components/schemas/ItemId"
+        required: true
     get:
       summary: Gets a Item object by id. For now, the only kind of item is a room.
       responses:
@@ -99,7 +100,6 @@ paths:
 
     get:
       summary: Gets a list of items. For now, the only kind of item is a room.
-      parameters: []
       # TODO: Add pagination
       # TODO: Add filtering
       responses:
