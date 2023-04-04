@@ -5,7 +5,7 @@ on:
             - main
         paths:
             - 'api/**'
-            - '.github/workflows/build-api.yaml`
+            - '.github/workflows/build-api.yaml'
 jobs:
     build:
         runs-on: ubuntu-latest
