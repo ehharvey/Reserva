@@ -15,6 +15,12 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
+            - uses: actions/setup-node@v3
+              with:
+                node-version: 18
+          
+            - name: Install Swagger CLI
+              run: npm install -g swagger-cli
             - uses: actions/setup-python@v4
               with:
                 python-version: '3.10' 
@@ -26,11 +32,12 @@ jobs:
               run: |
                 python api/schemas/create_all_schemas.py
                 python api/service_routes/create_all_routes.py
+                swagger-cli bundle api/service_routes/_all.yaml --outfile all.json
             - name: Generate Swagger UI
               uses: Legion2/swagger-ui-action@v1
               with:
                 output: api/swagger-ui
-                spec-file: api/service_routes/_all.yaml
+                spec-file: all.json
             - name: Setup Pages
               uses: actions/configure-pages@v3
             - name: Upload artifact
