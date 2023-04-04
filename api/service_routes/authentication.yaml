@@ -3,7 +3,7 @@ info:
   title: Authentication Microservice
   version: '0.0.1'
 servers:
-  - url: https://auth.reserva.emilharvey.ca
+  - url: https://authentication.reserva.emilharvey.ca
 paths:
   /authentication/login:
     post:

@@ -1,4 +1,4 @@
-openapi: '3.0.2'
+openapi: '3.1.0'
 info:
   title: API Title
   version: 0.0.1
@@ -9,9 +9,9 @@ paths:
     parameters:
       - name: id
         in: path
-        required: true
         schema:
           $ref: "#/components/schemas/ItemId"
+        required: true
     get:
       summary: Gets a Item object by id. For now, the only kind of item is a room.
       responses:
@@ -100,7 +100,6 @@ paths:
 
     get:
       summary: Gets a list of items. For now, the only kind of item is a room.
-      parameters: []
       # TODO: Add pagination
       # TODO: Add filtering
       responses:
@@ -110,7 +109,6 @@ paths:
             application/json:
               schema:
                 properties:
-                  items:
                     type: array
                     items:
                       $ref: "#/components/schemas/Item"

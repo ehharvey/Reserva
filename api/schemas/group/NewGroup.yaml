@@ -1,5 +1,6 @@
 ---
-$ref: UpdateGroup.yaml
+allOf:
+- $ref: UpdateGroup.yaml
 required:
   - name
   - createdBy

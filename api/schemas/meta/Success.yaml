@@ -1,6 +1,6 @@
----
 type: object
 properties:
   message:
     type: string
-    example: "The request was successful."
+description: >
+  A generic success response. It has a message property, which is a string.

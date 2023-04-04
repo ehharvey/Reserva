@@ -1,5 +1,6 @@
 ---
-$ref: './UpdateUnavailability.yaml'
+allOf:
+- $ref: './UpdateUnavailability.yaml'
 required:
   - room
   - startDateTime

@@ -4,7 +4,7 @@ info:
   description: This API manages user authentication, authorization, and admin management.
   version: 0.0.1
 servers:
-  - url: http://localhost:8000
+  - url: http://user.reserva.emilharvey.ca
 paths:
   /users:
     get:
@@ -18,10 +18,7 @@ paths:
               schema:
                 type: array
                 items:
-                  oneOf:
-                    - $ref: "#/components/schemas/User"
-                    - $ref: "#/components/schemas/AdminUser"
-                    - $ref: "#/components/schemas/StandardUser"
+                  $ref: "#/components/schemas/User"
     post:
       summary: Create a new user
       description: Creates a new user account.
@@ -123,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewAdminUser"
+              $ref: "#/components/schemas/NewUser"
       responses:
         "201":
           description: The new admin user
@@ -154,7 +151,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewStandardUser"
+              $ref: "#/components/schemas/NewUser"
       responses:
         "201":
           description: The new standard user
@@ -164,6 +161,29 @@ paths:
                 $ref: "#/components/schemas/User"
         "400":
           description: Invalid input
+  /users/{userId}/groups:
+    get:
+      summary: Get all groups for a user
+      description: Returns a list of all groups for a user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to retrieve groups for.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A list of groups
+          content:
+            application/json:
+              schema:
+                properties:  
+                  groups:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GroupMembership"
+        
 components:
   schemas:
     $ref: "../schemas/user/_index.yaml"

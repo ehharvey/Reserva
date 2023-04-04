@@ -1,12 +1,11 @@
 ---
-type: object
-properties:
-  id:
-    type: integer
-    description: The unique identifier of the credit.
-  user_id:
-    type: integer
-    description: The ID of the user associated with the credit.
-  amount:
-    type: integer
-    description: The amount of the credit in units.
+allOf:
+- $ref: './NewCredit.yaml'
+- type: object
+  required:
+    - id
+    - user_id
+    - amount
+  properties:
+    id:
+      $ref: './_index.yaml#/CreditId'

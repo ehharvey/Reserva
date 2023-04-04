@@ -1,15 +1,11 @@
 ---
-NewAdminUser:
-  $ref: "./NewAdminUser.yaml"
-NewStandardUser:
-  $ref: "./NewStandardUser.yaml"
 NewUser:
   $ref: "./NewUser.yaml"
 User:
   $ref: "./User.yaml"
 UpdateUser:
   $ref: "./UpdateUser.yaml"
-StandardUser:
-  $ref: "./StandardUser.yaml"
-AdminUser:
-  $ref: "./AdminUser.yaml"
+UserId:
+  $ref: "./UserId.yaml"
+GroupMembership:
+  $ref: "../group/GroupMembership.yaml"

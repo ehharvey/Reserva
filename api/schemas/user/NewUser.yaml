@@ -1,17 +1,15 @@
-type: object
-required:
-  - username
-  - email
-  - password
-properties:
-  username:
-    type: string
-    description: The user's username.
-  email:
-    type: string
-    format: email
-    description: The user's email address.
-  password:
-    type: string
-    format: password
-    description: The user's password.
+---
+allOf:
+- $ref: './UpdateUser.yaml'
+- type: object
+  required:
+    - username
+    - email
+    - password
+    - role
+  properties:
+    role:
+      type: string
+      enum: [standard, admin]
+      default: user
+      description: The user's role.
