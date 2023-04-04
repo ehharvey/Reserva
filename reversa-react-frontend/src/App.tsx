@@ -9,6 +9,7 @@ import { ScheduleItem } from './entities/ScheduleItem';
 import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
 import { Header } from './components/header/Header';
+import { AvailabilityScheduler } from './components/booking/AvailabilityScheduler';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
   return (
     <div>
       <Header {...student} />
+      <AvailabilityScheduler />
     </div>
   );
 }
