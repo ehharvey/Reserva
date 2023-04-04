@@ -5,6 +5,7 @@ on:
             - main
         paths:
             - 'api/**'
+            - '.github/workflows/build-api.yaml`
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -20,7 +21,7 @@ jobs:
             - name: Generate OpenAPI singleton
               run: |
                 python api/schemas/create_all_schemas.py
-                api/service_routes/create_all_routes.py
+                python api/service_routes/create_all_routes.py
             - name: Generate Swagger UI
               uses: Legion2/swagger-ui-action@v1
               with:
