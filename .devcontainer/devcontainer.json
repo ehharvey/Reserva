@@ -20,9 +20,8 @@
 				"eamodio.gitlens",
 				"GitHub.vscode-pull-request-github",
 				"GitHub.copilot",
-				"GitHub.vscode-github-actions"
+				"GitHub.vscode-github-actions",
 				"ms-python.python",
-				"GitHub.copilot"
 			]
 		}
 	},
