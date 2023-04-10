@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: User Service API
+  description: This API manages user authentication, authorization, and admin management.
+  version: 0.0.1
+servers:
+  - url: http://user.reserva.emilharvey.ca
+paths:
+  /users:
+    get:
+      summary: Get all users
+      description: Returns a list of all users.
+      responses:
+        "200":
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      summary: Create a new user
+      description: Creates a new user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewUser"
+      responses:
+        "201":
+          description: The new user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+  /users/{userId}:
+    get:
+      summary: Get a user by ID
+      description: Returns a single user by ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to retrieve.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: The requested user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+    put:
+      summary: Update a user by ID
+      description: Updates an existing user account.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to update.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUser"
+      responses:
+        "200":
+          description: The updated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+        "404":
+          description: User not found
+    delete:
+      summary: Delete a user by ID
+      description: Deletes an existing user account.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to delete.
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: User deleted
+        "404":
+          description: User not found
+  /users/admins:
+    get:
+      summary: Get all admin users
+      description: Returns a list of all admin users.
+      responses:
+        "200":
+          description: A list of admin users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      summary: Create a new admin user
+      description: Creates a new admin user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewUser"
+      responses:
+        "201":
+          description: The new admin user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+  /users/standard:
+    get:
+      summary: Get all standard users
+      description: Returns a list of all standard users.
+      responses:
+        "200":
+          description: A list of standard users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      summary: Create a new standard user
+      description: Creates a new standard user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewUser"
+      responses:
+        "201":
+          description: The new standard user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+  /users/{userId}/groups:
+    get:
+      summary: Get all groups for a user
+      description: Returns a list of all groups for a user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to retrieve groups for.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A list of groups
+          content:
+            application/json:
+              schema:
+                properties:  
+                  groups:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GroupMembership"
+        
+components:
+  schemas:
+    $ref: "../schemas/user/_index.yaml"

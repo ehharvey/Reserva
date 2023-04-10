@@ -9,7 +9,8 @@
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/maven-sdkman:2": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -19,9 +20,11 @@
 				"GitHub.vscode-pull-request-github",
 				"GitHub.copilot",
 				"GitHub.vscode-github-actions"
+				"ms-python.python",
+				"GitHub.copilot"
 			]
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -31,6 +34,9 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+	
+	// Adds Swagger CLI to devcontainer
+	"postCreateCommand": "npm install -g @apidevtools/swagger-cli"
 
 	// Configure tool-specific properties.
 	// "customizations": {},

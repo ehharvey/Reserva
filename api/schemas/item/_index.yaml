@@ -1,0 +1,11 @@
+---
+Feature:
+  $ref: "./Feature.yaml"
+Item:
+  $ref: "./Item.yaml"
+ItemId:
+  $ref: "./ItemId.yaml"
+NewItem:
+  $ref: "./NewItem.yaml"
+UpdateItem:
+  $ref: "./UpdateItem.yaml"

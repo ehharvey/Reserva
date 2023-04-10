@@ -1,0 +1,5 @@
+---
+Authorization:
+  $ref: './Authorization.yaml'
+UsernamePasswordPair:
+  $ref: './UsernamePasswordPair.yaml'

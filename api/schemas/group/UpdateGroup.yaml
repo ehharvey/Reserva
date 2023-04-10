@@ -1,0 +1,13 @@
+---
+type: object
+properties:
+  name:
+    type: string
+    example: Project Group
+    description: The name of the group.
+  createdBy:
+    $ref: '../user/_index.yaml#/UserId'
+    description: The ID of the user who created the group
+description: >
+  A group. This could be a project group, a team, or something else.
+  This is sent by the client when updating an existing group.

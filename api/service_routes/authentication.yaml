@@ -3,9 +3,9 @@ info:
   title: Authentication Microservice
   version: '0.0.1'
 servers:
-  - url: https://auth.reserva.emilharvey.ca
+  - url: https://authentication.reserva.emilharvey.ca
 paths:
-  /login:
+  /authentication/login:
     post:
       responses:
         '201':
@@ -25,7 +25,7 @@ paths:
               properties:
                 usernamePasswordPair:
                   $ref: "#/components/schemas/UsernamePasswordPair"
-  /validate:
+  /authentication/validate:
     put:
       responses:
         '200':
@@ -39,6 +39,20 @@ paths:
               properties:
                 authorization:
                   $ref: "#/components/schemas/Authorization"
+  /authentication/logout:
+    post:
+      responses:
+        '200':
+          description: Logout Successful
+        '401':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorization:
+                  $ref: "#/components/schemas/Authorization"
 components:
   schemas:
-    $ref: "../schemas/_index.yaml"
+    $ref: "../schemas/authentication/_index.yaml"

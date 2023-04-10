@@ -8,8 +8,9 @@ import { Location } from './entities/Location';
 import { ScheduleItem } from './entities/ScheduleItem';
 import { Schedule } from './entities/Schedule';
 import { Student } from './entities/Student';
-import { Dashboard } from './components/dashboard/Dashboard';
 import { Header } from './components/header/Header';
+import { RoomTable } from './components/room/RoomTable';
+
 
 function App() {
   var feature = { icon_path: logo, name: "Number of Seats", quantity: 6 } as Feature;
@@ -27,10 +28,11 @@ function App() {
   var schedule = { items: schedule_items } as Schedule;
   var student = { schedule: schedule, firstName: "Taylor", lastName: "Jarvis", credits: 5, id: 1  } as Student;
 
+
   return (
     <div>
       <Header {...student} />
-      <Dashboard {...student} />
+      <RoomTable data = {[room, room, room]}/> 
     </div>
   );
 }

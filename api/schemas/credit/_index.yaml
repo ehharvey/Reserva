@@ -1,0 +1,6 @@
+Credit:
+  $ref: ./Credit.yaml
+NewCredit:
+  $ref: ./NewCredit.yaml
+CreditId:
+  $ref: ./CreditId.yaml

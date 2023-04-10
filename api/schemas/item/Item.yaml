@@ -1,0 +1,25 @@
+---
+allOf:
+  - $ref: ./NewItem.yaml
+  - type: object
+    properties:
+      id:
+        $ref: ./_index.yaml#/ItemId
+      createdAt:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-01-01T00:00:00Z'
+        description: The date and time the item was created.
+      lastUpdatedAt:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-03-01T00:00:00Z'
+        description: The date and time the item was last updated.
+    required:
+      - id
+description: >
+  The data returned when an item is retrieved. This is the base schema for all
+  item retrievals. The difference between this and the NewItem schema is that
+  this schema includes the ID, createdAt, and lastUpdatedAt fields.

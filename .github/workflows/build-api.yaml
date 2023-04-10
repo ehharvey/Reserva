@@ -1,0 +1,50 @@
+name: Build API Webpage
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'api/**'
+            - '.github/workflows/build-api.yaml'
+jobs: # please work
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        permissions:
+          pages: write      # to deploy to Pages
+          id-token: write   # to verify the deployment originates from an appropriate source
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v3
+              with:
+                node-version: 18
+          
+            - name: Install Swagger CLI
+              run: npm install -g swagger-cli
+            - uses: actions/setup-python@v4
+              with:
+                python-version: '3.10' 
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r api/requirements.txt
+            - name: Generate OpenAPI singleton
+              run: |
+                python api/schemas/create_all_schemas.py
+                python api/service_routes/create_all_routes.py
+                swagger-cli bundle api/service_routes/_all.yaml --outfile all.json
+            - name: Generate Swagger UI
+              uses: Legion2/swagger-ui-action@v1
+              with:
+                output: api/swagger-ui
+                spec-file: all.json
+            - name: Setup Pages
+              uses: actions/configure-pages@v3
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v1
+              with:
+                # Upload entire repository
+                path: './api/swagger-ui'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v2

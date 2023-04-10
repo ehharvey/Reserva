@@ -1,0 +1,118 @@
+openapi: '3.1.0'
+info:
+  title: API Title
+  version: 0.0.1
+servers:
+  - url: https://item.reserva.emilharvey.ca
+paths:
+  /items/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          $ref: "#/components/schemas/ItemId"
+        required: true
+    get:
+      summary: Gets a Item object by id. For now, the only kind of item is a room.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  "Room": # Update this when we have more than one type of item
+                    $ref: "#/components/schemas/Item"
+        '404':
+          description: >
+            Item Not Found
+    put:
+      summary: Updates an item. For now, the only kind of item is a room.
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  "Room": # Update this when we have more than one type of item
+                    $ref: "#/components/schemas/UpdateItem"
+        '404':
+          description: >
+            Item Not Found
+    delete:
+      summary: Delete a Room object existing in the Rooms resources
+      description: >
+        ## More Information
+
+        Request for `DELETE/rooms/{id}` requires an id
+      operationId: deleteRoomId
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: >
+            Item Not Found
+  
+
+  /items:
+    post: 
+      summary: Posts an item. For now, the only kind of item is a room.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewItem"
+
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  "Room":
+                    $ref: "#/components/schemas/Item"
+        '400':
+          description: >
+            Bad Request
+
+    get:
+      summary: Gets a list of items. For now, the only kind of item is a room.
+      # TODO: Add pagination
+      # TODO: Add filtering
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Item"
+            
+components:
+  schemas:
+    $ref: "../schemas/item/_index.yaml"

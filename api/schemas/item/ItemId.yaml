@@ -1,0 +1,6 @@
+---
+$ref: ../meta/_index.yaml#/Id
+example: item-cc354ffb-fa63-4a67-a67f-a24048c26c3f
+description: >
+  The ID of the item. This is a UUID with a
+  prefix of "item-".

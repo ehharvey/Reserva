@@ -1,0 +1,7 @@
+---
+allOf:
+- $ref: NewGroupMembership.yaml
+- type: object
+  properties:
+    id:
+      $ref: ./GroupMembershipId.yaml

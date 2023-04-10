@@ -5,16 +5,151 @@ info:
 servers:
   - url: https://group.reserva.emilharvey.ca
 paths:
-  /test:
+  /groups/{id}:
+    parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/GroupId"
     get:
+      summary: Gets a Group object by id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  "Group":
+                    $ref: "#/components/schemas/Group"
+    put:
+      summary: Updates a Group object
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Student"
+              $ref: "#/components/schemas/UpdateGroup"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  Group:
+                    $ref: "#/components/schemas/Group"
+    delete:
+      summary: Deletes a Group object
+      responses:
+        '204':
+          description: Deleted
+  
+  /groups/{id}/memberships:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+    get:
+      summary: Gets a list of GroupMembership objects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  GroupMemberships:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GroupMembership"
+    post:
+      summary: Creates a new GroupMembership object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewGroupMembership"
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  GroupMembership:
+                    $ref: "#/components/schemas/GroupMembership"
+  
+  /groups/{id}/memberships/{membershipId}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - name: membershipId
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupMembershipId"
+    get:
+      summary: Gets a GroupMembership object by id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  GroupMembership:
+                    $ref: "#/components/schemas/GroupMembership"
+        '404':
+          description: Not Found
+    delete:
+      summary: Deletes a GroupMembership object
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: Not Found
+  
+  /groups:
+    post:  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewGroup"
+
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  Group:
+                    $ref: "#/components/schemas/Group"
+
+    get:
+      summary: Gets a list of Group objects
+      parameters: []
+        # TODO: Add pagination parameters
+        # TOOO: Add filter parameters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  Groups:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Group"
+            
 components:
   schemas:
-    $ref: "../schemas/_index.yaml"
+    $ref: "../schemas/group/_index.yaml"

@@ -1,0 +1,25 @@
+---
+type: object
+properties:
+  item:
+    $ref: "../item/_index.yaml#/ItemId"
+    description: "The ID of the item to be booked. For now, only rooms can be booked."
+  startDateTime:
+    $ref: "./DateTime15Min.yaml"
+    description: "The start time of the unavailability."
+  endDateTime:
+    $ref: "./DateTime15Min.yaml"
+    description: "The end time of the unavailability."
+  type:
+    type: string
+    enum:
+      - maintenance
+      - booking
+      - off_hours
+      - other
+description: >
+  An update to an unavailability. This could be a maintenance window, a booking, or something else.
+  This is the base type for all unavailability updates.
+  As a result, it does not have an ID, because it is not a complete unavailability.
+  It also has no required fields, because only need to send a fragment of this data
+  to update an unavailability.

@@ -1,0 +1,11 @@
+---
+allOf:
+- $ref: './NewCredit.yaml'
+- type: object
+  required:
+    - id
+    - user_id
+    - amount
+  properties:
+    id:
+      $ref: './_index.yaml#/CreditId'
