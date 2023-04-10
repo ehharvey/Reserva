@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: Credit Microservice API
+  version: 0.0.1
+servers:
+- url: https://credit.reserva.emilharvey.ca
+paths:
+  /credits:
+    get:
+      operationId: getCredits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Credit'
+                type: array
+          description: Successfully retrieved all credits.
+        "401":
+          description: Authentication token is missing or invalid.
+      summary: Get all credits
+    post:
+      operationId: createCredit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCredit'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully created a new credit.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authentication token is missing or invalid.
+      summary: Create a new credit
+  /credits/{creditId}:
+    delete:
+      operationId: deleteCreditById
+      parameters:
+      - description: The ID of the credit to delete.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Credit not found.
+      summary: Delete a credit by ID
+    get:
+      operationId: getCreditById
+      parameters:
+      - description: The ID of the credit to retrieve.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully retrieved the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Credit not found.
+      summary: Get a credit by ID
+    patch:
+      operationId: updateCreditById
+      parameters:
+      - description: The ID of the credit to update.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateCreditById_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully updated the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Credit not found.
+      summary: Update a credit by ID
+components:
+  schemas:
+    Credit:
+      allOf:
+      - $ref: '#/components/schemas/NewCredit'
+      - $ref: '#/components/schemas/Credit_allOf'
+      title: Credit
+    NewCredit:
+      example:
+        amount: 6
+        user_id: 0
+      properties:
+        user_id:
+          description: The ID of the user to create the credit for.
+          title: user_id
+          type: integer
+        amount:
+          description: The amount of the credit to create in units.
+          title: amount
+          type: integer
+      required:
+      - amount
+      - user_id
+      title: NewCredit
+      type: object
+    Error:
+      description: |
+        A generic error response. It has a message property, which is a string.
+      properties:
+        message:
+          title: message
+          type: string
+      title: Error
+      type: object
+    updateCreditById_request:
+      properties:
+        amount:
+          description: The new amount of the credit in units.
+          title: amount
+          type: integer
+      required:
+      - amount
+      title: updateCreditById_request
+      type: object
+    Credit_allOf:
+      properties:
+        id:
+          description: |
+            The ID of a credit. This is a UUID with the prefix "credit-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: id
+          type: string
+      required:
+      - amount
+      - id
+      - user_id
+      title: Credit_allOf
+      type: object
+      example: null
