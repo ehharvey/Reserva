@@ -1,0 +1,97 @@
+openapi: 3.0.2
+info:
+  title: Authentication Microservice
+  version: 0.0.1
+servers:
+- url: https://authentication.reserva.emilharvey.ca
+paths:
+  /authentication/login:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_authentication_login_post_request'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_authentication_login_post_201_response'
+          description: Authentication Passed
+        "401":
+          description: Authentication Failed
+  /authentication/validate:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_authentication_login_post_201_response'
+      responses:
+        "200":
+          description: Authentication Token is valid
+        "401":
+          description: Authentication Failed
+  /authentication/logout:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_authentication_login_post_201_response'
+      responses:
+        "200":
+          description: Logout Successful
+        "401":
+          description: Authentication Failed
+components:
+  schemas:
+    Authorization:
+      example:
+        accessToken: aaa-bbb-ccc
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        accessToken:
+          example: aaa-bbb-ccc
+          title: accessToken
+          type: string
+        expiresAt:
+          format: date-time
+          title: expiresAt
+          type: string
+      title: Authorization
+      type: object
+    UsernamePasswordPair:
+      properties:
+        clientId:
+          example: exampleClientId
+          pattern: "^[^\\s]*$"
+          title: clientId
+          type: string
+        username:
+          example: exampleUsername
+          pattern: "^[^\\s]*$"
+          title: username
+          type: string
+        password:
+          example: examplePassword
+          format: password
+          title: password
+          type: string
+      title: UsernamePasswordPair
+      type: object
+    _authentication_login_post_request:
+      properties:
+        usernamePasswordPair:
+          $ref: '#/components/schemas/UsernamePasswordPair'
+      title: _authentication_login_post_request
+    _authentication_login_post_201_response:
+      example:
+        authorization:
+          accessToken: aaa-bbb-ccc
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        authorization:
+          $ref: '#/components/schemas/Authorization'
+      title: _authentication_login_post_201_response
