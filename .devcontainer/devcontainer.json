@@ -11,7 +11,10 @@
 		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/java:1": {},
-		"ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {}
+		"ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {},
+		"ghcr.io/devcontainers-contrib/features/digitalocean-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/kubectl-asdf:2": {},
+		"ghcr.io/rio/features/kustomize:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -22,6 +25,7 @@
 				"GitHub.copilot",
 				"GitHub.vscode-github-actions",
 				"ms-python.python",
+				"GitHub.copilot"
 			]
 		}
 	},
