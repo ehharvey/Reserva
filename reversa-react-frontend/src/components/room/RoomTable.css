@@ -1,0 +1,61 @@
+h1 {
+    text-align: center;
+  }
+  
+  .table-title {
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #333;
+    color: black;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+  .table-container {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  
+  .table-container th,
+  .table-container td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .table-container th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Left justify Features column */
+  .table-container td:nth-child(5) {
+    text-align: left;
+  }
+  
+  /* Add padding to left of bullet points */
+  .table-container li {
+    padding-left: 8px;
+  }
+  
