@@ -153,5 +153,3 @@ paths:
 components:
   schemas:
     $ref: "../schemas/group/_index.yaml"
-  securitySchemes:
-    $ref: "../security/security.yaml"

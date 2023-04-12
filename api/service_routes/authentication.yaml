@@ -70,5 +70,3 @@ paths:
 components:
   schemas:
     $ref: "../schemas/authentication/_index.yaml"
-  securitySchemes:
-    $ref: "../security/security.yaml"
