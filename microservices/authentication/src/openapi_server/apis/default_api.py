@@ -30,7 +30,7 @@ router = APIRouter()
         201: {"model": AuthenticationLoginPost201Response, "description": "Authentication Passed"},
         401: {"description": "Authentication Failed"},
     },
-    tags=["default"],
+    tags=["authentication"],
     response_model_by_alias=True,
 )
 async def authentication_login_post(

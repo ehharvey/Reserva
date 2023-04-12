@@ -12,6 +12,7 @@ import { Header } from './components/header/Header';
 import { RoomTable } from './components/room/RoomTable';
 
 
+
 function App() {
   var feature = { icon_path: logo, name: "Number of Seats", quantity: 6 } as Feature;
   var features = [ feature, feature, feature, feature];

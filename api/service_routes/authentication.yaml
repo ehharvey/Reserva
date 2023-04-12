@@ -53,6 +53,20 @@ paths:
               properties:
                 authorization:
                   $ref: "#/components/schemas/Authorization"
+  /authentication/refresh:
+    post:
+      responses:
+        '200':
+          description: Refresh Successful
+        '401':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorization:
+                  $ref: "#/components/schemas/Authorization"
 components:
   schemas:
     $ref: "../schemas/authentication/_index.yaml"

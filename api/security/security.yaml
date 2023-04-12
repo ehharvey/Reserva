@@ -1,0 +1,10 @@
+securitySchemes:
+    oauth2:
+      flows:
+        implicit:
+          authorizationUrl: https://example.com/oauth2/authorize
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants read and write access to administrative information
+            
