@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'reversa-react-frontend/**'
+      - 'microservices/webapp/reversa-react-frontend/**'
 jobs:
   build:
 
@@ -21,10 +21,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: npm
-        cache-dependency-path: reversa-react-frontend/package.json
+        cache-dependency-path: microservices/webapp/reversa-react-frontend/package.json
     - run: npm install
-      working-directory: reversa-react-frontend
+      working-directory: microservices/webapp/reversa-react-frontend
     - run: npm run build --if-present
-      working-directory: reversa-react-frontend
+      working-directory: microservices/webapp/reversa-react-frontend
     - run: npm test
-      working-directory: reversa-react-frontend
+      working-directory: microservices/webapp/reversa-react-frontend

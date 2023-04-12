@@ -1,0 +1,44 @@
+version: '3'
+services:
+  user:
+    build: ./user 
+    ports:
+      - "8001:8001"
+  group:
+    build: ./group 
+    ports:
+      - "8002:8002"
+  authentication:
+    build: ./authentication 
+    ports:
+      - "8003:8003"
+  credit:
+    build: ./credit 
+    ports:
+      - "8004:8004"
+  item:
+    build: ./item 
+    ports:
+      - "8005:8005"
+  unavailability:
+    build: ./unavailability 
+    ports:
+      - "8006:8006"
+  
+  # Database
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/

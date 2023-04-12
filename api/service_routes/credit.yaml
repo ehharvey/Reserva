@@ -135,3 +135,5 @@ components:
       $ref: '../schemas/credit/NewCredit.yaml'
     Error:
       $ref: '../schemas/meta/Error.yaml'
+  securitySchemes:
+    $ref: "../security/security.yaml"

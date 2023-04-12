@@ -11,6 +11,9 @@ import { Student } from './entities/Student';
 import { Header } from './components/header/Header';
 import { RoomTable } from './components/room/RoomTable';
 
+import { FrontendApi, Configuration, Session, Identity } from "@ory/client"
+
+
 
 function App() {
   var feature = { icon_path: logo, name: "Number of Seats", quantity: 6 } as Feature;
