@@ -11,8 +11,6 @@ import { Student } from './entities/Student';
 import { Header } from './components/header/Header';
 import { RoomTable } from './components/room/RoomTable';
 
-import { FrontendApi, Configuration, Session, Identity } from "@ory/client"
-
 
 
 function App() {
