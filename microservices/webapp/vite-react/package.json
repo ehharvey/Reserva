@@ -24,6 +24,7 @@
     "@mantine/prism": "^6.0.7",
     "@mantine/spotlight": "^6.0.7",
     "@mantine/tiptap": "^6.0.7",
+    "@ory/client": "^1.1.24",
     "@tabler/icons-react": "^2.15.0",
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/react": "^2.0.3",
