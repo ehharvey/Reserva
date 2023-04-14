@@ -13,6 +13,7 @@ import {
 import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import { AuthButtons } from '../authentication/AuthButtons';
+import { AvatarProfile } from '../header/Avatar';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -101,8 +102,10 @@ export function AppHeader() {
             </a>
             
           </Group>
-
+          <Group position="apart" sx={{ height: '100%' }}>
+          <AvatarProfile/>
           <AuthButtons />
+          </Group>
         </Group>
       </Header>
     </Box>

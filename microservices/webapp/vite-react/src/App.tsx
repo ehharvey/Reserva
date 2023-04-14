@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Root } from "./routes/Root";
 import { Profile } from "./routes/Profile";
 import { BookingRoom} from "./routes/BookingRoom";
 import { Groups } from "./routes/Groups";
-import { Root } from "./routes/Root";
 import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
 
