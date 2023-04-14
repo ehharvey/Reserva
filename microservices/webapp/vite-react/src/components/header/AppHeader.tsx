@@ -103,7 +103,9 @@ export function AppHeader() {
             
           </Group>
           <Group position="apart" sx={{ height: '100%' }}>
-          <AvatarProfile/>
+          <AvatarProfile> 
+            <a href="/me" className={classes.link}></a> 
+          </AvatarProfile>
           <AuthButtons />
           </Group>
         </Group>
