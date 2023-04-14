@@ -17,7 +17,6 @@ export function AuthButtons() {
             ) : (
                 <>
                     <Button variant="default" onClick={() => { loginWithRedirect() }}>Log in</Button>
-                    <Button>Sign up</Button>
                 </>
             )}
         </Group>
