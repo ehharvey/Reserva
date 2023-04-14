@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.1",
     "@emotion/react": "^11.10.6",
     "@mantine/carousel": "^6.0.7",
     "@mantine/core": "^6.0.7",
