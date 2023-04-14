@@ -10,7 +10,6 @@ import {
   ScrollArea,
   rem,
 } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import { AuthButtons } from '../authentication/AuthButtons';
 import { AvatarProfile } from '../header/Avatar';
@@ -82,7 +81,6 @@ export function AppHeader() {
     <Box ml={0} mr={0}>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          <MantineLogo size={30} />
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/" className={classes.link}>
@@ -103,9 +101,7 @@ export function AppHeader() {
             
           </Group>
           <Group position="apart" sx={{ height: '100%' }}>
-          <AvatarProfile> 
-            <a href="/me" className={classes.link}></a> 
-          </AvatarProfile>
+          <AvatarProfile/> 
           <AuthButtons />
           </Group>
         </Group>
