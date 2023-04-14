@@ -11,7 +11,6 @@ os.chdir(script_dir)
 
 
 files = [
-    Path("authentication.yaml"),
     Path("credit.yaml"),
     Path("group.yaml"),
     Path("item.yaml"),
