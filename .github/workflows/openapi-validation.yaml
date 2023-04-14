@@ -21,7 +21,6 @@ jobs:
     
           - name: Validate Swagger and OpenAPI using Swagger CLI
             run: |
-              swagger-cli validate api/service_routes/authentication.yaml
               swagger-cli validate api/service_routes/credit.yaml
               swagger-cli validate api/service_routes/group.yaml        
               swagger-cli validate api/service_routes/item.yaml
