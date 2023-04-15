@@ -17,4 +17,5 @@ properties:
 example:
   username: "debugg"
   firstName: "Deb"
-  lastName: "Ugg"  
+  lastName: "Ugg" 
+  role: standard
