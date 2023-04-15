@@ -1,0 +1,40 @@
+---
+allof:
+  - $ref: ./newgroup.yaml
+  - type: object
+    properties:
+      id:
+        $ref: ./groupid.yaml
+      createdat:
+        type: string
+        format: date-time
+        readonly: true
+        example: '2019-01-01t00:00:00z'
+        description: the date and time the group was created.
+      lastupdatedat:
+        type: string
+        format: date-time
+        readonly: true
+        example: '2019-03-01t00:00:00z'
+        description: the date and time the group was last updated.
+      owner:
+        $ref: '../user/_index.yaml#/userid'
+        description: >
+          the id of the user who owns the group. this will initially be the user
+          who created the group, but can be changed later.
+      memberships:
+        type: array
+        items:
+          $ref: './_index.yaml#/groupmembershipid'
+        description: the ids of the group memberships.
+    required:
+      - owner
+      - memberships
+      - id
+      - createdat
+      - lastupdatedat
+    description: >
+      a group. this could be a project group, a team, or something else.
+      the difference between this and newgroup is that this has an id, which is
+      assigned by the server. it also has timestamps for when the group was created
+      and last updated.

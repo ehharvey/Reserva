@@ -1,15 +1,15 @@
 ---
-Group:
-  $ref: "./Group.yaml"
-GroupMembership:
-  $ref: "./GroupMembership.yaml"
-NewGroupMembership:
-  $ref: "./NewGroupMembership.yaml"
-GroupMembershipId:
-  $ref: "./GroupMembershipId.yaml"
-GroupId:
-  $ref: "./GroupId.yaml"
-NewGroup:
-  $ref: "./NewGroup.yaml"
-UpdateGroup:
-  $ref: "./UpdateGroup.yaml"
+group:
+  $ref: "./group.yaml"
+groupmembership:
+  $ref: "./groupmembership.yaml"
+newgroupmembership:
+  $ref: "./newgroupmembership.yaml"
+groupmembershipid:
+  $ref: "./groupmembershipid.yaml"
+groupid:
+  $ref: "./groupid.yaml"
+newgroup:
+  $ref: "./newgroup.yaml"
+updategroup:
+  $ref: "./updategroup.yaml"

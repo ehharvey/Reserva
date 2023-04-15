@@ -1,0 +1,13 @@
+---
+allof:
+- $ref: './newunavailability.yaml'
+- type: object
+  properties:
+    recurrence:
+      $ref: "./datetime15min.yaml"
+      description: the recurrence of the unavailability timed from the start time.
+  required:
+    - recurrence
+description: >
+  a recurring unavailability. this could be a maintenance window, a booking, or something else.
+  the client will send this when they want to create a new recurring unavailability.

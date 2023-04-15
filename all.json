@@ -1,0 +1,1448 @@
+{
+  "components": {
+    "schemas": {
+      "Credit": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewCredit"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "user_id",
+              "amount"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/CreditId"
+              }
+            }
+          }
+        ]
+      },
+      "CreditId": {
+        "example": "credit-8fec2234-d8cf-43a7-aaaa-94b1fde42468",
+        "description": "The ID of a credit. This is a UUID with the prefix \"credit-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "DateTime15Min": {
+        "type": "string",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$",
+        "description": "Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00",
+        "example": "2023-04-02T15:00:00"
+      },
+      "Error": {
+        "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+      },
+      "Feature": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the feature."
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the feature."
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "description": "The data required to create a new feature.\n"
+      },
+      "Group": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewGroup"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/GroupId"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-01-01T00:00:00Z",
+                "description": "The date and time the group was created."
+              },
+              "lastUpdatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-03-01T00:00:00Z",
+                "description": "The date and time the group was last updated."
+              }
+            },
+            "required": [
+              "id",
+              "createdAt",
+              "lastUpdatedAt"
+            ],
+            "description": "A group. This could be a project group, a team, or something else. The difference between this and NewGroup is that this has an ID, which is assigned by the server. It also has timestamps for when the group was created and last updated.\n"
+          }
+        ]
+      },
+      "GroupId": {
+        "example": "group-8fec2234-d8cf-43a7-a791-94b1fde42468",
+        "description": "The ID of a group. This is a UUID with the prefix \"group-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "GroupMembership": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewGroupMembership"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/GroupMembershipId"
+              }
+            }
+          }
+        ]
+      },
+      "GroupMembershipId": {
+        "example": "groupmembership-c49c283a-44d3-4cb5-b836-2ff8436f1e2f",
+        "description": "The ID of a group membership.",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "Id": {
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+        "description": "A UUID. This is a string that is a UUID. \n"
+      },
+      "Item": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/ItemId"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-01-01T00:00:00Z",
+                "description": "The date and time the item was created."
+              },
+              "lastUpdatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-03-01T00:00:00Z",
+                "description": "The date and time the item was last updated."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ],
+        "description": "The data returned when an item is retrieved. This is the base schema for all item retrievals. The difference between this and the NewItem schema is that this schema includes the ID, createdAt, and lastUpdatedAt fields.\n"
+      },
+      "ItemId": {
+        "example": "item-cc354ffb-fa63-4a67-a67f-a24048c26c3f",
+        "description": "The ID of the item. This is a UUID with a prefix of \"item-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "NewCredit": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "description": "The ID of the user to create the credit for."
+          },
+          "amount": {
+            "type": "integer",
+            "description": "The amount of the credit to create in units."
+          }
+        },
+        "required": [
+          "user_id",
+          "amount"
+        ]
+      },
+      "NewGroup": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateGroup"
+          }
+        ],
+        "required": [
+          "name",
+          "createdBy"
+        ],
+        "description": "A group. This could be a project group, a team, or something else. This is sent by the client when creating a new group.\n"
+      },
+      "NewGroupMembership": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/GroupId",
+            "description": "The ID of the group."
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserId",
+            "description": "The ID of the user."
+          }
+        },
+        "required": [
+          "group",
+          "user"
+        ],
+        "description": "This is a group membership. It is the intermediate object between a user and a group. It is used to determine which users are members of which groups.\n"
+      },
+      "NewItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateItem"
+          }
+        ],
+        "required": [
+          "name",
+          "location",
+          "description",
+          "type",
+          "features"
+        ],
+        "description": "The data required to create a new item. This is the base schema for all item creations. The difference between this and the UpdateItem schema is that this schema requires all fields to be present.\n"
+      },
+      "NewRecurringUnavailability": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewUnavailability"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "recurrence": {
+                "$ref": "#/components/schemas/DateTime15Min",
+                "description": "The recurrence of the unavailability timed from the start time."
+              }
+            },
+            "required": [
+              "recurrence"
+            ]
+          }
+        ],
+        "description": "A recurring unavailability. This could be a maintenance window, a booking, or something else. The client will send this when they want to create a new recurring unavailability.\n"
+      },
+      "NewUnavailability": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateUnavailability"
+          }
+        ],
+        "required": [
+          "room",
+          "startDateTime",
+          "endDateTime",
+          "type",
+          "item"
+        ],
+        "description": "A new unavailability. This is sent when a client wants to create a new unavailability."
+      },
+      "RecurringUnavailability": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewRecurringUnavailability"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/UnavailabilityId"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ],
+        "description": "A recurring unavailability. This could be a maintenance window, a booking, or something else. The server will send this to clients\n"
+      },
+      "Success": {
+        "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/delete/responses/200/content/application~1json/schema"
+      },
+      "Unavailability": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewUnavailability"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/UnavailabilityId"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-01-01T00:00:00Z",
+                "description": "The date and time the unavailability was created."
+              },
+              "lastUpdatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2019-03-01T00:00:00Z",
+                "description": "The date and time the unavailability was last updated."
+              }
+            },
+            "required": [
+              "id",
+              "createdAt",
+              "lastUpdatedAt"
+            ],
+            "description": "An unavailability. This could be a maintenance window, a booking, or something else. The difference between this and NewUnavailability is that this has an ID, which is assigned by the server. It also has timestamps for when the unavailability was created and last updated.\n"
+          }
+        ]
+      },
+      "UnavailabilityId": {
+        "example": "unavailability-cc354ffb-fa63-4a67-a67f-a24048c26c3f",
+        "description": "The ID of an unavailability. This is a UUID with the prefix \"unavailability-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "UpdateGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Project Group",
+            "description": "The name of the group."
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/UserId",
+            "description": "The ID of the user who created the group"
+          }
+        },
+        "description": "A group. This could be a project group, a team, or something else. This is sent by the client when updating an existing group.\n"
+      },
+      "UpdateItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Large Room",
+            "description": "The name of the item. For now, these will be names of rooms"
+          },
+          "location": {
+            "type": "string",
+            "example": "1st Floor",
+            "description": "The location of the item."
+          },
+          "description": {
+            "type": "string",
+            "example": "Large Room with Low Ceilings",
+            "description": "A description of the item."
+          },
+          "type": {
+            "type": "string",
+            "example": "Room",
+            "enum": [
+              "Room"
+            ],
+            "description": "The type of the item. For now, this will only be Room."
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            },
+            "description": "The features of the item. For now, these will be the features of the room.\n"
+          }
+        },
+        "description": "The data required to update an item. This is the base schema for all item updates.\n"
+      },
+      "UpdateUnavailability": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/ItemId",
+            "description": "The ID of the item to be booked. For now, only rooms can be booked."
+          },
+          "startDateTime": {
+            "$ref": "#/components/schemas/DateTime15Min",
+            "description": "The start time of the unavailability."
+          },
+          "endDateTime": {
+            "$ref": "#/components/schemas/DateTime15Min",
+            "description": "The end time of the unavailability."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "maintenance",
+              "booking",
+              "off_hours",
+              "other"
+            ]
+          }
+        },
+        "description": "An update to an unavailability. This could be a maintenance window, a booking, or something else. This is the base type for all unavailability updates. As a result, it does not have an ID, because it is not a complete unavailability. It also has no required fields, because only need to send a fragment of this data to update an unavailability.\n"
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The user's username."
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The user's first name."
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The user's last name."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "admin"
+            ],
+            "default": "standard",
+            "description": "The user's role."
+          }
+        },
+        "example": {
+          "username": "debugg",
+          "firstName": "Deb",
+          "lastName": "Ugg",
+          "role": "standard"
+        }
+      },
+      "UserId": {
+        "example": "user-7f876542-5b07-4ba4-a380-c946964c5a84",
+        "description": "Id of a user. This is a UUID with the prefix \"user-\".\n",
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      }
+    }
+  },
+  "info": {
+    "title": "Main API",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.2",
+  "paths": {
+    "/credits": {
+      "get": {
+        "operationId": "getCredits",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Credit"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successfully retrieved all credits."
+          },
+          "401": {
+            "description": "Authentication token is missing or invalid."
+          }
+        },
+        "summary": "Get all credits",
+        "tags": [
+          "credit"
+        ]
+      },
+      "post": {
+        "operationId": "createCredit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCredit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            },
+            "description": "Successfully created a new credit."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Authentication token is missing or invalid."
+          }
+        },
+        "summary": "Create a new credit",
+        "tags": [
+          "credit"
+        ]
+      }
+    },
+    "/credits/{creditId}": {
+      "delete": {
+        "operationId": "deleteCreditById",
+        "parameters": [
+          {
+            "description": "The ID of the credit to delete.",
+            "in": "path",
+            "name": "creditId",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the credit."
+          },
+          "401": {
+            "description": "Authentication token is missing or invalid."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Credit not found."
+          }
+        },
+        "summary": "Delete a credit by ID",
+        "tags": [
+          "credit"
+        ]
+      },
+      "get": {
+        "operationId": "getCreditById",
+        "parameters": [
+          {
+            "description": "The ID of the credit to retrieve.",
+            "in": "path",
+            "name": "creditId",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            },
+            "description": "Successfully retrieved the credit."
+          },
+          "401": {
+            "description": "Authentication token is missing or invalid."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Credit not found."
+          }
+        },
+        "summary": "Get a credit by ID",
+        "tags": [
+          "credit"
+        ]
+      },
+      "patch": {
+        "operationId": "updateCreditById",
+        "parameters": [
+          {
+            "description": "The ID of the credit to update.",
+            "in": "path",
+            "name": "creditId",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "description": "The new amount of the credit in units.",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "amount"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            },
+            "description": "Successfully updated the credit."
+          },
+          "401": {
+            "description": "Authentication token is missing or invalid."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Credit not found."
+          }
+        },
+        "summary": "Update a credit by ID",
+        "tags": [
+          "credit"
+        ]
+      }
+    },
+    "/groups": {
+      "get": {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Groups": {
+                      "items": {
+                        "$ref": "#/components/schemas/Group"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets a list of Group objects",
+        "tags": [
+          "group"
+        ]
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGroup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Group": {
+                      "$ref": "#/components/schemas/Group"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "group"
+        ]
+      }
+    },
+    "/groups/{id}": {
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "summary": "Deletes a Group object",
+        "tags": [
+          "group"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Group": {
+                      "$ref": "#/components/schemas/Group"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets a Group object by id",
+        "tags": [
+          "group"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GroupId"
+          }
+        }
+      ],
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGroup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Group": {
+                      "$ref": "#/components/schemas/Group"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Updates a Group object",
+        "tags": [
+          "group"
+        ]
+      }
+    },
+    "/groups/{id}/memberships": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "GroupMemberships": {
+                      "items": {
+                        "$ref": "#/components/schemas/GroupMembership"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets a list of GroupMembership objects",
+        "tags": [
+          "group"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GroupId"
+          }
+        }
+      ],
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGroupMembership"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "GroupMembership": {
+                      "$ref": "#/components/schemas/GroupMembership"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Creates a new GroupMembership object",
+        "tags": [
+          "group"
+        ]
+      }
+    },
+    "/groups/{id}/memberships/{membershipId}": {
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Deletes a GroupMembership object",
+        "tags": [
+          "group"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "GroupMembership": {
+                      "$ref": "#/components/schemas/GroupMembership"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Gets a GroupMembership object by id",
+        "tags": [
+          "group"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GroupId"
+          }
+        },
+        {
+          "in": "path",
+          "name": "membershipId",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GroupMembershipId"
+          }
+        }
+      ]
+    },
+    "/items": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Rooms": {
+                      "items": {
+                        "$ref": "#/components/schemas/Item"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets a list of items. For now, the only kind of item is a room.",
+        "tags": [
+          "item"
+        ]
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/Item"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request\n"
+          }
+        },
+        "summary": "Posts an item. For now, the only kind of item is a room.",
+        "tags": [
+          "item"
+        ]
+      }
+    },
+    "/items/{id}": {
+      "delete": {
+        "description": "## More Information\nRequest for `DELETE/rooms/{id}` requires an id\n",
+        "operationId": "deleteRoomId",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        },
+        "summary": "Delete a Room object existing in the Rooms resources",
+        "tags": [
+          "item"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/Item"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        },
+        "summary": "Gets a Item object by id. For now, the only kind of item is a room.",
+        "tags": [
+          "item"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ItemId"
+          }
+        }
+      ],
+      "put": {
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Room": {
+                      "$ref": "#/components/schemas/UpdateItem"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Item Not Found\n"
+          }
+        },
+        "summary": "Updates an item. For now, the only kind of item is a room.",
+        "tags": [
+          "item"
+        ]
+      }
+    },
+    "/unavailabilities": {
+      "get": {
+        "description": "Retrieve all unavailability associated with a student or a room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Unavailabilities": {
+                      "items": {
+                        "$ref": "#/components/schemas/Unavailability",
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "unavailability"
+        ]
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/NewUnavailability"
+                  },
+                  {
+                    "$ref": "#/components/schemas/NewRecurringUnavailability"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "Created",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "Bad Request",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "unavailability"
+        ]
+      }
+    },
+    "/unavailabilities/{id}": {
+      "delete": {
+        "description": "Delete a specific unavailability identified by the `id` parameter.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "A generic success response. It has a message property, which is a string.\n"
+                }
+              }
+            },
+            "description": "Deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "unavailability"
+        ]
+      },
+      "get": {
+        "description": "Retrieves information about a specific unavailability identified by the `id` parameter.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "unavailability": {
+                      "$ref": "#/components/schemas/Unavailability",
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "A generic error response. It has a message property, which is a string.\n"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "unavailability"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "The unavailability ID",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UnavailabilityId"
+          }
+        }
+      ],
+      "put": {
+        "description": "Update a specific unavailability identified by the `id` parameter with the information  provided in the request body.\n",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "Booking": {
+                      "$ref": "#/components/schemas/UpdateUnavailability",
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "unavailability"
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "Returns a list of all users.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "users": {
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "A list of users"
+          }
+        },
+        "summary": "Get all users",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/admins": {
+      "get": {
+        "description": "Returns a list of all admin users.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "A list of admin users"
+          }
+        },
+        "summary": "Get all admin users",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/standard": {
+      "get": {
+        "description": "Returns a list of all standard users.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "A list of standard users"
+          }
+        },
+        "summary": "Get all standard users",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "description": "Returns a single user by ID.",
+        "parameters": [
+          {
+            "description": "The ID of the user to retrieve.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "The requested user"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Get a user by ID",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{userId}/groups": {
+      "get": {
+        "description": "Returns a list of all groups for a user.",
+        "parameters": [
+          {
+            "description": "The ID of the user to retrieve groups for.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "groups": {
+                      "items": {
+                        "$ref": "#/components/schemas/GroupMembership"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "A list of groups"
+          }
+        },
+        "summary": "Get all groups for a user",
+        "tags": [
+          "user"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://reserva.emilharvey.ca"
+    }
+  ]
+}

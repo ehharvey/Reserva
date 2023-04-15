@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: API Title
+  title: api title
   version: '1.0'
 servers:
   - url: https://group.reserva.emilharvey.ca
@@ -11,39 +11,45 @@ paths:
           in: path
           required: true
           schema:
-            $ref: "#/components/schemas/GroupId"
+            $ref: "#/components/schemas/groupid"
     get:
-      summary: Gets a Group object by id
+      summary: gets a group object by id
+      security:
+        - standard: [read:groups:associated]
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  "Group":
-                    $ref: "#/components/schemas/Group"
+                  "group":
+                    $ref: "#/components/schemas/group"
     put:
-      summary: Updates a Group object
+      summary: updates a group object
+      security:
+        - standard: [write:groups:me]      
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateGroup"
+              $ref: "#/components/schemas/updategroup"
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  Group:
-                    $ref: "#/components/schemas/Group"
+                  group:
+                    $ref: "#/components/schemas/group"
     delete:
-      summary: Deletes a Group object
+      summary: deletes a group object
+      security:
+        - standard: [write:groups:me]
       responses:
         '204':
-          description: Deleted
+          description: deleted
   
   /groups/{id}/memberships:
     parameters:
@@ -51,105 +57,102 @@ paths:
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupId"
+          $ref: "#/components/schemas/groupid"
     get:
-      summary: Gets a list of GroupMembership objects
+      summary: gets a list of groupmembership objects
+      security:
+        - standard: [read:groups:associated]
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  GroupMemberships:
+                  groupmemberships:
                     type: array
                     items:
-                      $ref: "#/components/schemas/GroupMembership"
+                      $ref: "#/components/schemas/groupmembership"
     post:
-      summary: Creates a new GroupMembership object
+      summary: creates a new groupmembership object
+      security:
+        - standard: [write:groups:me]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewGroupMembership"
+              $ref: "#/components/schemas/newgroupmembership"
       responses:
         '201':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  GroupMembership:
-                    $ref: "#/components/schemas/GroupMembership"
+                  groupmembership:
+                    $ref: "#/components/schemas/groupmembership"
   
-  /groups/{id}/memberships/{membershipId}:
+  /groups/{id}/memberships/{membershipid}:
     parameters:
       - name: id
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupId"
-      - name: membershipId
+          $ref: "#/components/schemas/groupid"
+      - name: membershipid
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupMembershipId"
+          $ref: "#/components/schemas/groupmembershipid"
     get:
-      summary: Gets a GroupMembership object by id
+      summary: gets a groupmembership object by id
+      security:
+        - standard: [read:groups:associated]
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  GroupMembership:
-                    $ref: "#/components/schemas/GroupMembership"
+                  groupmembership:
+                    $ref: "#/components/schemas/groupmembership"
         '404':
-          description: Not Found
+          description: not found
     delete:
-      summary: Deletes a GroupMembership object
+      summary: deletes a groupmembership object
+      security:
+        - standard: 
+            - write:groups:me
+            - write:groupmemberships:me
       responses:
         '204':
-          description: Deleted
+          description: deleted
         '404':
-          description: Not Found
+          description: not found
   
   /groups:
-    post:  
+    post: 
+      summary: creates a new group object
+      security:
+        - standard: [write:groups:me] 
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewGroup"
+              $ref: "#/components/schemas/newgroup"
 
       responses:
         '201':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  Group:
-                    $ref: "#/components/schemas/Group"
-
-    get:
-      summary: Gets a list of Group objects
-      parameters: []
-        # TODO: Add pagination parameters
-        # TOOO: Add filter parameters
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  Groups:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Group"
-            
+                  group:
+                    $ref: "#/components/schemas/group"
 components:
   schemas:
     $ref: "../schemas/group/_index.yaml"
+  securitySchemes:
+    $ref: '../security/_all.yaml'

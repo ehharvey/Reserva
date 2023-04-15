@@ -11,11 +11,10 @@ os.chdir(script_dir)
 
 
 files = [
-    Path("credit.yaml"),
     Path("group.yaml"),
     Path("item.yaml"),
     Path("unavailability.yaml"),
-    Path("user.yaml")
+    Path("user.yaml"),
 ]
 
 boilerplate = """---
@@ -27,19 +26,18 @@ output_dict = {
     "openapi": "3.0.2",
     "info": {
         "title": "Main API",
-        "version": "0.0.1"
+        "version": "0.0.1",
     },
-    "servers": [
-        {
-            "url": "https://reserva.emilharvey.ca"
-        }
-    ],
+    "servers": [{"url": "https://reserva.emilharvey.ca"}],
     "paths": {},
     "components": {
         "schemas": {
             "$ref": "../schemas/_all.yaml",
+            "securitySchemes": {
+                "$ref": "../security/_all.yaml",
+            },
         }
-    }
+    },
 }
 
 for file in files:
@@ -53,9 +51,8 @@ for file in files:
 
                 file_dict["paths"][path][method]["tags"] = [file.name[:-5]]
 
-
-        for key, value in file_dict["paths"].items():            
-            output_dict["paths"][key] = value           
+        for key, value in file_dict["paths"].items():
+            output_dict["paths"][key] = value
 
 with open("_all.yaml", "w") as output:
     output.write(boilerplate)

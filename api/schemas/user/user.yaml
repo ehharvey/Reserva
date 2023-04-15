@@ -2,20 +2,20 @@ type: object
 properties:
   username:
     type: string
-    description: The user's username.
-  firstName:
+    description: the user's username.
+  firstname:
     type: string
-    description: The user's first name.
-  lastName:
+    description: the user's first name.
+  lastname:
     type: string
-    description: The user's last name.
+    description: the user's last name.
   role:
       type: string
       enum: [standard, admin]
       default: standard
-      description: The user's role.
+      description: the user's role.
 example:
   username: "debugg"
-  firstName: "Deb"
-  lastName: "Ugg" 
+  firstname: "deb"
+  lastname: "ugg" 
   role: standard

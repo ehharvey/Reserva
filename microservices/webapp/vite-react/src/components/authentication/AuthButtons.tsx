@@ -5,7 +5,7 @@ import { User } from "../../entities/User";
 
 
 export function AuthButtons() {
-    const { loginWithRedirect, logout, isAuthenticated, user, loginWithPopup } = useAuth0();
+    const { logout, isAuthenticated, user, loginWithPopup } = useAuth0();
 
     return (
         <Group position="center" grow pb="xl" px="md">
@@ -16,7 +16,7 @@ export function AuthButtons() {
                 </>
             ) : (
                 <>
-                    <Button variant="default" onClick={() => { loginWithRedirect() }}>Log in</Button>
+                    <Button variant="default" onClick={() => { loginWithPopup() }}>Log in</Button>
                     <Button>Sign up</Button>
                 </>
             )}

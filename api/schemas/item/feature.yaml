@@ -1,0 +1,22 @@
+---
+type: object
+properties:
+  name: 
+    type: string
+    description: the name of the feature.
+  value:
+    oneof:
+      - type: string
+        description: the value of the feature.
+      - type: number
+        description: the value of the feature.
+      - type: boolean
+        description: the value of the feature.
+required:
+  - name
+  - value
+description: >
+  the data required to create a new feature.
+example:
+  name: "number of beds"
+  value: 2
