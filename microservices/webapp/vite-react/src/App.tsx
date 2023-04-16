@@ -18,8 +18,8 @@ const router = createBrowserRouter([
 export function App() {
   return (
     <Auth0Provider
-      domain="" // TODO: Add your Auth0 domain
-      clientId="" // TODO: Add your Auth0 client ID
+      domain={import.meta.env.VITE_AUTH_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}

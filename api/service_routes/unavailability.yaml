@@ -14,6 +14,7 @@ paths:
         $ref: "#/components/schemas/unavailabilityid"
       description: the unavailability id
     put:
+      summary: update an unavailability
       security:
         - staff: [write:unavailabilities:me]
         - standard: [write:unavailabilities:me]
@@ -36,7 +37,10 @@ paths:
                 $ref: '../schemas/meta/error.yaml'
           description: bad request
     delete:
-      description: delete a specific unavailability identified by the `id` parameter.
+      summary: Delete an unavailability
+      security:
+        - staff: [write:unavailabilities:me]
+        - standard: [write:unavailabilities:me]
       responses:
         '200':
           content:
@@ -52,7 +56,7 @@ paths:
           description: bad request
   /unavailabilities:
     get:
-      description: retrieve all unavailability associated with a student or a room.
+      summary: Get a list of unavailabilities
       # todo: add query parameters for filtering
       # todo: add query parameters for pagination
       responses:
@@ -70,6 +74,10 @@ paths:
           description: ok
     
     post:
+      summary: Create a new unavailability
+      security:
+        - staff: [write:unavailabilities:me]
+        - standard: [write:unavailabilities:me]
       requestBody:
         content:
           application/json:
@@ -79,18 +87,23 @@ paths:
                 - $ref: "#/components/schemas/newrecurringunavailability"
       responses:
         '201':
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: created
           description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unavailability:
+                    type: object
+                    $ref: "#/components/schemas/unavailability"
         '400':
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: bad request
+                type: object
+                properties:
+                  error:
+                    $ref: '../schemas/meta/error.yaml'
           description: bad request
 
 
