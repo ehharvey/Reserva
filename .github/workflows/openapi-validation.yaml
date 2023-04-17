@@ -2,8 +2,7 @@ name: Validate OpenAPI YAML
 
 on:
   pull_request:
-    paths:
-    - 'api/**/*.yaml'
+    branches: [ main ]
 
 jobs:
   validate:
