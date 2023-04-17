@@ -1,0 +1,10 @@
+---
+allOf:
+- $ref: './updateUnavailability.yaml'
+required:
+  - room
+  - startdatetime
+  - enddatetime
+  - type
+  - item
+description: a new unavailability. this is sent when a client wants to create a new unavailability.

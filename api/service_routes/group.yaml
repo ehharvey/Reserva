@@ -1,9 +1,9 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
-  title: api title
-  version: '1.0'
+  title: Group Management API
+  version: '0.0.1'
 servers:
-  - url: https://group.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca
 paths:
   /groups/{id}:
     parameters:
@@ -16,6 +16,7 @@ paths:
       summary: gets a group object by id
       security:
         - standard: [read:groups:associated]
+      description: gets a group object by id
       responses:
         '200':
           description: ok
@@ -27,13 +28,14 @@ paths:
                     $ref: "#/components/schemas/group"
     put:
       summary: updates a group object
+      description: updates a group object
       security:
         - standard: [write:groups:me]      
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/updategroup"
+              $ref: "#/components/schemas/updateGroup"
       responses:
         '200':
           description: ok
@@ -45,11 +47,18 @@ paths:
                     $ref: "#/components/schemas/group"
     delete:
       summary: deletes a group object
+      description: deletes a group object
       security:
         - standard: [write:groups:me]
       responses:
         '204':
           description: deleted
+          content:
+            application/json:
+              schema:
+                properties:
+                  group:
+                    $ref: "#/components/schemas/group"
   
   /groups/{id}/memberships:
     parameters:
@@ -59,7 +68,8 @@ paths:
         schema:
           $ref: "#/components/schemas/groupid"
     get:
-      summary: gets a list of groupmembership objects
+      summary: gets a list of groupMembership objects
+      description: gets a list of groupMembership objects for a group
       security:
         - standard: [read:groups:associated]
       responses:
@@ -69,19 +79,20 @@ paths:
             application/json:
               schema:
                 properties:
-                  groupmemberships:
+                  groupMemberships:
                     type: array
                     items:
-                      $ref: "#/components/schemas/groupmembership"
+                      $ref: "#/components/schemas/groupMembership"
     post:
-      summary: creates a new groupmembership object
+      summary: creates a new groupMembership object
+      description: creates a new groupMembership object
       security:
         - standard: [write:groups:me]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/newgroupmembership"
+              $ref: "#/components/schemas/newGroupMembership"
       responses:
         '201':
           description: ok
@@ -89,8 +100,8 @@ paths:
             application/json:
               schema:
                 properties:
-                  groupmembership:
-                    $ref: "#/components/schemas/groupmembership"
+                  groupMembership:
+                    $ref: "#/components/schemas/groupMembership"
   
   /groups/{id}/memberships/{membershipid}:
     parameters:
@@ -103,9 +114,10 @@ paths:
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/groupmembershipid"
+          $ref: "#/components/schemas/groupMembershipId"
     get:
-      summary: gets a groupmembership object by id
+      summary: gets a groupMembership object by id
+      description: gets a groupMembership object by id
       security:
         - standard: [read:groups:associated]
       responses:
@@ -115,16 +127,17 @@ paths:
             application/json:
               schema:
                 properties:
-                  groupmembership:
-                    $ref: "#/components/schemas/groupmembership"
+                  groupMembership:
+                    $ref: "#/components/schemas/groupMembership"
         '404':
           description: not found
     delete:
-      summary: deletes a groupmembership object
+      summary: deletes a groupMembership object
+      description: deletes a groupMembership object
       security:
         - standard: 
             - write:groups:me
-            - write:groupmemberships:me
+            - write:groupMemberships:me
       responses:
         '204':
           description: deleted
@@ -134,13 +147,14 @@ paths:
   /groups:
     post: 
       summary: creates a new group object
+      description: creates a new group object
       security:
         - standard: [write:groups:me] 
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/newgroup"
+              $ref: "#/components/schemas/newGroup"
 
       responses:
         '201':

@@ -1,9 +1,9 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
   title: api title
-  version: '1.0'
+  version: '0.0.1'
 servers:
-  - url: https://unavailability.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca
 paths:
   /unavailabilities/{id}:
     parameters:
@@ -11,7 +11,7 @@ paths:
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/unavailabilityid"
+        $ref: "#/components/schemas/unavailabilityId"
       description: the unavailability id
     put:
       summary: update an unavailability
@@ -28,7 +28,7 @@ paths:
                 properties:
                   booking:
                     type: object
-                    $ref: "#/components/schemas/updateunavailability"
+                    $ref: "#/components/schemas/updateUnavailability"
           description: ok
         '400':
           content:
@@ -83,8 +83,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/newunavailability"
-                - $ref: "#/components/schemas/newrecurringunavailability"
+                - $ref: "#/components/schemas/newUnavailability"
+                - $ref: "#/components/schemas/newRecurringUnavailability"
       responses:
         '201':
           description: created

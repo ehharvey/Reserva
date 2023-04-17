@@ -2,7 +2,7 @@ admin:
   type: oauth2
   flows:
     authorizationCode:
-      authorizationCode: "https://dev-mnj1i4nq.us.auth0.com/authorize"
+      authorizationUrl: "https://dev-mnj1i4nq.us.auth0.com/authorize"
       tokenUrl: "https://dev-mnj1i4nq.us.auth0.com/oauth/token"
       scopes:
         read:items: Read full information about any room
@@ -15,7 +15,7 @@ standard:
       tokenUrl: "https://dev-mnj1i4nq.us.auth0.com/oauth/token"
       scopes:
         read:groups:associated: Read information about Groups you are a member of
-        write:groupmemberships:me: Delete your current memberships
+        write:groupMemberships:me: Delete your current memberships
         write:groups:me: Create and edit groups under your account
         write:unavailabilities:me: Create and edit new room bookings under your account
 staff:

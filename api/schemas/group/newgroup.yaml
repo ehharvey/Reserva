@@ -1,9 +1,0 @@
----
-allof:
-- $ref: updategroup.yaml
-required:
-  - name
-  - createdby
-description: >
-  a group. this could be a project group, a team, or something else.
-  this is sent by the client when creating a new group.

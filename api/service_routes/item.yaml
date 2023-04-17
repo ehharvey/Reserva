@@ -3,14 +3,14 @@ info:
   title: api title
   version: 0.0.1
 servers:
-  - url: https://item.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca
 paths:
   /items/{id}/unavailabilities:
     parameters:
       - name: id
         in: path
         schema:
-          $ref: "#/components/schemas/itemid"
+          $ref: "#/components/schemas/itemId"
         required: true
     get:
       summary: gets a list of unavailabilities for a given item.
@@ -34,7 +34,7 @@ paths:
       - name: id
         in: path
         schema:
-          $ref: "#/components/schemas/itemid"
+          $ref: "#/components/schemas/itemId"
         required: true
     put:
       summary: updates an item. for now, the only kind of item is a room.
@@ -97,7 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/newitem"
+              $ref: "#/components/schemas/newItem"
 
       responses:
         '201':
@@ -109,8 +109,7 @@ paths:
                   "room":
                     $ref: "#/components/schemas/item"
         '400':
-          description: >
-            bad request
+          description: bad request
 
     get:
       summary: gets a list of items. for now, the only kind of item is a room.

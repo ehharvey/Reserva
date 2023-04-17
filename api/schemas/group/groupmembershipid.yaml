@@ -1,4 +1,0 @@
----
-$ref: '../meta/_index.yaml#/id'
-example: groupmembership-c49c283a-44d3-4cb5-b836-2ff8436f1e2f
-description: the id of a group membership.

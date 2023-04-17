@@ -5,7 +5,7 @@ properties:
     type: string
     description: the name of the feature.
   value:
-    oneof:
+    oneOf:
       - type: string
         description: the value of the feature.
       - type: number
