@@ -54,25 +54,8 @@ paths:
               schema:
                 $ref: '../schemas/meta/error.yaml'
           description: bad request
-  /unavailabilities:
-    get:
-      summary: Get a list of unavailabilities
-      # todo: add query parameters for filtering
-      # todo: add query parameters for pagination
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  unavailabilities:
-                    type: array
-                    items:
-                      type: object
-                      $ref: "#/components/schemas/unavailability"
-          description: ok
-    
+          
+  /unavailabilities:   
     post:
       summary: Create a new unavailability
       security:

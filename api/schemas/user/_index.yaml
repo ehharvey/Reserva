@@ -5,3 +5,5 @@ userId:
   $ref: "./userId.yaml"
 groupMembership:
   $ref: "../group/groupMembership.yaml"
+unavailability:
+  $ref: "../unavailability/unavailability.yaml"

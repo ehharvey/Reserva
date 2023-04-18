@@ -41,6 +41,7 @@ paths:
                 $ref: "#/components/schemas/user"
         "404":
           description: user not found
+
   /users/admins:
     get:
       summary: get all admin users
@@ -54,6 +55,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/user"
+
   /users/standard:
     get:
       summary: get all standard users
@@ -67,6 +69,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/user"
+
   /users/{userId}/groups:
     get:
       summary: get all groups for a user
@@ -89,6 +92,28 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/groupMembership"
+  /users/{userId}/unavailabilities:
+    get:
+      summary: get all unavailabilities for a user
+      description: returns a list of all unavailabilities for a user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: the id of the user to retrieve unavailabilities for.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: a list of unavailabilities
+          content:
+            application/json:
+              schema:
+                properties:  
+                  unavailabilities:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unavailability"
         
 components:
   schemas:
