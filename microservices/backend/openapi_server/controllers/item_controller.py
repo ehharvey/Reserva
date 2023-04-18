@@ -1,3 +1,4 @@
+import sqlite3
 import connexion
 import six
 from typing import Dict
@@ -12,7 +13,7 @@ from openapi_server.models.new_item import NewItem  # noqa: E501
 from openapi_server import util
 
 
-def items_get():  # noqa: E501
+def items_get(db: sqlite3.Connection):  # noqa: E501
     """gets a list of items. for now, the only kind of item is a room.
 
      # noqa: E501
@@ -20,7 +21,12 @@ def items_get():  # noqa: E501
 
     :rtype: Union[ItemsGet200Response, Tuple[ItemsGet200Response, int], Tuple[ItemsGet200Response, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM items")
+    items = cursor.fetchall()
+    
+    return 'do some magic!: ITEMS = ' + str(items)
 
 
 def items_id_delete(id):  # noqa: E501

@@ -1,3 +1,4 @@
+import sqlite3
 from urllib.request import urlopen
 import connexion
 import six
@@ -29,7 +30,7 @@ def groups_id_delete(id):  # noqa: E501
     return 'do some magic!'
 
 
-def groups_id_get(id):  # noqa: E501
+def groups_id_get(id, db: sqlite3.Connection):  # noqa: E501
     """gets a group object by id
 
     gets a group object by id # noqa: E501
@@ -40,6 +41,10 @@ def groups_id_get(id):  # noqa: E501
 
     :rtype: Union[GroupsPost201Response, Tuple[GroupsPost201Response, int], Tuple[GroupsPost201Response, int, Dict[str, str]]
     """
+
+    groups = db.execute("SELECT * FROM groups WHERE id = ?", (id,)).fetchall()
+
+
     return 'do some magic!'
 
 
