@@ -2,7 +2,7 @@
 type: object
 properties:
   group:
-    $ref: './_index.yaml#/groupid'
+    $ref: './_index.yaml#/groupId'
     description: the id of the group.
   user:
     $ref: '../user/_index.yaml#/userId'

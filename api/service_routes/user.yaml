@@ -5,6 +5,7 @@ info:
   version: 0.0.1
 servers:
   - url: http://reserva.emilharvey.ca
+  - url: http://localhost:8080
 paths:
   /users:
     get:
@@ -92,6 +93,7 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/groupMembership"
+
   /users/{userId}/unavailabilities:
     get:
       summary: get all unavailabilities for a user

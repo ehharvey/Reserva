@@ -6,4 +6,4 @@ userId:
 groupMembership:
   $ref: "../group/groupMembership.yaml"
 unavailability:
-  $ref: "../unavailability/unavailability.yaml"
+  $ref: "../unavailability/_index.yaml#/unavailability"

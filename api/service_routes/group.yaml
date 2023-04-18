@@ -4,6 +4,7 @@ info:
   version: '0.0.1'
 servers:
   - url: https://reserva.emilharvey.ca
+  - url: http://localhost:8080
 paths:
   /groups/{id}:
     parameters:
@@ -11,7 +12,7 @@ paths:
           in: path
           required: true
           schema:
-            $ref: "#/components/schemas/groupid"
+            $ref: "#/components/schemas/groupId"
     get:
       summary: gets a group object by id
       security:
@@ -66,7 +67,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/groupid"
+          $ref: "#/components/schemas/groupId"
     get:
       summary: gets a list of groupMembership objects
       description: gets a list of groupMembership objects for a group
@@ -109,7 +110,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/groupid"
+          $ref: "#/components/schemas/groupId"
       - name: membershipid
         in: path
         required: true

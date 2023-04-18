@@ -4,7 +4,7 @@ allOf:
   - type: object
     properties:
       id:
-        $ref: ./groupid.yaml
+        $ref: ./groupId.yaml
       createDate:
         type: string
         format: date-time

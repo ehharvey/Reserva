@@ -7,8 +7,8 @@ newGroupMembership:
   $ref: "./newGroupMembership.yaml"
 groupMembershipId:
   $ref: "./groupMembershipId.yaml"
-groupid:
-  $ref: "./groupid.yaml"
+groupId:
+  $ref: "./groupId.yaml"
 newGroup:
   $ref: "./newGroup.yaml"
 updateGroup:

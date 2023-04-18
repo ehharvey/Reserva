@@ -33,9 +33,9 @@ output_dict = {
     "components": {
         "schemas": {
             "$ref": "../schemas/_all.yaml",
-            "securitySchemes": {
-                "$ref": "../security/_all.yaml",
-            },
+        },
+        "securitySchemes": {
+            "$ref": "../security/_all.yaml",
         }
     },
 }
