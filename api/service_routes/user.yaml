@@ -11,6 +11,13 @@ paths:
     get:
       summary: get all users
       description: returns a list of all users.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          description: a search string to filter users by.
+          schema:
+            type: string
       responses:
         "200":
           description: a list of users
@@ -43,34 +50,6 @@ paths:
         "404":
           description: user not found
 
-  /users/admins:
-    get:
-      summary: get all admin users
-      description: returns a list of all admin users.
-      responses:
-        "200":
-          description: a list of admin users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/user"
-
-  /users/standard:
-    get:
-      summary: get all standard users
-      description: returns a list of all standard users.
-      responses:
-        "200":
-          description: a list of standard users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/user"
-
   /users/{userId}/groups:
     get:
       summary: get all groups for a user
@@ -94,17 +73,25 @@ paths:
                     items:
                       $ref: "#/components/schemas/groupMembership"
 
-  /users/{userId}/unavailabilities:
+  /users/me/unavailabilities:
     get:
-      summary: get all unavailabilities for a user
-      description: returns a list of all unavailabilities for a user.
+      summary: get all unavailabilities for the current user
+      description: returns a list of all unavailabilities for the current user.
       parameters:
-        - name: userId
-          in: path
-          required: true
-          description: the id of the user to retrieve unavailabilities for.
+        - name: start
+          in: query
+          required: false
+          description: the start of the time range to retrieve unavailabilities for.
           schema:
-            type: integer
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          required: false
+          description: the end of the time range to retrieve unavailabilities for.
+          schema:
+            type: string
+            format: date-time
       responses:
         "200":
           description: a list of unavailabilities
@@ -116,6 +103,21 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/unavailability"
+  /users/me/groups:
+    get:
+      summary: get all groups for the current user
+      description: returns a list of all groups for the current user.
+      responses:
+        "200":
+          description: a list of groups
+          content:
+            application/json:
+              schema:
+                properties:  
+                  groups:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/groupMembership"
         
 components:
   schemas:

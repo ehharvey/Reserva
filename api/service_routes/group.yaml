@@ -13,20 +13,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/groupId"
-    get:
-      summary: gets a group object by id
-      security:
-        - standard: [read:groups:associated]
-      description: gets a group object by id
-      responses:
-        '200':
-          description: ok
-          content:
-            application/json:
-              schema:
-                properties:
-                  "group":
-                    $ref: "#/components/schemas/group"
     put:
       summary: updates a group object
       description: updates a group object
@@ -84,54 +70,19 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/groupMembership"
-    post:
-      summary: creates a new groupMembership object
-      description: creates a new groupMembership object
-      security:
-        - standard: [write:groups:me]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/newGroupMembership"
-      responses:
-        '201':
-          description: ok
-          content:
-            application/json:
-              schema:
-                properties:
-                  groupMembership:
-                    $ref: "#/components/schemas/groupMembership"
-  
-  /groups/{id}/memberships/{membershipid}:
+    
+  /groups/{id}/memberships/{membershipId}:
     parameters:
       - name: id
         in: path
         required: true
         schema:
           $ref: "#/components/schemas/groupId"
-      - name: membershipid
+      - name: membershipId
         in: path
         required: true
         schema:
           $ref: "#/components/schemas/groupMembershipId"
-    get:
-      summary: gets a groupMembership object by id
-      description: gets a groupMembership object by id
-      security:
-        - standard: [read:groups:associated]
-      responses:
-        '200':
-          description: ok
-          content:
-            application/json:
-              schema:
-                properties:
-                  groupMembership:
-                    $ref: "#/components/schemas/groupMembership"
-        '404':
-          description: not found
     delete:
       summary: deletes a groupMembership object
       description: deletes a groupMembership object
@@ -166,6 +117,28 @@ paths:
                 properties:
                   group:
                     $ref: "#/components/schemas/group"
+  
+  /groupMemberships:
+    post:
+      summary: creates a new groupMembership object
+      description: creates a new groupMembership object
+      security:
+        - standard: [write:groups:me]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/newGroupMembership"
+      responses:
+        '201':
+          description: ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  groupMembership:
+                    $ref: "#/components/schemas/groupMembership"
+  
 components:
   schemas:
     $ref: "../schemas/group/_index.yaml"

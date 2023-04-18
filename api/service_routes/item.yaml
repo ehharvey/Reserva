@@ -114,8 +114,30 @@ paths:
 
     get:
       summary: gets a list of items. for now, the only kind of item is a room.
-      # todo: add pagination
-      # todo: add filtering
+      parameters:
+        - name: search
+          in: query
+          description: Search term to filter items by
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of items per page for pagination
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
       responses:
         '200':
           description: ok
