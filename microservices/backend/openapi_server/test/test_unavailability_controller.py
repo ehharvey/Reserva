@@ -6,7 +6,6 @@ import unittest
 from flask import json
 from six import BytesIO
 
-from openapi_server.models.unavailabilities_get200_response import UnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_delete200_response import UnavailabilitiesIdDelete200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_put200_response import UnavailabilitiesIdPut200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_put400_response import UnavailabilitiesIdPut400Response  # noqa: E501
@@ -18,21 +17,6 @@ from openapi_server.test import BaseTestCase
 
 class TestUnavailabilityController(BaseTestCase):
     """UnavailabilityController integration test stubs"""
-
-    def test_unavailabilities_get(self):
-        """Test case for unavailabilities_get
-
-        Get a list of unavailabilities
-        """
-        headers = { 
-            'Accept': 'application/json',
-        }
-        response = self.client.open(
-            '/unavailabilities',
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
 
     def test_unavailabilities_id_delete(self):
         """Test case for unavailabilities_id_delete

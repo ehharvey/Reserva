@@ -17,13 +17,11 @@ class Group(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None, created_by=None, id=None, create_date=None, last_update_date=None, owner=None, memberships=None):  # noqa: E501
+    def __init__(self, name=None, id=None, create_date=None, last_update_date=None, owner=None):  # noqa: E501
         """Group - a model defined in OpenAPI
 
         :param name: The name of this Group.  # noqa: E501
         :type name: str
-        :param created_by: The created_by of this Group.  # noqa: E501
-        :type created_by: str
         :param id: The id of this Group.  # noqa: E501
         :type id: str
         :param create_date: The create_date of this Group.  # noqa: E501
@@ -32,36 +30,28 @@ class Group(Model):
         :type last_update_date: datetime
         :param owner: The owner of this Group.  # noqa: E501
         :type owner: str
-        :param memberships: The memberships of this Group.  # noqa: E501
-        :type memberships: List[str]
         """
         self.openapi_types = {
             'name': str,
-            'created_by': str,
             'id': str,
             'create_date': datetime,
             'last_update_date': datetime,
-            'owner': str,
-            'memberships': List[str]
+            'owner': str
         }
 
         self.attribute_map = {
             'name': 'name',
-            'created_by': 'createdBy',
             'id': 'id',
             'create_date': 'createDate',
             'last_update_date': 'lastUpdateDate',
-            'owner': 'owner',
-            'memberships': 'memberships'
+            'owner': 'owner'
         }
 
         self._name = name
-        self._created_by = created_by
         self._id = id
         self._create_date = create_date
         self._last_update_date = last_update_date
         self._owner = owner
-        self._memberships = memberships
 
     @classmethod
     def from_dict(cls, dikt) -> 'Group':
@@ -98,33 +88,6 @@ class Group(Model):
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
-
-    @property
-    def created_by(self):
-        """Gets the created_by of this Group.
-
-        id of a user. this is a uuid with the prefix \"user-\".   # noqa: E501
-
-        :return: The created_by of this Group.
-        :rtype: str
-        """
-        return self._created_by
-
-    @created_by.setter
-    def created_by(self, created_by):
-        """Sets the created_by of this Group.
-
-        id of a user. this is a uuid with the prefix \"user-\".   # noqa: E501
-
-        :param created_by: The created_by of this Group.
-        :type created_by: str
-        """
-        if created_by is None:
-            raise ValueError("Invalid value for `created_by`, must not be `None`")  # noqa: E501
-        if created_by is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', created_by):  # noqa: E501
-            raise ValueError("Invalid value for `created_by`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
-
-        self._created_by = created_by
 
     @property
     def id(self):
@@ -225,32 +188,5 @@ class Group(Model):
         """
         if owner is None:
             raise ValueError("Invalid value for `owner`, must not be `None`")  # noqa: E501
-        if owner is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', owner):  # noqa: E501
-            raise ValueError("Invalid value for `owner`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._owner = owner
-
-    @property
-    def memberships(self):
-        """Gets the memberships of this Group.
-
-        the ids of the group memberships.  # noqa: E501
-
-        :return: The memberships of this Group.
-        :rtype: List[str]
-        """
-        return self._memberships
-
-    @memberships.setter
-    def memberships(self, memberships):
-        """Sets the memberships of this Group.
-
-        the ids of the group memberships.  # noqa: E501
-
-        :param memberships: The memberships of this Group.
-        :type memberships: List[str]
-        """
-        if memberships is None:
-            raise ValueError("Invalid value for `memberships`, must not be `None`")  # noqa: E501
-
-        self._memberships = memberships

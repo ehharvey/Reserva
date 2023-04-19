@@ -6,9 +6,11 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from openapi_server.models.base_model_ import Model
+from openapi_server.models.update_unavailability_owner import UpdateUnavailabilityOwner
 import re
 from openapi_server import util
 
+from openapi_server.models.update_unavailability_owner import UpdateUnavailabilityOwner  # noqa: E501
 import re  # noqa: E501
 
 class Unavailability(Model):
@@ -17,15 +19,17 @@ class Unavailability(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, item=None, startDate=None, endDate=None, type=None, id=None, create_date=None, last_updated_date=None):  # noqa: E501
+    def __init__(self, item=None, start_date=None, end_date=None, owner=None, type=None, id=None, create_date=None, last_updated_date=None):  # noqa: E501
         """Unavailability - a model defined in OpenAPI
 
         :param item: The item of this Unavailability.  # noqa: E501
         :type item: str
-        :param startDate: The startDate of this Unavailability.  # noqa: E501
-        :type startDate: str
-        :param endDate: The endDate of this Unavailability.  # noqa: E501
-        :type endDate: str
+        :param start_date: The start_date of this Unavailability.  # noqa: E501
+        :type start_date: str
+        :param end_date: The end_date of this Unavailability.  # noqa: E501
+        :type end_date: str
+        :param owner: The owner of this Unavailability.  # noqa: E501
+        :type owner: UpdateUnavailabilityOwner
         :param type: The type of this Unavailability.  # noqa: E501
         :type type: str
         :param id: The id of this Unavailability.  # noqa: E501
@@ -37,8 +41,9 @@ class Unavailability(Model):
         """
         self.openapi_types = {
             'item': str,
-            'startDate': str,
-            'endDate': str,
+            'start_date': str,
+            'end_date': str,
+            'owner': UpdateUnavailabilityOwner,
             'type': str,
             'id': str,
             'create_date': datetime,
@@ -47,8 +52,9 @@ class Unavailability(Model):
 
         self.attribute_map = {
             'item': 'item',
-            'startDate': 'startDate',
-            'endDate': 'endDate',
+            'start_date': 'startDate',
+            'end_date': 'endDate',
+            'owner': 'owner',
             'type': 'type',
             'id': 'id',
             'create_date': 'createDate',
@@ -56,8 +62,9 @@ class Unavailability(Model):
         }
 
         self._item = item
-        self._startdatetime = startDate
-        self._enddatetime = endDate
+        self._start_date = start_date
+        self._end_date = end_date
+        self._owner = owner
         self._type = type
         self._id = id
         self._create_date = create_date
@@ -102,58 +109,79 @@ class Unavailability(Model):
         self._item = item
 
     @property
-    def startDate(self):
-        """Gets the startDate of this Unavailability.
+    def start_date(self):
+        """Gets the start_date of this Unavailability.
 
         date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
-        :return: The startDate of this Unavailability.
+        :return: The start_date of this Unavailability.
         :rtype: str
         """
-        return self._startdatetime
+        return self._start_date
 
-    @startDate.setter
-    def startDate(self, startDate):
-        """Sets the startDate of this Unavailability.
+    @start_date.setter
+    def start_date(self, start_date):
+        """Sets the start_date of this Unavailability.
 
         date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
-        :param startDate: The startDate of this Unavailability.
-        :type startDate: str
+        :param start_date: The start_date of this Unavailability.
+        :type start_date: str
         """
-        if startDate is None:
-            raise ValueError("Invalid value for `startDate`, must not be `None`")  # noqa: E501
-        if startDate is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', startDate):  # noqa: E501
-            raise ValueError("Invalid value for `startDate`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+        if start_date is None:
+            raise ValueError("Invalid value for `start_date`, must not be `None`")  # noqa: E501
+        if start_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', start_date):  # noqa: E501
+            raise ValueError("Invalid value for `start_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
 
-        self._startdatetime = startDate
+        self._start_date = start_date
 
     @property
-    def endDate(self):
-        """Gets the endDate of this Unavailability.
+    def end_date(self):
+        """Gets the end_date of this Unavailability.
 
         date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
-        :return: The endDate of this Unavailability.
+        :return: The end_date of this Unavailability.
         :rtype: str
         """
-        return self._enddatetime
+        return self._end_date
 
-    @endDate.setter
-    def endDate(self, endDate):
-        """Sets the endDate of this Unavailability.
+    @end_date.setter
+    def end_date(self, end_date):
+        """Sets the end_date of this Unavailability.
 
         date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
-        :param endDate: The endDate of this Unavailability.
-        :type endDate: str
+        :param end_date: The end_date of this Unavailability.
+        :type end_date: str
         """
-        if endDate is None:
-            raise ValueError("Invalid value for `endDate`, must not be `None`")  # noqa: E501
-        if endDate is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', endDate):  # noqa: E501
-            raise ValueError("Invalid value for `endDate`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+        if end_date is None:
+            raise ValueError("Invalid value for `end_date`, must not be `None`")  # noqa: E501
+        if end_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', end_date):  # noqa: E501
+            raise ValueError("Invalid value for `end_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
 
-        self._enddatetime = endDate
+        self._end_date = end_date
+
+    @property
+    def owner(self):
+        """Gets the owner of this Unavailability.
+
+
+        :return: The owner of this Unavailability.
+        :rtype: UpdateUnavailabilityOwner
+        """
+        return self._owner
+
+    @owner.setter
+    def owner(self, owner):
+        """Sets the owner of this Unavailability.
+
+
+        :param owner: The owner of this Unavailability.
+        :type owner: UpdateUnavailabilityOwner
+        """
+
+        self._owner = owner
 
     @property
     def type(self):
@@ -173,7 +201,7 @@ class Unavailability(Model):
         :param type: The type of this Unavailability.
         :type type: str
         """
-        allowed_values = ["maintenance", "booking", "off_hours", "other"]  # noqa: E501
+        allowed_values = ["maintenance", "booking", "offHours", "other"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"

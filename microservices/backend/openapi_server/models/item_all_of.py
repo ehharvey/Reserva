@@ -17,31 +17,36 @@ class ItemAllOf(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, createDate=None, lastUpdateDate=None):  # noqa: E501
+    def __init__(self, id=None, create_date=None, last_update_date=None, created_by=None):  # noqa: E501
         """ItemAllOf - a model defined in OpenAPI
 
         :param id: The id of this ItemAllOf.  # noqa: E501
         :type id: str
-        :param createDate: The createDate of this ItemAllOf.  # noqa: E501
-        :type createDate: datetime
-        :param lastUpdateDate: The lastUpdateDate of this ItemAllOf.  # noqa: E501
-        :type lastUpdateDate: datetime
+        :param create_date: The create_date of this ItemAllOf.  # noqa: E501
+        :type create_date: datetime
+        :param last_update_date: The last_update_date of this ItemAllOf.  # noqa: E501
+        :type last_update_date: datetime
+        :param created_by: The created_by of this ItemAllOf.  # noqa: E501
+        :type created_by: str
         """
         self.openapi_types = {
             'id': str,
-            'createDate': datetime,
-            'lastUpdateDate': datetime
+            'create_date': datetime,
+            'last_update_date': datetime,
+            'created_by': str
         }
 
         self.attribute_map = {
             'id': 'id',
-            'createDate': 'createDate',
-            'lastUpdateDate': 'lastUpdateDate'
+            'create_date': 'createDate',
+            'last_update_date': 'lastUpdateDate',
+            'created_by': 'createdBy'
         }
 
         self._id = id
-        self._createdat = createDate
-        self._lastupdatedat = lastUpdateDate
+        self._create_date = create_date
+        self._last_update_date = last_update_date
+        self._created_by = created_by
 
     @classmethod
     def from_dict(cls, dikt) -> 'ItemAllOf':
@@ -82,47 +87,76 @@ class ItemAllOf(Model):
         self._id = id
 
     @property
-    def createDate(self):
-        """Gets the createDate of this ItemAllOf.
+    def create_date(self):
+        """Gets the create_date of this ItemAllOf.
 
         the date and time the item was created.  # noqa: E501
 
-        :return: The createDate of this ItemAllOf.
+        :return: The create_date of this ItemAllOf.
         :rtype: datetime
         """
-        return self._createdat
+        return self._create_date
 
-    @createDate.setter
-    def createDate(self, createDate):
-        """Sets the createDate of this ItemAllOf.
+    @create_date.setter
+    def create_date(self, create_date):
+        """Sets the create_date of this ItemAllOf.
 
         the date and time the item was created.  # noqa: E501
 
-        :param createDate: The createDate of this ItemAllOf.
-        :type createDate: datetime
+        :param create_date: The create_date of this ItemAllOf.
+        :type create_date: datetime
         """
+        if create_date is None:
+            raise ValueError("Invalid value for `create_date`, must not be `None`")  # noqa: E501
 
-        self._createdat = createDate
+        self._create_date = create_date
 
     @property
-    def lastUpdateDate(self):
-        """Gets the lastUpdateDate of this ItemAllOf.
+    def last_update_date(self):
+        """Gets the last_update_date of this ItemAllOf.
 
         the date and time the item was last updated.  # noqa: E501
 
-        :return: The lastUpdateDate of this ItemAllOf.
+        :return: The last_update_date of this ItemAllOf.
         :rtype: datetime
         """
-        return self._lastupdatedat
+        return self._last_update_date
 
-    @lastUpdateDate.setter
-    def lastUpdateDate(self, lastUpdateDate):
-        """Sets the lastUpdateDate of this ItemAllOf.
+    @last_update_date.setter
+    def last_update_date(self, last_update_date):
+        """Sets the last_update_date of this ItemAllOf.
 
         the date and time the item was last updated.  # noqa: E501
 
-        :param lastUpdateDate: The lastUpdateDate of this ItemAllOf.
-        :type lastUpdateDate: datetime
+        :param last_update_date: The last_update_date of this ItemAllOf.
+        :type last_update_date: datetime
         """
+        if last_update_date is None:
+            raise ValueError("Invalid value for `last_update_date`, must not be `None`")  # noqa: E501
 
-        self._lastupdatedat = lastUpdateDate
+        self._last_update_date = last_update_date
+
+    @property
+    def created_by(self):
+        """Gets the created_by of this ItemAllOf.
+
+        id of a user. this is a uuid with the prefix \"user-\".   # noqa: E501
+
+        :return: The created_by of this ItemAllOf.
+        :rtype: str
+        """
+        return self._created_by
+
+    @created_by.setter
+    def created_by(self, created_by):
+        """Sets the created_by of this ItemAllOf.
+
+        id of a user. this is a uuid with the prefix \"user-\".   # noqa: E501
+
+        :param created_by: The created_by of this ItemAllOf.
+        :type created_by: str
+        """
+        if created_by is None:
+            raise ValueError("Invalid value for `created_by`, must not be `None`")  # noqa: E501
+
+        self._created_by = created_by

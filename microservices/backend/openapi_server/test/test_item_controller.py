@@ -22,13 +22,19 @@ class TestItemController(BaseTestCase):
 
         gets a list of items. for now, the only kind of item is a room.
         """
+        query_string = [('page', 1),
+                        ('per_page', 10),
+                        ('nameSearch', 'name_search_example'),
+                        ('locationSearch', 'location_search_example'),
+                        ('descriptionSearch', 'description_search_example')]
         headers = { 
             'Accept': 'application/json',
         }
         response = self.client.open(
             '/items',
             method='GET',
-            headers=headers)
+            headers=headers,
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -74,13 +80,18 @@ class TestItemController(BaseTestCase):
 
         gets a list of unavailabilities for a given item.
         """
+        query_string = [('start', '2013-10-20T19:20:30+01:00'),
+                        ('end', '2013-10-20T19:20:30+01:00'),
+                        ('page', 1),
+                        ('per_page', 10)]
         headers = { 
             'Accept': 'application/json',
         }
         response = self.client.open(
             '/items/{id}/unavailabilities'.format(id='id_example'),
             method='GET',
-            headers=headers)
+            headers=headers,
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

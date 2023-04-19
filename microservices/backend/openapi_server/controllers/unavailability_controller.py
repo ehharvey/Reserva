@@ -4,7 +4,6 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
-from openapi_server.models.unavailabilities_get200_response import UnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_delete200_response import UnavailabilitiesIdDelete200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_put200_response import UnavailabilitiesIdPut200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_put400_response import UnavailabilitiesIdPut400Response  # noqa: E501
@@ -12,17 +11,6 @@ from openapi_server.models.unavailabilities_post201_response import Unavailabili
 from openapi_server.models.unavailabilities_post400_response import UnavailabilitiesPost400Response  # noqa: E501
 from openapi_server.models.unavailabilities_post_request import UnavailabilitiesPostRequest  # noqa: E501
 from openapi_server import util
-
-
-def unavailabilities_get():  # noqa: E501
-    """Get a list of unavailabilities
-
-     # noqa: E501
-
-
-    :rtype: Union[UnavailabilitiesGet200Response, Tuple[UnavailabilitiesGet200Response, int], Tuple[UnavailabilitiesGet200Response, int, Dict[str, str]]
-    """
-    return 'do some magic!'
 
 
 def unavailabilities_id_delete(id):  # noqa: E501

@@ -6,8 +6,8 @@ import unittest
 from flask import json
 from six import BytesIO
 
-from openapi_server.models.groups_id_memberships_get200_response import GroupsIdMembershipsGet200Response  # noqa: E501
-from openapi_server.models.groups_id_memberships_post201_response import GroupsIdMembershipsPost201Response  # noqa: E501
+from openapi_server.models.group_memberships_post201_response import GroupMembershipsPost201Response  # noqa: E501
+from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
 from openapi_server.models.groups_post201_response import GroupsPost201Response  # noqa: E501
 from openapi_server.models.new_group import NewGroup  # noqa: E501
 from openapi_server.models.new_group_membership import NewGroupMembership  # noqa: E501
@@ -18,87 +18,8 @@ from openapi_server.test import BaseTestCase
 class TestGroupController(BaseTestCase):
     """GroupController integration test stubs"""
 
-    def test_groups_id_delete(self):
-        """Test case for groups_id_delete
-
-        deletes a group object
-        """
-        headers = { 
-            'Accept': 'application/json',
-            'Authorization': 'Bearer special-key',
-        }
-        response = self.client.open(
-            '/groups/{id}'.format(id='id_example'),
-            method='DELETE',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_groups_id_get(self):
-        """Test case for groups_id_get
-
-        gets a group object by id
-        """
-        headers = { 
-            'Accept': 'application/json',
-            'Authorization': 'Bearer special-key',
-        }
-        response = self.client.open(
-            '/groups/{id}'.format(id='id_example'),
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_groups_id_memberships_get(self):
-        """Test case for groups_id_memberships_get
-
-        gets a list of groupMembership objects
-        """
-        headers = { 
-            'Accept': 'application/json',
-            'Authorization': 'Bearer special-key',
-        }
-        response = self.client.open(
-            '/groups/{id}/memberships'.format(id='id_example'),
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_groups_id_memberships_membershipid_delete(self):
-        """Test case for groups_id_memberships_membershipid_delete
-
-        deletes a groupMembership object
-        """
-        headers = { 
-            'Authorization': 'Bearer special-key',
-        }
-        response = self.client.open(
-            '/groups/{id}/memberships/{membershipid}'.format(id='id_example', membershipid='membershipid_example'),
-            method='DELETE',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_groups_id_memberships_membershipid_get(self):
-        """Test case for groups_id_memberships_membershipid_get
-
-        gets a groupMembership object by id
-        """
-        headers = { 
-            'Accept': 'application/json',
-            'Authorization': 'Bearer special-key',
-        }
-        response = self.client.open(
-            '/groups/{id}/memberships/{membershipid}'.format(id='id_example', membershipid='membershipid_example'),
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_groups_id_memberships_post(self):
-        """Test case for groups_id_memberships_post
+    def test_group_memberships_post(self):
+        """Test case for group_memberships_post
 
         creates a new groupMembership object
         """
@@ -109,11 +30,42 @@ class TestGroupController(BaseTestCase):
             'Authorization': 'Bearer special-key',
         }
         response = self.client.open(
-            '/groups/{id}/memberships'.format(id='id_example'),
+            '/groupMemberships',
             method='POST',
             headers=headers,
             data=json.dumps(new_group_membership),
             content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_groups_id_delete(self):
+        """Test case for groups_id_delete
+
+        deletes a group object.  Also deletes all groupMembership objects associated with the group. 
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+        }
+        response = self.client.open(
+            '/groups/{id}'.format(id='id_example'),
+            method='DELETE',
+            headers=headers)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_groups_id_memberships_membership_id_delete(self):
+        """Test case for groups_id_memberships_membership_id_delete
+
+        deletes a groupMembership object
+        """
+        headers = { 
+            'Authorization': 'Bearer special-key',
+        }
+        response = self.client.open(
+            '/groups/{id}/memberships/{membership_id}'.format(id='id_example', membership_id='membership_id_example'),
+            method='DELETE',
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -134,6 +86,22 @@ class TestGroupController(BaseTestCase):
             headers=headers,
             data=json.dumps(update_group),
             content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_groups_id_users_get(self):
+        """Test case for groups_id_users_get
+
+        gets a list of user objects
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+        }
+        response = self.client.open(
+            '/groups/{id}/users'.format(id='id_example'),
+            method='GET',
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

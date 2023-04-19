@@ -1,9 +1,5 @@
 from typing import List
 
-from jwt import PyJWKClient
-import jwt
-
-
 # TODO: This is a temporary solution to get the scopes from the token
 # REMOVE THIS ONCE WE HAVE A REAL AUTHENTICATION SYSTEM
 ALL_SCOPES = [
@@ -17,6 +13,7 @@ ALL_SCOPES = [
     'read:groups:associated',
     'write:groupmemberships:me',
 ]
+
 
 def info_from_admin(token):
     """
@@ -59,21 +56,6 @@ def info_from_standard(token):
     :return: Decoded token information or None if token is invalid
     :rtype: dict | None
     """
-    # Validate and decode token as JWT
-    # TODO: Have a global jwks that is injected into the function
-    # jwks_client = PyJWKClient("https://DOMAIN.com/.well-known/jwks.json")
-    # signing_key = jwks_client.get_signing_key_from_jwt(token)
-
-    # claims = jwt.decode(
-    #     token,
-    #     signing_key.key,
-    #     algorithms=["RS256"],
-    #     # issuer="https://DOMAIN.com", # TODO: figure out how to verify issuer
-    #     audience="http://localhost:8080"
-    #     )
-    
-    # claims['scopes'] = claims['scope'].split(' ')
-
     return {'scopes': ALL_SCOPES, 'uid': 'user_id'}
 
 

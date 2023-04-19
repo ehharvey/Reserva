@@ -9,7 +9,6 @@ import sqlite3
 from flask_injector import FlaskInjector
 from injector import SingletonScope, inject
 
-
 def configure(binder):
     binder.bind(sqlite3.Connection, to=sqlite3.Connection(':memory:'), scope=SingletonScope)
 
