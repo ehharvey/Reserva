@@ -3,8 +3,8 @@ info:
   title: Group Management API
   version: '0.0.1'
 servers:
-  - url: https://reserva.emilharvey.ca
-  - url: http://localhost:8080
+  - url: https://reserva.emilharvey.ca # production
+  - url: http://localhost:8080 # development
 paths:
   /groups/{id}:
     parameters:
@@ -88,8 +88,8 @@ paths:
       description: deletes a groupMembership object
       security:
         - standard: 
-            - write:groups:me
-            - write:groupMemberships:me
+            - write:groups:me # Owner of the group can delete memberships
+            - write:groupMemberships:me # User can delete their own memberships
       responses:
         '204':
           description: deleted

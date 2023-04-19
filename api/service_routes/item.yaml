@@ -15,6 +15,41 @@ paths:
         required: true
     get:
       summary: gets a list of unavailabilities for a given item.
+      parameters:
+        - name: start
+          in: query
+          description: the start date of the unavailabilities to get
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: the end date of the unavailabilities to get
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: the page of unavailabilities to get
+          required: false
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: the number of unavailabilities to get per page
+          required: false
+          schema:
+            type: integer
+            format: int64
+            maximum: 100
+            default: 10
+            minimum: 1
+
       responses:
         '200':
           description: ok
