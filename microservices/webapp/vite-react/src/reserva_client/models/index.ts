@@ -1,13 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './Feature';
-export * from './FeatureValue';
 export * from './Group';
 export * from './GroupAllOf';
 export * from './GroupMembership';
 export * from './GroupMembershipAllOf';
-export * from './GroupsIdMembershipsGet200Response';
-export * from './GroupsIdMembershipsPost201Response';
+export * from './GroupMembershipsPost201Response';
+export * from './GroupsIdUsersGet200Response';
 export * from './GroupsPost201Response';
 export * from './Item';
 export * from './ItemAllOf';
@@ -22,7 +21,6 @@ export * from './NewRecurringUnavailabilityAllOf';
 export * from './NewUnavailability';
 export * from './RecurringUnavailability';
 export * from './RecurringUnavailabilityAllOf';
-export * from './UnavailabilitiesGet200Response';
 export * from './UnavailabilitiesIdDelete200Response';
 export * from './UnavailabilitiesIdPut200Response';
 export * from './UnavailabilitiesIdPut400Response';
@@ -34,6 +32,7 @@ export * from './UnavailabilityAllOf';
 export * from './UpdateGroup';
 export * from './UpdateItem';
 export * from './UpdateUnavailability';
+export * from './UpdateUnavailabilityOwner';
 export * from './User';
-export * from './UsersGet200Response';
-export * from './UsersUserIdGroupsGet200Response';
+export * from './UsersMeGroupsGet200Response';
+export * from './UsersUserIdGet200Response';

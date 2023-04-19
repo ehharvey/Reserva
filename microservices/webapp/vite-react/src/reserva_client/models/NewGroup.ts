@@ -13,60 +13,45 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { FeatureValue } from './FeatureValue';
-import {
-    FeatureValueFromJSON,
-    FeatureValueFromJSONTyped,
-    FeatureValueToJSON,
-} from './FeatureValue';
-
 /**
- * the data required to create a new feature.
+ * a group. this could be a project group, a team, or something else. this is sent by the client when creating a new group.
  * @export
- * @interface Feature
+ * @interface NewGroup
  */
-export interface Feature {
+export interface NewGroup {
     /**
-     * the name of the feature.
+     * the name of the group.
      * @type {string}
-     * @memberof Feature
+     * @memberof NewGroup
      */
     name: string;
-    /**
-     * 
-     * @type {FeatureValue}
-     * @memberof Feature
-     */
-    value: FeatureValue;
 }
 
 /**
- * Check if a given object implements the Feature interface.
+ * Check if a given object implements the NewGroup interface.
  */
-export function instanceOfFeature(value: object): boolean {
+export function instanceOfNewGroup(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "value" in value;
 
     return isInstance;
 }
 
-export function FeatureFromJSON(json: any): Feature {
-    return FeatureFromJSONTyped(json, false);
+export function NewGroupFromJSON(json: any): NewGroup {
+    return NewGroupFromJSONTyped(json, false);
 }
 
-export function FeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean): Feature {
+export function NewGroupFromJSONTyped(json: any, ignoreDiscriminator: boolean): NewGroup {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'name': json['name'],
-        'value': FeatureValueFromJSON(json['value']),
     };
 }
 
-export function FeatureToJSON(value?: Feature | null): any {
+export function NewGroupToJSON(value?: NewGroup | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -76,7 +61,6 @@ export function FeatureToJSON(value?: Feature | null): any {
     return {
         
         'name': value.name,
-        'value': FeatureValueToJSON(value.value),
     };
 }
 

@@ -43,12 +43,6 @@ export interface GroupAllOf {
      * @memberof GroupAllOf
      */
     owner?: string;
-    /**
-     * the ids of the group memberships.
-     * @type {Array<string>}
-     * @memberof GroupAllOf
-     */
-    memberships?: Array<string>;
 }
 
 /**
@@ -74,7 +68,6 @@ export function GroupAllOfFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'createDate': !exists(json, 'createDate') ? undefined : (new Date(json['createDate'])),
         'lastUpdateDate': !exists(json, 'lastUpdateDate') ? undefined : (new Date(json['lastUpdateDate'])),
         'owner': !exists(json, 'owner') ? undefined : json['owner'],
-        'memberships': !exists(json, 'memberships') ? undefined : json['memberships'],
     };
 }
 
@@ -89,7 +82,6 @@ export function GroupAllOfToJSON(value?: GroupAllOf | null): any {
         
         'id': value.id,
         'owner': value.owner,
-        'memberships': value.memberships,
     };
 }
 

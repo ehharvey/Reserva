@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
+import {
+    UpdateUnavailabilityOwnerFromJSON,
+    UpdateUnavailabilityOwnerFromJSONTyped,
+    UpdateUnavailabilityOwnerToJSON,
+} from './UpdateUnavailabilityOwner';
+
 /**
  * a recurring unavailability. this could be a maintenance window, a booking, or something else. the client will send this when they want to create a new recurring unavailability.
  * @export
@@ -39,6 +46,12 @@ export interface NewRecurringUnavailability {
     endDate: string;
     /**
      * 
+     * @type {UpdateUnavailabilityOwner}
+     * @memberof NewRecurringUnavailability
+     */
+    owner?: UpdateUnavailabilityOwner;
+    /**
+     * 
      * @type {string}
      * @memberof NewRecurringUnavailability
      */
@@ -58,7 +71,7 @@ export interface NewRecurringUnavailability {
 export const NewRecurringUnavailabilityTypeEnum = {
     Maintenance: 'maintenance',
     Booking: 'booking',
-    OffHours: 'off_hours',
+    OffHours: 'offHours',
     Other: 'other'
 } as const;
 export type NewRecurringUnavailabilityTypeEnum = typeof NewRecurringUnavailabilityTypeEnum[keyof typeof NewRecurringUnavailabilityTypeEnum];
@@ -91,6 +104,7 @@ export function NewRecurringUnavailabilityFromJSONTyped(json: any, ignoreDiscrim
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
+        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
         'type': json['type'],
         'recurrence': json['recurrence'],
     };
@@ -108,6 +122,7 @@ export function NewRecurringUnavailabilityToJSON(value?: NewRecurringUnavailabil
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
+        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
         'type': value.type,
         'recurrence': value.recurrence,
     };

@@ -2,7 +2,7 @@ import { Button, Group } from "@mantine/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "../../entities/User";
 import { useEffect, useState } from "react";
-import { GroupApi, Configuration, GroupsPostRequest } from "../../fetch";
+import { GroupApi, Configuration, GroupsPostRequest } from "../../reserva_client";
 
 
 

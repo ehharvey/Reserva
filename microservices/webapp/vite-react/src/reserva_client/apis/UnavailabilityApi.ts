@@ -15,7 +15,6 @@
 
 import * as runtime from '../runtime';
 import type {
-  UnavailabilitiesGet200Response,
   UnavailabilitiesIdDelete200Response,
   UnavailabilitiesIdPut200Response,
   UnavailabilitiesIdPut400Response,
@@ -24,8 +23,6 @@ import type {
   UnavailabilitiesPostRequest,
 } from '../models';
 import {
-    UnavailabilitiesGet200ResponseFromJSON,
-    UnavailabilitiesGet200ResponseToJSON,
     UnavailabilitiesIdDelete200ResponseFromJSON,
     UnavailabilitiesIdDelete200ResponseToJSON,
     UnavailabilitiesIdPut200ResponseFromJSON,
@@ -56,32 +53,6 @@ export interface UnavailabilitiesPostOperationRequest {
  * 
  */
 export class UnavailabilityApi extends runtime.BaseAPI {
-
-    /**
-     * Get a list of unavailabilities
-     */
-    async unavailabilitiesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UnavailabilitiesGet200Response>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/unavailabilities`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UnavailabilitiesGet200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Get a list of unavailabilities
-     */
-    async unavailabilitiesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UnavailabilitiesGet200Response> {
-        const response = await this.unavailabilitiesGetRaw(initOverrides);
-        return await response.value();
-    }
 
     /**
      * Delete an unavailability

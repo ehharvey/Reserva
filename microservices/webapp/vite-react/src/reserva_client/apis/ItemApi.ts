@@ -34,6 +34,14 @@ import {
     NewItemToJSON,
 } from '../models';
 
+export interface ItemsGetRequest {
+    page?: number;
+    perPage?: number;
+    nameSearch?: string;
+    locationSearch?: string;
+    descriptionSearch?: string;
+}
+
 export interface ItemsIdDeleteRequest {
     id: number;
 }
@@ -45,6 +53,10 @@ export interface ItemsIdPutRequest {
 
 export interface ItemsIdUnavailabilitiesGetRequest {
     id: string;
+    start: Date;
+    end: Date;
+    page?: number;
+    perPage?: number;
 }
 
 export interface ItemsPostRequest {
@@ -59,8 +71,28 @@ export class ItemApi extends runtime.BaseAPI {
     /**
      * gets a list of items. for now, the only kind of item is a room.
      */
-    async itemsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ItemsGet200Response>> {
+    async itemsGetRaw(requestParameters: ItemsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ItemsGet200Response>> {
         const queryParameters: any = {};
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.perPage !== undefined) {
+            queryParameters['per_page'] = requestParameters.perPage;
+        }
+
+        if (requestParameters.nameSearch !== undefined) {
+            queryParameters['nameSearch'] = requestParameters.nameSearch;
+        }
+
+        if (requestParameters.locationSearch !== undefined) {
+            queryParameters['locationSearch'] = requestParameters.locationSearch;
+        }
+
+        if (requestParameters.descriptionSearch !== undefined) {
+            queryParameters['descriptionSearch'] = requestParameters.descriptionSearch;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -77,8 +109,8 @@ export class ItemApi extends runtime.BaseAPI {
     /**
      * gets a list of items. for now, the only kind of item is a room.
      */
-    async itemsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ItemsGet200Response> {
-        const response = await this.itemsGetRaw(initOverrides);
+    async itemsGet(requestParameters: ItemsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ItemsGet200Response> {
+        const response = await this.itemsGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -172,7 +204,31 @@ export class ItemApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling itemsIdUnavailabilitiesGet.');
         }
 
+        if (requestParameters.start === null || requestParameters.start === undefined) {
+            throw new runtime.RequiredError('start','Required parameter requestParameters.start was null or undefined when calling itemsIdUnavailabilitiesGet.');
+        }
+
+        if (requestParameters.end === null || requestParameters.end === undefined) {
+            throw new runtime.RequiredError('end','Required parameter requestParameters.end was null or undefined when calling itemsIdUnavailabilitiesGet.');
+        }
+
         const queryParameters: any = {};
+
+        if (requestParameters.start !== undefined) {
+            queryParameters['start'] = (requestParameters.start as any).toISOString();
+        }
+
+        if (requestParameters.end !== undefined) {
+            queryParameters['end'] = (requestParameters.end as any).toISOString();
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.perPage !== undefined) {
+            queryParameters['per_page'] = requestParameters.perPage;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 

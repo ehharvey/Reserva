@@ -26,12 +26,6 @@ export interface Group {
      */
     name: string;
     /**
-     * id of a user. this is a uuid with the prefix "user-".
-     * @type {string}
-     * @memberof Group
-     */
-    createdBy: string;
-    /**
      * the id of a group. this is a uuid with the prefix "group-".
      * @type {string}
      * @memberof Group
@@ -55,12 +49,6 @@ export interface Group {
      * @memberof Group
      */
     owner: string;
-    /**
-     * the ids of the group memberships.
-     * @type {Array<string>}
-     * @memberof Group
-     */
-    memberships: Array<string>;
 }
 
 /**
@@ -69,12 +57,10 @@ export interface Group {
 export function instanceOfGroup(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "createdBy" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "createDate" in value;
     isInstance = isInstance && "lastUpdateDate" in value;
     isInstance = isInstance && "owner" in value;
-    isInstance = isInstance && "memberships" in value;
 
     return isInstance;
 }
@@ -90,12 +76,10 @@ export function GroupFromJSONTyped(json: any, ignoreDiscriminator: boolean): Gro
     return {
         
         'name': json['name'],
-        'createdBy': json['createdBy'],
         'id': json['id'],
         'createDate': (new Date(json['createDate'])),
         'lastUpdateDate': (new Date(json['lastUpdateDate'])),
         'owner': json['owner'],
-        'memberships': json['memberships'],
     };
 }
 
@@ -109,10 +93,8 @@ export function GroupToJSON(value?: Group | null): any {
     return {
         
         'name': value.name,
-        'createdBy': value.createdBy,
         'id': value.id,
         'owner': value.owner,
-        'memberships': value.memberships,
     };
 }
 

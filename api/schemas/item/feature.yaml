@@ -5,13 +5,7 @@ properties:
     type: string
     description: the name of the feature.
   value:
-    oneOf:
-      - type: string
-        description: the value of the feature.
-      - type: number
-        description: the value of the feature.
-      - type: boolean
-        description: the value of the feature.
+    description: the value of the feature. Should be a string, number, or boolean.
 required:
   - name
   - value

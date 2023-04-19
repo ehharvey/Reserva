@@ -6,13 +6,12 @@ apis/UserApi.ts
 apis/index.ts
 index.ts
 models/Feature.ts
-models/FeatureValue.ts
 models/Group.ts
 models/GroupAllOf.ts
 models/GroupMembership.ts
 models/GroupMembershipAllOf.ts
-models/GroupsIdMembershipsGet200Response.ts
-models/GroupsIdMembershipsPost201Response.ts
+models/GroupMembershipsPost201Response.ts
+models/GroupsIdUsersGet200Response.ts
 models/GroupsPost201Response.ts
 models/Item.ts
 models/ItemAllOf.ts
@@ -27,7 +26,6 @@ models/NewRecurringUnavailabilityAllOf.ts
 models/NewUnavailability.ts
 models/RecurringUnavailability.ts
 models/RecurringUnavailabilityAllOf.ts
-models/UnavailabilitiesGet200Response.ts
 models/UnavailabilitiesIdDelete200Response.ts
 models/UnavailabilitiesIdPut200Response.ts
 models/UnavailabilitiesIdPut400Response.ts
@@ -39,8 +37,9 @@ models/UnavailabilityAllOf.ts
 models/UpdateGroup.ts
 models/UpdateItem.ts
 models/UpdateUnavailability.ts
+models/UpdateUnavailabilityOwner.ts
 models/User.ts
-models/UsersGet200Response.ts
-models/UsersUserIdGroupsGet200Response.ts
+models/UsersMeGroupsGet200Response.ts
+models/UsersUserIdGet200Response.ts
 models/index.ts
 runtime.ts

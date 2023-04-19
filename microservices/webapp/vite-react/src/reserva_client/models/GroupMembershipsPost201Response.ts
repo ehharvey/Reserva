@@ -23,31 +23,31 @@ import {
 /**
  * 
  * @export
- * @interface GroupsIdMembershipsPost201Response
+ * @interface GroupMembershipsPost201Response
  */
-export interface GroupsIdMembershipsPost201Response {
+export interface GroupMembershipsPost201Response {
     /**
      * 
      * @type {GroupMembership}
-     * @memberof GroupsIdMembershipsPost201Response
+     * @memberof GroupMembershipsPost201Response
      */
     groupMembership?: GroupMembership;
 }
 
 /**
- * Check if a given object implements the GroupsIdMembershipsPost201Response interface.
+ * Check if a given object implements the GroupMembershipsPost201Response interface.
  */
-export function instanceOfGroupsIdMembershipsPost201Response(value: object): boolean {
+export function instanceOfGroupMembershipsPost201Response(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function GroupsIdMembershipsPost201ResponseFromJSON(json: any): GroupsIdMembershipsPost201Response {
-    return GroupsIdMembershipsPost201ResponseFromJSONTyped(json, false);
+export function GroupMembershipsPost201ResponseFromJSON(json: any): GroupMembershipsPost201Response {
+    return GroupMembershipsPost201ResponseFromJSONTyped(json, false);
 }
 
-export function GroupsIdMembershipsPost201ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GroupsIdMembershipsPost201Response {
+export function GroupMembershipsPost201ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GroupMembershipsPost201Response {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function GroupsIdMembershipsPost201ResponseFromJSONTyped(json: any, ignor
     };
 }
 
-export function GroupsIdMembershipsPost201ResponseToJSON(value?: GroupsIdMembershipsPost201Response | null): any {
+export function GroupMembershipsPost201ResponseToJSON(value?: GroupMembershipsPost201Response | null): any {
     if (value === undefined) {
         return undefined;
     }

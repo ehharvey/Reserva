@@ -67,13 +67,19 @@ export interface Item {
      * @type {Date}
      * @memberof Item
      */
-    readonly createDate?: Date;
+    readonly createDate: Date;
     /**
      * the date and time the item was last updated.
      * @type {Date}
      * @memberof Item
      */
-    readonly lastUpdateDate?: Date;
+    readonly lastUpdateDate: Date;
+    /**
+     * id of a user. this is a uuid with the prefix "user-".
+     * @type {string}
+     * @memberof Item
+     */
+    createdBy: string;
 }
 
 
@@ -97,6 +103,9 @@ export function instanceOfItem(value: object): boolean {
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "features" in value;
     isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "createDate" in value;
+    isInstance = isInstance && "lastUpdateDate" in value;
+    isInstance = isInstance && "createdBy" in value;
 
     return isInstance;
 }
@@ -117,8 +126,9 @@ export function ItemFromJSONTyped(json: any, ignoreDiscriminator: boolean): Item
         'type': json['type'],
         'features': ((json['features'] as Array<any>).map(FeatureFromJSON)),
         'id': json['id'],
-        'createDate': !exists(json, 'createDate') ? undefined : (new Date(json['createDate'])),
-        'lastUpdateDate': !exists(json, 'lastUpdateDate') ? undefined : (new Date(json['lastUpdateDate'])),
+        'createDate': (new Date(json['createDate'])),
+        'lastUpdateDate': (new Date(json['lastUpdateDate'])),
+        'createdBy': json['createdBy'],
     };
 }
 
@@ -137,6 +147,7 @@ export function ItemToJSON(value?: Item | null): any {
         'type': value.type,
         'features': ((value.features as Array<any>).map(FeatureToJSON)),
         'id': value.id,
+        'createdBy': value.createdBy,
     };
 }
 

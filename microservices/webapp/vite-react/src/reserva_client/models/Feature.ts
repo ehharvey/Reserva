@@ -14,52 +14,52 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * a group. this could be a project group, a team, or something else. this is sent by the client when creating a new group.
+ * the data required to create a new feature.
  * @export
- * @interface NewGroup
+ * @interface Feature
  */
-export interface NewGroup {
+export interface Feature {
     /**
-     * the name of the group.
+     * the name of the feature.
      * @type {string}
-     * @memberof NewGroup
+     * @memberof Feature
      */
     name: string;
     /**
-     * id of a user. this is a uuid with the prefix "user-".
-     * @type {string}
-     * @memberof NewGroup
+     * the value of the feature. Should be a string, number, or boolean.
+     * @type {any}
+     * @memberof Feature
      */
-    createdBy: string;
+    value: any | null;
 }
 
 /**
- * Check if a given object implements the NewGroup interface.
+ * Check if a given object implements the Feature interface.
  */
-export function instanceOfNewGroup(value: object): boolean {
+export function instanceOfFeature(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "createdBy" in value;
+    isInstance = isInstance && "value" in value;
 
     return isInstance;
 }
 
-export function NewGroupFromJSON(json: any): NewGroup {
-    return NewGroupFromJSONTyped(json, false);
+export function FeatureFromJSON(json: any): Feature {
+    return FeatureFromJSONTyped(json, false);
 }
 
-export function NewGroupFromJSONTyped(json: any, ignoreDiscriminator: boolean): NewGroup {
+export function FeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean): Feature {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'name': json['name'],
-        'createdBy': json['createdBy'],
+        'value': json['value'],
     };
 }
 
-export function NewGroupToJSON(value?: NewGroup | null): any {
+export function FeatureToJSON(value?: Feature | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -69,7 +69,7 @@ export function NewGroupToJSON(value?: NewGroup | null): any {
     return {
         
         'name': value.name,
-        'createdBy': value.createdBy,
+        'value': value.value,
     };
 }
 

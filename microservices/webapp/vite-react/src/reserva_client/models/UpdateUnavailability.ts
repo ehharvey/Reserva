@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
+import {
+    UpdateUnavailabilityOwnerFromJSON,
+    UpdateUnavailabilityOwnerFromJSONTyped,
+    UpdateUnavailabilityOwnerToJSON,
+} from './UpdateUnavailabilityOwner';
+
 /**
  * an update to an unavailability. this could be a maintenance window, a booking, or something else. this is the base type for all unavailability updates. as a result, it does not have an id, because it is not a complete unavailability. it also has no required fields, because only need to send a fragment of this data to update an unavailability.
  * @export
@@ -39,6 +46,12 @@ export interface UpdateUnavailability {
     endDate?: string;
     /**
      * 
+     * @type {UpdateUnavailabilityOwner}
+     * @memberof UpdateUnavailability
+     */
+    owner?: UpdateUnavailabilityOwner;
+    /**
+     * 
      * @type {string}
      * @memberof UpdateUnavailability
      */
@@ -52,7 +65,7 @@ export interface UpdateUnavailability {
 export const UpdateUnavailabilityTypeEnum = {
     Maintenance: 'maintenance',
     Booking: 'booking',
-    OffHours: 'off_hours',
+    OffHours: 'offHours',
     Other: 'other'
 } as const;
 export type UpdateUnavailabilityTypeEnum = typeof UpdateUnavailabilityTypeEnum[keyof typeof UpdateUnavailabilityTypeEnum];
@@ -80,6 +93,7 @@ export function UpdateUnavailabilityFromJSONTyped(json: any, ignoreDiscriminator
         'item': !exists(json, 'item') ? undefined : json['item'],
         'startDate': !exists(json, 'startDate') ? undefined : json['startDate'],
         'endDate': !exists(json, 'endDate') ? undefined : json['endDate'],
+        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
         'type': !exists(json, 'type') ? undefined : json['type'],
     };
 }
@@ -96,6 +110,7 @@ export function UpdateUnavailabilityToJSON(value?: UpdateUnavailability | null):
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
+        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
         'type': value.type,
     };
 }

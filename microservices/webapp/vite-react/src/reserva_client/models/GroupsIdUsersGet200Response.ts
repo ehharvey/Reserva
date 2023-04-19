@@ -23,31 +23,31 @@ import {
 /**
  * 
  * @export
- * @interface UsersGet200Response
+ * @interface GroupsIdUsersGet200Response
  */
-export interface UsersGet200Response {
+export interface GroupsIdUsersGet200Response {
     /**
      * 
      * @type {Array<User>}
-     * @memberof UsersGet200Response
+     * @memberof GroupsIdUsersGet200Response
      */
     users?: Array<User>;
 }
 
 /**
- * Check if a given object implements the UsersGet200Response interface.
+ * Check if a given object implements the GroupsIdUsersGet200Response interface.
  */
-export function instanceOfUsersGet200Response(value: object): boolean {
+export function instanceOfGroupsIdUsersGet200Response(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function UsersGet200ResponseFromJSON(json: any): UsersGet200Response {
-    return UsersGet200ResponseFromJSONTyped(json, false);
+export function GroupsIdUsersGet200ResponseFromJSON(json: any): GroupsIdUsersGet200Response {
+    return GroupsIdUsersGet200ResponseFromJSONTyped(json, false);
 }
 
-export function UsersGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UsersGet200Response {
+export function GroupsIdUsersGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GroupsIdUsersGet200Response {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function UsersGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function UsersGet200ResponseToJSON(value?: UsersGet200Response | null): any {
+export function GroupsIdUsersGet200ResponseToJSON(value?: GroupsIdUsersGet200Response | null): any {
     if (value === undefined) {
         return undefined;
     }

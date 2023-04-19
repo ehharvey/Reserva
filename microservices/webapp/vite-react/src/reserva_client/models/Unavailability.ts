@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
+import {
+    UpdateUnavailabilityOwnerFromJSON,
+    UpdateUnavailabilityOwnerFromJSONTyped,
+    UpdateUnavailabilityOwnerToJSON,
+} from './UpdateUnavailabilityOwner';
+
 /**
  * 
  * @export
@@ -37,6 +44,12 @@ export interface Unavailability {
      * @memberof Unavailability
      */
     endDate: string;
+    /**
+     * 
+     * @type {UpdateUnavailabilityOwner}
+     * @memberof Unavailability
+     */
+    owner?: UpdateUnavailabilityOwner;
     /**
      * 
      * @type {string}
@@ -70,7 +83,7 @@ export interface Unavailability {
 export const UnavailabilityTypeEnum = {
     Maintenance: 'maintenance',
     Booking: 'booking',
-    OffHours: 'off_hours',
+    OffHours: 'offHours',
     Other: 'other'
 } as const;
 export type UnavailabilityTypeEnum = typeof UnavailabilityTypeEnum[keyof typeof UnavailabilityTypeEnum];
@@ -105,6 +118,7 @@ export function UnavailabilityFromJSONTyped(json: any, ignoreDiscriminator: bool
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
+        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
         'type': json['type'],
         'id': json['id'],
         'createDate': (new Date(json['createDate'])),
@@ -124,6 +138,7 @@ export function UnavailabilityToJSON(value?: Unavailability | null): any {
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
+        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
         'type': value.type,
         'id': value.id,
     };

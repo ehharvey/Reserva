@@ -25,12 +25,6 @@ export interface UpdateGroup {
      * @memberof UpdateGroup
      */
     name?: string;
-    /**
-     * id of a user. this is a uuid with the prefix "user-".
-     * @type {string}
-     * @memberof UpdateGroup
-     */
-    createdBy?: string;
 }
 
 /**
@@ -53,7 +47,6 @@ export function UpdateGroupFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
     };
 }
 
@@ -67,7 +60,6 @@ export function UpdateGroupToJSON(value?: UpdateGroup | null): any {
     return {
         
         'name': value.name,
-        'createdBy': value.createdBy,
     };
 }
 

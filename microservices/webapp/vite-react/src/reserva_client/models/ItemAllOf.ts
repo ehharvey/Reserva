@@ -30,13 +30,19 @@ export interface ItemAllOf {
      * @type {Date}
      * @memberof ItemAllOf
      */
-    readonly createDate?: Date;
+    readonly createDate: Date;
     /**
      * the date and time the item was last updated.
      * @type {Date}
      * @memberof ItemAllOf
      */
-    readonly lastUpdateDate?: Date;
+    readonly lastUpdateDate: Date;
+    /**
+     * id of a user. this is a uuid with the prefix "user-".
+     * @type {string}
+     * @memberof ItemAllOf
+     */
+    createdBy: string;
 }
 
 /**
@@ -45,6 +51,9 @@ export interface ItemAllOf {
 export function instanceOfItemAllOf(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "createDate" in value;
+    isInstance = isInstance && "lastUpdateDate" in value;
+    isInstance = isInstance && "createdBy" in value;
 
     return isInstance;
 }
@@ -60,8 +69,9 @@ export function ItemAllOfFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'id': json['id'],
-        'createDate': !exists(json, 'createDate') ? undefined : (new Date(json['createDate'])),
-        'lastUpdateDate': !exists(json, 'lastUpdateDate') ? undefined : (new Date(json['lastUpdateDate'])),
+        'createDate': (new Date(json['createDate'])),
+        'lastUpdateDate': (new Date(json['lastUpdateDate'])),
+        'createdBy': json['createdBy'],
     };
 }
 
@@ -75,6 +85,7 @@ export function ItemAllOfToJSON(value?: ItemAllOf | null): any {
     return {
         
         'id': value.id,
+        'createdBy': value.createdBy,
     };
 }
 
