@@ -8,11 +8,11 @@ servers:
 paths:
   /groups/{id}:
     parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            $ref: "#/components/schemas/groupId"
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/groupId"
     put:
       summary: updates a group object
       description: updates a group object
@@ -33,7 +33,9 @@ paths:
                   group:
                     $ref: "#/components/schemas/group"
     delete:
-      summary: deletes a group object
+      summary: >
+        deletes a group object. 
+        Also deletes all groupMembership objects associated with the group.
       description: deletes a group object
       security:
         - standard: [write:groups:me]
@@ -47,7 +49,7 @@ paths:
                   group:
                     $ref: "#/components/schemas/group"
   
-  /groups/{id}/memberships:
+  /groups/{id}/users:
     parameters:
       - name: id
         in: path
@@ -55,8 +57,8 @@ paths:
         schema:
           $ref: "#/components/schemas/groupId"
     get:
-      summary: gets a list of groupMembership objects
-      description: gets a list of groupMembership objects for a group
+      summary: gets a list of user objects
+      description: gets a list of user objects for a group
       security:
         - standard: [read:groups:associated]
       responses:
@@ -66,10 +68,10 @@ paths:
             application/json:
               schema:
                 properties:
-                  groupMemberships:
+                  users:
                     type: array
                     items:
-                      $ref: "#/components/schemas/groupMembership"
+                      $ref: "#/components/schemas/user"
     
   /groups/{id}/memberships/{membershipId}:
     parameters:
@@ -85,7 +87,10 @@ paths:
           $ref: "#/components/schemas/groupMembershipId"
     delete:
       summary: deletes a groupMembership object
-      description: deletes a groupMembership object
+      description: >
+        deletes a groupMembership object. 
+        The group owner can delete any membership.
+        A user can delete their own membership.
       security:
         - standard: 
             - write:groups:me # Owner of the group can delete memberships
@@ -121,7 +126,10 @@ paths:
   /groupMemberships:
     post:
       summary: creates a new groupMembership object
-      description: creates a new groupMembership object
+      description: >
+        creates a new groupMembership object.
+        Only the group owner can create a membership.
+        (After a user becomes a member, they can delete their own membership.)
       security:
         - standard: [write:groups:me]
       requestBody:

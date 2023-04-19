@@ -18,6 +18,25 @@ paths:
           description: a search string to filter users by.
           schema:
             type: string
+        - name: page
+          in: query
+          required: false
+          description: the page of users to retrieve.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          required: false
+          description: the number of users to retrieve per page.
+          schema:
+            type: integer
+            format: int64
+            maximum: 100
+            default: 10
+            minimum: 1
       responses:
         "200":
           description: a list of users
@@ -46,32 +65,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/user"
+                properties:
+                  user:
+                    $ref: "#/components/schemas/user"
         "404":
           description: user not found
-
-  /users/{userId}/groups:
-    get:
-      summary: get all groups for a user
-      description: returns a list of all groups for a user.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: the id of the user to retrieve groups for.
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: a list of groups
-          content:
-            application/json:
-              schema:
-                properties:  
-                  groups:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/groupMembership"
 
   /users/me/unavailabilities:
     get:

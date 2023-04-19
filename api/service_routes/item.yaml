@@ -150,29 +150,43 @@ paths:
     get:
       summary: gets a list of items. for now, the only kind of item is a room.
       parameters:
-        - name: search
-          in: query
-          description: Search term to filter items by
-          required: false
-          schema:
-            type: string
         - name: page
           in: query
-          description: Page number for pagination
+          description: Page number
           required: false
           schema:
             type: integer
+            format: int64
             minimum: 1
             default: 1
         - name: per_page
           in: query
-          description: Number of items per page for pagination
+          description: Number of items per page
           required: false
           schema:
             type: integer
+            format: int64
             minimum: 1
             maximum: 100
             default: 10
+        - name: nameSearch
+          in: query
+          description: Search for a room by name
+          required: false
+          schema:
+            type: string
+        - name: locationSearch
+          in: query
+          description: Search for a room by location
+          required: false
+          schema:
+            type: string
+        - name: descriptionSearch
+          in: query
+          description: Search for a room by description
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: ok

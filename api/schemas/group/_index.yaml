@@ -13,3 +13,5 @@ newGroup:
   $ref: "./newGroup.yaml"
 updateGroup:
   $ref: "./updateGroup.yaml"
+user:
+  $ref: "../user/_index.yaml#/user"
