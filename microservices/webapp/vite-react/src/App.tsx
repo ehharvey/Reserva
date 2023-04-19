@@ -3,6 +3,8 @@ import { Profile } from "./routes/Profile";
 import { Root } from "./routes/Root";
 import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { Rooms } from "./routes/Rooms";
+
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/me",
     element: <Profile />
+  }, 
+  {
+    path: "/rooms",
+    element: <Rooms />
   }
 ]);
 

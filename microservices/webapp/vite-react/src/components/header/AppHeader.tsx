@@ -91,6 +91,11 @@ export function AppHeader() {
             <a href="/me" className={classes.link}>
               Profile
             </a>
+
+
+            <a href="/rooms" className={classes.link}>
+              Rooms
+            </a>
           </Group>
 
           <AuthButtons />
