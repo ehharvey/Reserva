@@ -2,7 +2,7 @@ import { Button, Group } from "@mantine/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "../../entities/User";
 import { useEffect, useState } from "react";
-import { GroupApi, Configuration, GroupsPostRequest } from "../../reserva_client";
+import { GroupApi, Configuration, GroupsPostRequest, UserApi } from "../../reserva_client";
 
 
 
@@ -28,16 +28,9 @@ export function AuthButtons() {
                     basePath: "http://localhost:8080", accessToken: "Bearer " + token, 
                 });
                 
-                var foo = new GroupApi(config);
+                var foo = new UserApi(config);
     
-                var request = {
-                    newGroup: {
-                        name: "test",
-                        createdBy: "user-28e5e6f6-de0a-45ce-bc12-54d3810a99b1",
-                    }
-                } as GroupsPostRequest;
-    
-                foo.groupsPost(request).then((response) => {
+                foo.usersMeGroupsGet().then((response) => {
                     console.log(response);
                 });
             });

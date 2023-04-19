@@ -9,6 +9,10 @@ servers:
 paths:
   /users:
     get:
+      security:
+        - admin: []
+        - staff: []
+        - standard: []      
       summary: get all users
       description: returns a list of all users.
       parameters:
@@ -48,33 +52,15 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/user"
-  /users/{userId}:
-    get:
-      summary: get a user by id
-      description: returns a single user by id.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: the id of the user to retrieve.
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: the requested user
-          content:
-            application/json:
-              schema:
-                properties:
-                  user:
-                    $ref: "#/components/schemas/user"
-        "404":
-          description: user not found
 
   /users/me/unavailabilities:
     get:
       summary: get all unavailabilities for the current user
       description: returns a list of all unavailabilities for the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
       parameters:
         - name: start
           in: query
@@ -105,6 +91,10 @@ paths:
     get:
       summary: get all groups for the current user
       description: returns a list of all groups for the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
       responses:
         "200":
           description: a list of groups

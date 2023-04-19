@@ -543,6 +543,10 @@ paths:
       summary: get all groups for the current user
       tags:
       - user
+      security:
+        - staff: []
+        - standard: []
+        - admin: []
       x-openapi-router-controller: openapi_server.controllers.user_controller
   /users/me/unavailabilities:
     get:

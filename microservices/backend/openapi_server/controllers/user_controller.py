@@ -28,7 +28,7 @@ def users_get(search=None, page=None, per_page=None):  # noqa: E501
     return 'do some magic!'
 
 
-def users_me_groups_get():  # noqa: E501
+def users_me_groups_get(token_info):  # noqa: E501
     """get all groups for the current user
 
     returns a list of all groups for the current user. # noqa: E501
@@ -36,7 +36,8 @@ def users_me_groups_get():  # noqa: E501
 
     :rtype: Union[UsersMeGroupsGet200Response, Tuple[UsersMeGroupsGet200Response, int], Tuple[UsersMeGroupsGet200Response, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return token_info
 
 
 def users_me_unavailabilities_get(start=None, end=None):  # noqa: E501
