@@ -10,7 +10,6 @@ from flask_injector import FlaskInjector, RequestScope
 from pymongo import MongoClient
 from pymongo.database import Database
 
-from mongoengine import connect
 from openapi_server.config import get_env_config
 from openapi_server.user_utils import configure as configure_user_utils, configure_dev
 
