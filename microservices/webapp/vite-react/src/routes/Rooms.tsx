@@ -1,32 +1,21 @@
-import { NativeSelect, Table } from "@mantine/core"
+import { Table } from "@mantine/core"
 import { useState } from 'react';
-import { MultiSelect } from '@mantine/core';
 import { TextInput } from '@mantine/core';
-import { Room } from "../entities/Room";
 
 
-interface paramsObj {
+interface searchParams {
   name: string;
   location: string;
   description: string;
-  [key:string]: string;
 }
 
-
-const paramsObj: paramsObj = {
-  "name": "",
-  "location": "",
-  "description": "",
-  "type": ""
-}; 
-
-function searchAPI(searchParams:URLSearchParams) {
+function searchAPI(search: searchParams) {
   const rooms = [
     {
       name: "Room 2312",
       location: "A-Wing 2nd Floor",
       description: "This is an awesome room filled with so much fun!",
-      type: "Fun Room",
+      type: "Room",
       features: "Friendly, Awesome whatever",
       id: 1,
       created_at: "Jan 12, 2012",
@@ -36,7 +25,7 @@ function searchAPI(searchParams:URLSearchParams) {
       name: "Room 1001",
       location: "B-Wing 1st Floor",
       description: "This room is great for studying or working alone.",
-      type: "Study Room",
+      type: "Room",
       features: "Quiet, Has a desk and chair",
       id: 2,
       created_at: "Feb 15, 2013",
@@ -46,7 +35,7 @@ function searchAPI(searchParams:URLSearchParams) {
       name: "Room 2020",
       location: "C-Wing 2nd Floor",
       description: "This is a cozy room with a great view of the city.",
-      type: "Comfort Room",
+      type: "Room",
       features: "Warm lighting, Comfortable furniture",
       id: 3,
       created_at: "Mar 22, 2014",
@@ -56,7 +45,7 @@ function searchAPI(searchParams:URLSearchParams) {
       name: "Room 305",
       location: "D-Wing 3rd Floor",
       description: "This is a large conference room that can fit up to 20 people.",
-      type: "Conference Room",
+      type: "Room",
       features: "Projector, Whiteboard, Conference table and chairs",
       id: 4,
       created_at: "Apr 18, 2015",
@@ -66,7 +55,7 @@ function searchAPI(searchParams:URLSearchParams) {
       name: "Room 405",
       location: "E-Wing 4th Floor",
       description: "This is a bright and airy room that's perfect for yoga or meditation.",
-      type: "Fitness Room",
+      type: "Room",
       features: "Large windows, Yoga mats, Meditation cushions",
       id: 5,
       created_at: "May 25, 2016",
@@ -74,12 +63,8 @@ function searchAPI(searchParams:URLSearchParams) {
     }
   ];
 
-  const name = searchParams.get('name');
-  const location = searchParams.get('location');
-  const description = searchParams.get('description');
-
   const filteredRooms = rooms.filter((room) => {
-    return Object.entries(paramsObj).reduce((result, [key, value]) => {
+    return Object.entries(search).reduce((result, [key, value]) => {
       if (typeof(key)!== "string" || value === "") {
         return result;
       }
@@ -95,7 +80,6 @@ function searchAPI(searchParams:URLSearchParams) {
         <td>{room.name}</td>
         <td>{room.location}</td>
         <td>{room.description}</td>
-        <td>{room.type}</td>
         <td>{room.features}</td>
         <td>{room.created_at}</td>
         <td>{room.last_updated_at}</td>
@@ -110,123 +94,41 @@ function searchAPI(searchParams:URLSearchParams) {
 
 
 export function Rooms() {
+  const [nameSearch, setNameSearch] = useState('');
+  const [locationSearch, setLocationSearch] = useState('');
+  const [descriptionSearch, setDescriptionSearch] = useState('');
 
-  const [featureValue, setFeatureValue] = useState('name');
-  const [textValue, setTextValue] = useState('');
+  const search = {
+    name: nameSearch,
+    location: locationSearch,
+    description: descriptionSearch
+  } as searchParams;
 
-  
-
-paramsObj[featureValue] = textValue;
-const searchParams = new URLSearchParams(paramsObj);
-  
-
-
-  console.log(searchParams.toString())
-
-
-
-  const rooms = [
-    {
-      name: "Room 2312",
-      location: "A-Wing 2nd Floor",
-      description: "This is an awesome room filled with so much fun!",
-      type: "Fun Room",
-      features: "Friendly, Awesome whatever",
-      id: 1,
-      created_at: "Jan 12, 2012",
-      last_updated_at: "Jan 12, 2015"
-    },
-    {
-      name: "Room 1001",
-      location: "B-Wing 1st Floor",
-      description: "This room is great for studying or working alone.",
-      type: "Study Room",
-      features: "Quiet, Has a desk and chair",
-      id: 2,
-      created_at: "Feb 15, 2013",
-      last_updated_at: "Feb 18, 2015"
-    },
-    {
-      name: "Room 2020",
-      location: "C-Wing 2nd Floor",
-      description: "This is a cozy room with a great view of the city.",
-      type: "Comfort Room",
-      features: "Warm lighting, Comfortable furniture",
-      id: 3,
-      created_at: "Mar 22, 2014",
-      last_updated_at: "Mar 24, 2016"
-    },
-    {
-      name: "Room 305",
-      location: "D-Wing 3rd Floor",
-      description: "This is a large conference room that can fit up to 20 people.",
-      type: "Conference Room",
-      features: "Projector, Whiteboard, Conference table and chairs",
-      id: 4,
-      created_at: "Apr 18, 2015",
-      last_updated_at: "Apr 20, 2018"
-    },
-    {
-      name: "Room 405",
-      location: "E-Wing 4th Floor",
-      description: "This is a bright and airy room that's perfect for yoga or meditation.",
-      type: "Fitness Room",
-      features: "Large windows, Yoga mats, Meditation cushions",
-      id: 5,
-      created_at: "May 25, 2016",
-      last_updated_at: "May 28, 2019"
-    }
-  ];
-
-  var rows = searchAPI(searchParams); // searchAPI is just a dummy function 
-
-
-  // var rows = rooms.map((room) => {
-  //   if (room.hasOwnProperty(featureValue)) {
-  //     const value = room[featureValue];
-
-  //     const theRoute = "/rooms/"+ room.id;
-      
-  //     if (typeof (value) === "string" && ((value.toLowerCase().includes(textValue.toLowerCase())) || !textValue))
-  //       return (
-
-         
-  //         <tr key={room.id} onClick={() => {window.location.href = theRoute;}}>
-            
-  //           <td> {room.name}</td>
-  //           <td>{room.location}</td>
-  //           <td>{room.description}</td>
-  //           <td>{room.type}</td>
-  //           <td>{room.features}</td>
-  //           <td>{room.created_at}</td>
-  //           <td>{room.last_updated_at}</td>
-          
-  //         </tr>
-         
-  //       )
-  //   }
-  // }
- // )
+  var rows = searchAPI(search); // searchAPI is just a dummy function 
 
 
   return (
     <div>
       <h1>Rooms</h1>
-      <NativeSelect
-        value={featureValue}
-        onChange={(event) => {
-          paramsObj[featureValue]='';
-          setFeatureValue(event.currentTarget.value);
-          setTextValue('');
-        }
-        }
-        data={['name', 'type', 'location', 'description']}
+      <TextInput
+        placeholder={"Search By Name"}
+        value={nameSearch} onChange={(event) => {
+          setNameSearch(event.currentTarget.value);
+        }}
       />
       <TextInput
-        placeholder={"type here ..."}
-        label={featureValue}
-        value={textValue} onChange={(event) => setTextValue(event.currentTarget.value)}
+        placeholder={"Search By Location"}
+        value={locationSearch} onChange={(event) => {
+          setLocationSearch(event.currentTarget.value);
+        }}
       />
+      <TextInput
+        placeholder={"Search By Description"}
+        value={descriptionSearch} onChange={(event) => {
+          setDescriptionSearch(event.currentTarget.value);
+        }}
+      />
+
 
       <Table striped highlightOnHover withBorder withColumnBorders>
         <thead>
@@ -234,7 +136,6 @@ const searchParams = new URLSearchParams(paramsObj);
             <th>Name</th>
             <th>Room Location</th>
             <th>Room Description</th>
-            <th>Room Type</th>
             <th>Room Features </th>
             <th>Room Created At</th>
             <th>Room Last Updated At</th>
