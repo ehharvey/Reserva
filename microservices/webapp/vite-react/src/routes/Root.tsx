@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
+import reservaLogo from '../assets/reserva.png'
 import { Button } from '@mantine/core'
 import './Root.css'
 
@@ -10,25 +9,23 @@ export function Root() {
   return (
     <div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        <a> 
+          <img src= {reservaLogo} className="logo reserva" alt="Reserva logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Welcome to Reserva!</h1>
+      <p> 
+        Our study room booking system provides easy access to booking study rooms on campus.
+        <br></br>
+        Our system is user-friendly and designed to make your study experience stress-free. 
+        <br></br>
+        Start booking your study room today and elevate your academic success! 
+      </p>
       <div className="card">
         <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          CLICK ME! {count}
         </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
