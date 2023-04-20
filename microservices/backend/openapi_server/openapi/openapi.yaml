@@ -1,0 +1,1491 @@
+openapi: 3.0.2
+info:
+  title: Main API
+  version: 0.0.1
+servers:
+- url: https://reserva.emilharvey.ca
+paths:
+  /credits:
+    get:
+      operationId: get_credits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Credit'
+                type: array
+          description: Successfully retrieved all credits.
+        "401":
+          description: Authentication token is missing or invalid.
+      summary: Get all credits
+      tags:
+      - credit
+      x-openapi-router-controller: openapi_server.controllers.credit_controller
+    post:
+      operationId: create_credit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCredit'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully created a new credit.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Authentication token is missing or invalid.
+      summary: Create a new credit
+      tags:
+      - credit
+      x-openapi-router-controller: openapi_server.controllers.credit_controller
+  /credits/{creditId}:
+    delete:
+      operationId: delete_credit_by_id
+      parameters:
+      - description: The ID of the credit to delete.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Credit not found.
+      summary: Delete a credit by ID
+      tags:
+      - credit
+      x-openapi-router-controller: openapi_server.controllers.credit_controller
+    get:
+      operationId: get_credit_by_id
+      parameters:
+      - description: The ID of the credit to retrieve.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully retrieved the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Credit not found.
+      summary: Get a credit by ID
+      tags:
+      - credit
+      x-openapi-router-controller: openapi_server.controllers.credit_controller
+    patch:
+      operationId: update_credit_by_id
+      parameters:
+      - description: The ID of the credit to update.
+        explode: false
+        in: path
+        name: creditId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateCreditById_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+          description: Successfully updated the credit.
+        "401":
+          description: Authentication token is missing or invalid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Credit not found.
+      summary: Update a credit by ID
+      tags:
+      - credit
+      x-openapi-router-controller: openapi_server.controllers.credit_controller
+  /groups:
+    get:
+      operationId: groups_get
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups_get_200_response'
+          description: OK
+      summary: Gets a list of Group objects
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+    post:
+      operationId: groups_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGroup'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups_post_201_response'
+          description: OK
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+  /groups/{id}:
+    delete:
+      operationId: groups_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      responses:
+        "204":
+          description: Deleted
+      summary: Deletes a Group object
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+    get:
+      operationId: groups_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups_post_201_response'
+          description: OK
+      summary: Gets a Group object by id
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+    put:
+      operationId: groups_id_put
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroup'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups_post_201_response'
+          description: OK
+      summary: Updates a Group object
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+  /groups/{id}/memberships:
+    get:
+      operationId: groups_id_memberships_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups__id__memberships_get_200_response'
+          description: OK
+      summary: Gets a list of GroupMembership objects
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+    post:
+      operationId: groups_id_memberships_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGroupMembership'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups__id__memberships_post_201_response'
+          description: OK
+      summary: Creates a new GroupMembership object
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+  /groups/{id}/memberships/{membershipId}:
+    delete:
+      operationId: groups_id_memberships_membership_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      - explode: false
+        in: path
+        name: membershipId
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupMembershipId'
+        style: simple
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not Found
+      summary: Deletes a GroupMembership object
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+    get:
+      operationId: groups_id_memberships_membership_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupId'
+        style: simple
+      - explode: false
+        in: path
+        name: membershipId
+        required: true
+        schema:
+          $ref: '#/components/schemas/GroupMembershipId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups__id__memberships_post_201_response'
+          description: OK
+        "404":
+          description: Not Found
+      summary: Gets a GroupMembership object by id
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+  /items:
+    get:
+      operationId: items_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items_get_200_response'
+          description: OK
+      summary: "Gets a list of items. For now, the only kind of item is a room."
+      tags:
+      - item
+      x-openapi-router-controller: openapi_server.controllers.item_controller
+    post:
+      operationId: items_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewItem'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items_post_201_response'
+          description: Created
+        "400":
+          description: |
+            Bad Request
+      summary: "Posts an item. For now, the only kind of item is a room."
+      tags:
+      - item
+      x-openapi-router-controller: openapi_server.controllers.item_controller
+  /items/{id}:
+    delete:
+      description: |
+        ## More Information
+        Request for `DELETE/rooms/{id}` requires an id
+      operationId: delete_room_id
+      parameters:
+      - description: User ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: |
+            Item Not Found
+      summary: Delete a Room object existing in the Rooms resources
+      tags:
+      - item
+      x-openapi-router-controller: openapi_server.controllers.item_controller
+    get:
+      operationId: items_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ItemId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items_post_201_response'
+          description: OK
+        "404":
+          description: |
+            Item Not Found
+      summary: "Gets a Item object by id. For now, the only kind of item is a room."
+      tags:
+      - item
+      x-openapi-router-controller: openapi_server.controllers.item_controller
+    put:
+      operationId: items_id_put
+      parameters:
+      - description: User ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items__id__put_200_response'
+          description: OK
+        "404":
+          description: |
+            Item Not Found
+      summary: "Updates an item. For now, the only kind of item is a room."
+      tags:
+      - item
+      x-openapi-router-controller: openapi_server.controllers.item_controller
+  /unavailabilities:
+    get:
+      description: Retrieve all unavailability associated with a student or a room.
+      operationId: unavailabilities_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_unavailabilities_get_200_response'
+          description: OK
+      tags:
+      - unavailability
+      x-openapi-router-controller: openapi_server.controllers.unavailability_controller
+    post:
+      operationId: unavailabilities_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_unavailabilities_post_request'
+      responses:
+        "201":
+          content:
+            text/plain:
+              schema:
+                example: Created
+                type: string
+          description: Created
+        "400":
+          content:
+            text/plain:
+              schema:
+                example: Bad Request
+                type: string
+          description: Bad Request
+      tags:
+      - unavailability
+      x-openapi-router-controller: openapi_server.controllers.unavailability_controller
+  /unavailabilities/{id}:
+    delete:
+      description: Delete a specific unavailability identified by the `id` parameter.
+      operationId: unavailabilities_id_delete
+      parameters:
+      - description: The unavailability ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UnavailabilityId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_unavailabilities__id__delete_200_response'
+          description: Deleted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Bad Request
+      tags:
+      - unavailability
+      x-openapi-router-controller: openapi_server.controllers.unavailability_controller
+    get:
+      description: Retrieves information about a specific unavailability identified
+        by the `id` parameter.
+      operationId: unavailabilities_id_get
+      parameters:
+      - description: The unavailability ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UnavailabilityId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_unavailabilities__id__get_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_unavailabilities__id__get_400_response'
+          description: Bad Request
+      tags:
+      - unavailability
+      x-openapi-router-controller: openapi_server.controllers.unavailability_controller
+    put:
+      description: |
+        Update a specific unavailability identified by the `id` parameter with the information  provided in the request body.
+      operationId: unavailabilities_id_put
+      parameters:
+      - description: The unavailability ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UnavailabilityId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_unavailabilities__id__put_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+          description: Bad Request
+      tags:
+      - unavailability
+      x-openapi-router-controller: openapi_server.controllers.unavailability_controller
+  /users:
+    get:
+      description: Returns a list of all users.
+      operationId: users_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: A list of users
+      summary: Get all users
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+    post:
+      description: Creates a new user account.
+      operationId: users_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The new user
+        "400":
+          description: Invalid input
+      summary: Create a new user
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /users/admins:
+    get:
+      description: Returns a list of all admin users.
+      operationId: users_admins_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: A list of admin users
+      summary: Get all admin users
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+    post:
+      description: Creates a new admin user account.
+      operationId: users_admins_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The new admin user
+        "400":
+          description: Invalid input
+      summary: Create a new admin user
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /users/standard:
+    get:
+      description: Returns a list of all standard users.
+      operationId: users_standard_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: A list of standard users
+      summary: Get all standard users
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+    post:
+      description: Creates a new standard user account.
+      operationId: users_standard_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The new standard user
+        "400":
+          description: Invalid input
+      summary: Create a new standard user
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /users/{userId}:
+    delete:
+      description: Deletes an existing user account.
+      operationId: users_user_id_delete
+      parameters:
+      - description: The ID of the user to delete.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: User deleted
+        "404":
+          description: User not found
+      summary: Delete a user by ID
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+    get:
+      description: Returns a single user by ID.
+      operationId: users_user_id_get
+      parameters:
+      - description: The ID of the user to retrieve.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The requested user
+        "404":
+          description: User not found
+      summary: Get a user by ID
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+    put:
+      description: Updates an existing user account.
+      operationId: users_user_id_put
+      parameters:
+      - description: The ID of the user to update.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The updated user
+        "400":
+          description: Invalid input
+        "404":
+          description: User not found
+      summary: Update a user by ID
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /users/{userId}/groups:
+    get:
+      description: Returns a list of all groups for a user.
+      operationId: users_user_id_groups_get
+      parameters:
+      - description: The ID of the user to retrieve groups for.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_users__userId__groups_get_200_response'
+          description: A list of groups
+      summary: Get all groups for a user
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+components:
+  schemas:
+    Credit:
+      allOf:
+      - $ref: '#/components/schemas/NewCredit'
+      - $ref: '#/components/schemas/Credit_allOf'
+      title: Credit
+    CreditId:
+      description: |
+        The ID of a credit. This is a UUID with the prefix "credit-".
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: CreditId
+      type: string
+    DateTime15Min:
+      description: "Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00"
+      example: 2023-04-02T15:00:00
+      pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$"
+      title: DateTime15Min
+      type: string
+    Error:
+      $ref: '#/paths/~1unavailabilities~1%7Bid%7D/get/responses/400/content/application~1json/schema'
+    Feature:
+      description: |
+        The data required to create a new feature.
+      properties:
+        name:
+          description: The name of the feature.
+          title: name
+          type: string
+        value:
+          description: The value of the feature.
+          title: value
+      required:
+      - name
+      - value
+      title: Feature
+      type: object
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/NewGroup'
+      - $ref: '#/components/schemas/Group_allOf'
+      title: Group
+    GroupId:
+      description: |
+        The ID of a group. This is a UUID with the prefix "group-".
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: GroupId
+      type: string
+    GroupMembership:
+      allOf:
+      - $ref: '#/components/schemas/NewGroupMembership'
+      - $ref: '#/components/schemas/GroupMembership_allOf'
+      title: GroupMembership
+    GroupMembershipId:
+      description: The ID of a group membership.
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: GroupMembershipId
+      type: string
+    Id:
+      description: "A UUID. This is a string that is a UUID. \n"
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      type: string
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/NewItem'
+      - $ref: '#/components/schemas/Item_allOf'
+      description: |
+        The data returned when an item is retrieved. This is the base schema for all item retrievals. The difference between this and the NewItem schema is that this schema includes the ID, createdAt, and lastUpdatedAt fields.
+      title: Item
+    ItemId:
+      description: |
+        The ID of the item. This is a UUID with a prefix of "item-".
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: ItemId
+      type: string
+    NewCredit:
+      example:
+        amount: 6
+        user_id: 0
+      properties:
+        user_id:
+          description: The ID of the user to create the credit for.
+          title: user_id
+          type: integer
+        amount:
+          description: The amount of the credit to create in units.
+          title: amount
+          type: integer
+      required:
+      - amount
+      - user_id
+      title: NewCredit
+      type: object
+    NewGroup:
+      allOf:
+      - $ref: '#/components/schemas/UpdateGroup'
+      description: |
+        A group. This could be a project group, a team, or something else. This is sent by the client when creating a new group.
+      required:
+      - createdBy
+      - name
+      title: NewGroup
+    NewGroupMembership:
+      description: |
+        This is a group membership. It is the intermediate object between a user and a group. It is used to determine which users are members of which groups.
+      example:
+        user: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        group: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        group:
+          description: |
+            The ID of a group. This is a UUID with the prefix "group-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: GroupId
+          type: string
+        user:
+          description: |
+            Id of a user. This is a UUID with the prefix "user-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: UserId
+          type: string
+      required:
+      - group
+      - user
+      title: NewGroupMembership
+      type: object
+    NewItem:
+      allOf:
+      - $ref: '#/components/schemas/UpdateItem'
+      description: |
+        The data required to create a new item. This is the base schema for all item creations. The difference between this and the UpdateItem schema is that this schema requires all fields to be present.
+      required:
+      - description
+      - features
+      - location
+      - name
+      - type
+      title: NewItem
+    NewRecurringUnavailability:
+      allOf:
+      - $ref: '#/components/schemas/NewUnavailability'
+      - $ref: '#/components/schemas/NewRecurringUnavailability_allOf'
+      description: |
+        A recurring unavailability. This could be a maintenance window, a booking, or something else. The client will send this when they want to create a new recurring unavailability.
+      title: NewRecurringUnavailability
+    NewUnavailability:
+      allOf:
+      - $ref: '#/components/schemas/UpdateUnavailability'
+      description: A new unavailability. This is sent when a client wants to create
+        a new unavailability.
+      required:
+      - endDateTime
+      - item
+      - room
+      - startDateTime
+      - type
+      title: NewUnavailability
+    NewUser:
+      allOf:
+      - $ref: '#/components/schemas/UpdateUser'
+      - $ref: '#/components/schemas/NewUser_allOf'
+      title: NewUser
+    RecurringUnavailability:
+      allOf:
+      - $ref: '#/components/schemas/NewRecurringUnavailability'
+      - $ref: '#/components/schemas/RecurringUnavailability_allOf'
+      description: |
+        A recurring unavailability. This could be a maintenance window, a booking, or something else. The server will send this to clients
+    Success:
+      $ref: '#/paths/~1unavailabilities~1%7Bid%7D/delete/responses/200/content/application~1json/schema'
+    Unavailability:
+      allOf:
+      - $ref: '#/components/schemas/NewUnavailability'
+      - $ref: '#/components/schemas/Unavailability_allOf'
+      title: Unavailability
+    UnavailabilityId:
+      description: |
+        The ID of an unavailability. This is a UUID with the prefix "unavailability-".
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: UnavailabilityId
+      type: string
+    UpdateGroup:
+      description: |
+        A group. This could be a project group, a team, or something else. This is sent by the client when updating an existing group.
+      example:
+        createdBy: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: Project Group
+      properties:
+        name:
+          description: The name of the group.
+          example: Project Group
+          title: name
+          type: string
+        createdBy:
+          description: |
+            Id of a user. This is a UUID with the prefix "user-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: UserId
+          type: string
+      title: UpdateGroup
+      type: object
+    UpdateItem:
+      description: |
+        The data required to update an item. This is the base schema for all item updates.
+      example:
+        features:
+        - name: Style
+          value: Modern
+        - name: Size
+          value: 1000
+        - name: Has Windows
+          value: true
+        name: Large Room
+        description: Large Room with Low Ceilings
+        location: 1st Floor
+        type: Room
+      properties:
+        name:
+          description: "The name of the item. For now, these will be names of rooms"
+          example: Large Room
+          title: name
+          type: string
+        location:
+          description: The location of the item.
+          example: 1st Floor
+          title: location
+          type: string
+        description:
+          description: A description of the item.
+          example: Large Room with Low Ceilings
+          title: description
+          type: string
+        type:
+          description: "The type of the item. For now, this will only be Room."
+          enum:
+          - Room
+          example: Room
+          title: type
+          type: string
+        features:
+          description: |
+            The features of the item. For now, these will be the features of the room.
+          example:
+          - name: Style
+            value: Modern
+          - name: Size
+            value: 1000
+          - name: Has Windows
+            value: true
+          items:
+            $ref: '#/components/schemas/Feature'
+          title: features
+          type: array
+      title: UpdateItem
+      type: object
+    UpdateUnavailability:
+      description: |
+        An update to an unavailability. This could be a maintenance window, a booking, or something else. This is the base type for all unavailability updates. As a result, it does not have an ID, because it is not a complete unavailability. It also has no required fields, because only need to send a fragment of this data to update an unavailability.
+      example:
+        item: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        startDateTime: 2023-04-02T15:00:00
+        endDateTime: 2023-04-02T15:00:00
+        type: maintenance
+      properties:
+        item:
+          description: |
+            The ID of the item. This is a UUID with a prefix of "item-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: ItemId
+          type: string
+        startDateTime:
+          description: "Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00"
+          example: 2023-04-02T15:00:00
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          title: DateTime15Min
+          type: string
+        endDateTime:
+          description: "Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00"
+          example: 2023-04-02T15:00:00
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          title: DateTime15Min
+          type: string
+        type:
+          enum:
+          - maintenance
+          - booking
+          - off_hours
+          - other
+          title: type
+          type: string
+      title: UpdateUnavailability
+      type: object
+    UpdateUser:
+      example:
+        password: password
+        email: email
+        username: username
+      properties:
+        username:
+          description: The user's username.
+          title: username
+          type: string
+        email:
+          description: The user's email address.
+          format: email
+          title: email
+          type: string
+        password:
+          description: The user's password.
+          format: password
+          title: password
+          type: string
+      title: UpdateUser
+      type: object
+    User:
+      allOf:
+      - $ref: '#/components/schemas/NewUser'
+      - $ref: '#/components/schemas/User_allOf'
+      title: User
+    UserId:
+      description: |
+        Id of a user. This is a UUID with the prefix "user-".
+      format: uuid
+      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      title: UserId
+      type: string
+    updateCreditById_request:
+      properties:
+        amount:
+          description: The new amount of the credit in units.
+          title: amount
+          type: integer
+      required:
+      - amount
+      title: updateCreditById_request
+      type: object
+    _groups_get_200_response:
+      example:
+        Groups:
+        - null
+        - null
+      properties:
+        Groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          title: Groups
+          type: array
+      title: _groups_get_200_response
+    _groups_post_201_response:
+      example:
+        Group: null
+      properties:
+        Group:
+          $ref: '#/components/schemas/Group'
+      title: _groups_post_201_response
+    _groups__id__memberships_get_200_response:
+      example:
+        GroupMemberships:
+        - null
+        - null
+      properties:
+        GroupMemberships:
+          items:
+            $ref: '#/components/schemas/GroupMembership'
+          title: GroupMemberships
+          type: array
+      title: _groups__id__memberships_get_200_response
+    _groups__id__memberships_post_201_response:
+      example:
+        GroupMembership: null
+      properties:
+        GroupMembership:
+          $ref: '#/components/schemas/GroupMembership'
+      title: _groups__id__memberships_post_201_response
+    _items_get_200_response:
+      example:
+        items: null
+      properties:
+        items:
+          $ref: '#/components/schemas/Item'
+      title: _items_get_200_response
+    _items_post_201_response:
+      example:
+        Room: null
+      properties:
+        Room:
+          $ref: '#/components/schemas/Item'
+      title: _items_post_201_response
+    _items__id__put_200_response:
+      example:
+        Room:
+          features:
+          - name: Style
+            value: Modern
+          - name: Size
+            value: 1000
+          - name: Has Windows
+            value: true
+          name: Large Room
+          description: Large Room with Low Ceilings
+          location: 1st Floor
+          type: Room
+      properties:
+        Room:
+          $ref: '#/components/schemas/UpdateItem'
+      title: _items__id__put_200_response
+    _unavailabilities_get_200_response:
+      example:
+        Unavailabilities:
+        - null
+        - null
+      properties:
+        Unavailabilities:
+          items:
+            $ref: '#/components/schemas/Unavailability'
+          title: Unavailabilities
+          type: array
+      title: _unavailabilities_get_200_response
+      type: object
+    _unavailabilities_post_request:
+      oneOf:
+      - $ref: '#/components/schemas/NewUnavailability'
+      - $ref: '#/components/schemas/NewRecurringUnavailability'
+      title: _unavailabilities_post_request
+    _unavailabilities__id__get_200_response:
+      example:
+        unavailability: null
+      properties:
+        unavailability:
+          $ref: '#/components/schemas/Unavailability'
+      title: _unavailabilities__id__get_200_response
+      type: object
+    _unavailabilities__id__get_400_response:
+      description: |
+        A generic error response. It has a message property, which is a string.
+      properties:
+        message:
+          title: message
+          type: string
+      title: _unavailabilities__id__get_400_response
+      type: object
+    _unavailabilities__id__put_200_response:
+      example:
+        Booking:
+          item: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          startDateTime: 2023-04-02T15:00:00
+          endDateTime: 2023-04-02T15:00:00
+          type: maintenance
+      properties:
+        Booking:
+          $ref: '#/components/schemas/UpdateUnavailability'
+      title: _unavailabilities__id__put_200_response
+      type: object
+    _unavailabilities__id__delete_200_response:
+      description: |
+        A generic success response. It has a message property, which is a string.
+      example:
+        message: message
+      properties:
+        message:
+          title: message
+          type: string
+      title: _unavailabilities__id__delete_200_response
+      type: object
+    _users__userId__groups_get_200_response:
+      example:
+        groups:
+        - null
+        - null
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/GroupMembership'
+          title: groups
+          type: array
+      title: _users__userId__groups_get_200_response
+    Credit_allOf:
+      properties:
+        id:
+          description: |
+            The ID of a credit. This is a UUID with the prefix "credit-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: CreditId
+          type: string
+      required:
+      - amount
+      - id
+      - user_id
+      title: Credit_allOf
+      type: object
+      example: null
+    Group_allOf:
+      description: |
+        A group. This could be a project group, a team, or something else. The difference between this and NewGroup is that this has an ID, which is assigned by the server. It also has timestamps for when the group was created and last updated.
+      properties:
+        id:
+          description: |
+            The ID of a group. This is a UUID with the prefix "group-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: GroupId
+          type: string
+        createdAt:
+          description: The date and time the group was created.
+          example: 2019-01-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: createdAt
+          type: string
+        lastUpdatedAt:
+          description: The date and time the group was last updated.
+          example: 2019-03-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: lastUpdatedAt
+          type: string
+      required:
+      - createdAt
+      - id
+      - lastUpdatedAt
+      title: Group_allOf
+      type: object
+      example: null
+    GroupMembership_allOf:
+      properties:
+        id:
+          description: The ID of a group membership.
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: GroupMembershipId
+          type: string
+      title: GroupMembership_allOf
+      type: object
+      example: null
+    Item_allOf:
+      properties:
+        id:
+          description: |
+            The ID of the item. This is a UUID with a prefix of "item-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: ItemId
+          type: string
+        createdAt:
+          description: The date and time the item was created.
+          example: 2019-01-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: createdAt
+          type: string
+        lastUpdatedAt:
+          description: The date and time the item was last updated.
+          example: 2019-03-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: lastUpdatedAt
+          type: string
+      required:
+      - id
+      title: Item_allOf
+      type: object
+      example: null
+    NewRecurringUnavailability_allOf:
+      properties:
+        recurrence:
+          description: "Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00"
+          example: 2023-04-02T15:00:00
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          title: DateTime15Min
+          type: string
+      required:
+      - recurrence
+      title: NewRecurringUnavailability_allOf
+      type: object
+      example: null
+    NewUser_allOf:
+      properties:
+        role:
+          default: user
+          description: The user's role.
+          enum:
+          - standard
+          - admin
+          title: role
+          type: string
+      required:
+      - email
+      - password
+      - role
+      - username
+      title: NewUser_allOf
+      type: object
+      example: null
+    RecurringUnavailability_allOf:
+      properties:
+        id:
+          description: |
+            The ID of an unavailability. This is a UUID with the prefix "unavailability-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: UnavailabilityId
+          type: string
+      required:
+      - id
+      title: RecurringUnavailability_allOf
+      type: object
+      example: null
+    Unavailability_allOf:
+      description: |
+        An unavailability. This could be a maintenance window, a booking, or something else. The difference between this and NewUnavailability is that this has an ID, which is assigned by the server. It also has timestamps for when the unavailability was created and last updated.
+      properties:
+        id:
+          description: |
+            The ID of an unavailability. This is a UUID with the prefix "unavailability-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: UnavailabilityId
+          type: string
+        createdAt:
+          description: The date and time the unavailability was created.
+          example: 2019-01-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: createdAt
+          type: string
+        lastUpdatedAt:
+          description: The date and time the unavailability was last updated.
+          example: 2019-03-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: lastUpdatedAt
+          type: string
+      required:
+      - createdAt
+      - id
+      - lastUpdatedAt
+      title: Unavailability_allOf
+      type: object
+      example: null
+    User_allOf:
+      description: |
+        A user. This could be a standard user, an admin, or something else (tbd). The difference between this and NewUser is that this has an ID, which is assigned by the server. It also has timestamps for when the user was created and last updated.
+      properties:
+        id:
+          description: |
+            Id of a user. This is a UUID with the prefix "user-".
+          format: uuid
+          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: UserId
+          type: string
+        createdAt:
+          description: The date and time the user was created.
+          example: 2019-01-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: createdAt
+          type: string
+        lastUpdatedAt:
+          description: The date and time the user was last updated.
+          example: 2019-03-01T00:00:00Z
+          format: date-time
+          readOnly: true
+          title: lastUpdatedAt
+          type: string
+      required:
+      - createdAt
+      - id
+      - lastUpdatedAt
+      title: User_allOf
+      type: object
+      example: null

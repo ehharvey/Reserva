@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root";
 import { Profile } from "./routes/Profile";
-import { BookingRoom} from "./routes/BookingRoom";
 import { Groups } from "./routes/Groups";
 import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { BookingForm } from "./routes/BookingForm";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +16,12 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: "/bookingroom",
-    element: <BookingRoom />
-  },
-  {
     path: "/groups",
     element: <Groups />
+  },
+  {
+    path: "/booking-request/:roomId",
+    element: <BookingForm />
   }
 ]);
 

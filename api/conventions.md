@@ -1,0 +1,1 @@
+* Variables start with lowercase letters and are in camelCase. E.g., `myVariable`.

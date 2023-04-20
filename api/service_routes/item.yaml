@@ -109,9 +109,10 @@ paths:
             application/json:
               schema:
                 properties:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Item"
+                    "Rooms":
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/Item"
             
 components:
   schemas:

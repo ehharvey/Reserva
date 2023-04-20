@@ -13,7 +13,6 @@ class RefModel(BaseModel):
     ref: str = Field(..., alias="$ref")
 
 folders = [
-    Path("authentication"),
     Path("credit"),
     Path("group"),
     Path("item"),
