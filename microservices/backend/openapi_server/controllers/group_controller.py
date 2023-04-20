@@ -5,6 +5,7 @@ from typing import Tuple
 from typing import Union
 
 from openapi_server.models.group_memberships_post201_response import GroupMembershipsPost201Response  # noqa: E501
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
 from openapi_server.models.groups_post201_response import GroupsPost201Response  # noqa: E501
 from openapi_server.models.new_group import NewGroup  # noqa: E501
@@ -74,6 +75,20 @@ def groups_id_put(id, update_group=None):  # noqa: E501
     """
     if connexion.request.is_json:
         update_group = UpdateGroup.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def groups_id_unavailabilities_get(id):  # noqa: E501
+    """gets a list of unavailability objects
+
+    gets a list of unavailability objects for a group # noqa: E501
+
+    :param id: 
+    :type id: str
+    :type id: str
+
+    :rtype: Union[GroupsIdUnavailabilitiesGet200Response, Tuple[GroupsIdUnavailabilitiesGet200Response, int], Tuple[GroupsIdUnavailabilitiesGet200Response, int, Dict[str, str]]
+    """
     return 'do some magic!'
 
 

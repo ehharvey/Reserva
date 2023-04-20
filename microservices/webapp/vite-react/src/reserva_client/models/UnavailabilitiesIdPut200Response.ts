@@ -53,7 +53,7 @@ export function UnavailabilitiesIdPut200ResponseFromJSONTyped(json: any, ignoreD
     }
     return {
         
-        'booking': !exists(json, 'booking') ? undefined : json['booking'],
+        'booking': !exists(json, 'booking') ? undefined : UpdateUnavailabilityFromJSON(json['booking']),
     };
 }
 
@@ -66,7 +66,7 @@ export function UnavailabilitiesIdPut200ResponseToJSON(value?: UnavailabilitiesI
     }
     return {
         
-        'booking': value.booking,
+        'booking': UpdateUnavailabilityToJSON(value.booking),
     };
 }
 

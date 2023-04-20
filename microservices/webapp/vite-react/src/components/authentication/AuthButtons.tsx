@@ -22,8 +22,6 @@ export function AuthButtons() {
                 audience: "http://localhost:8080",
                 scope: "write:groups:me"
             }}).then((token) => {
-                console.log(token);
-
                 var config = new Configuration({
                     basePath: "http://localhost:8080", accessToken: "Bearer " + token, 
                 });

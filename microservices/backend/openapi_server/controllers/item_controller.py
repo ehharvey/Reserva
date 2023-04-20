@@ -4,9 +4,9 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.item import Item  # noqa: E501
 from openapi_server.models.items_get200_response import ItemsGet200Response  # noqa: E501
-from openapi_server.models.items_id_unavailabilities_get200_response import ItemsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.items_post201_response import ItemsPost201Response  # noqa: E501
 from openapi_server.models.new_item import NewItem  # noqa: E501
 from openapi_server import util
@@ -80,7 +80,7 @@ def items_id_unavailabilities_get(id, start, end, page=None, per_page=None):  # 
     :param per_page: the number of unavailabilities to get per page
     :type per_page: int
 
-    :rtype: Union[ItemsIdUnavailabilitiesGet200Response, Tuple[ItemsIdUnavailabilitiesGet200Response, int], Tuple[ItemsIdUnavailabilitiesGet200Response, int, Dict[str, str]]
+    :rtype: Union[GroupsIdUnavailabilitiesGet200Response, Tuple[GroupsIdUnavailabilitiesGet200Response, int], Tuple[GroupsIdUnavailabilitiesGet200Response, int, Dict[str, str]]
     """
     start = util.deserialize_datetime(start)
     end = util.deserialize_datetime(end)

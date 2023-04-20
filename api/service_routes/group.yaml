@@ -72,6 +72,31 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/user"
+  
+  /groups/{id}/unavailabilities:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/groupId"
+    get:
+      summary: gets a list of unavailability objects
+      description: gets a list of unavailability objects for a group
+      security:
+        - standard: [read:groups:associated]
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  unavailabilities:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unavailability"
+  
     
   /groups/{id}/memberships/{membershipId}:
     parameters:

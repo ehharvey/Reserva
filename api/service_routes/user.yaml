@@ -53,6 +53,24 @@ paths:
                     items:
                       $ref: "#/components/schemas/user"
 
+  /users/me:
+    get:
+      summary: get the current user
+      description: returns the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
+      responses:
+        "200":
+          description: the current user
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    $ref: "#/components/schemas/user"
+
   /users/me/unavailabilities:
     get:
       summary: get all unavailabilities for the current user

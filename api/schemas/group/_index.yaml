@@ -15,3 +15,5 @@ updateGroup:
   $ref: "./updateGroup.yaml"
 user:
   $ref: "../user/_index.yaml#/user"
+unavailability:
+  $ref: "../unavailability/_index.yaml#/unavailability"

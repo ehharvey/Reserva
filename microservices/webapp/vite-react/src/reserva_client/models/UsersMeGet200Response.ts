@@ -23,31 +23,31 @@ import {
 /**
  * 
  * @export
- * @interface UsersUserIdGet200Response
+ * @interface UsersMeGet200Response
  */
-export interface UsersUserIdGet200Response {
+export interface UsersMeGet200Response {
     /**
      * 
      * @type {User}
-     * @memberof UsersUserIdGet200Response
+     * @memberof UsersMeGet200Response
      */
     user?: User;
 }
 
 /**
- * Check if a given object implements the UsersUserIdGet200Response interface.
+ * Check if a given object implements the UsersMeGet200Response interface.
  */
-export function instanceOfUsersUserIdGet200Response(value: object): boolean {
+export function instanceOfUsersMeGet200Response(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function UsersUserIdGet200ResponseFromJSON(json: any): UsersUserIdGet200Response {
-    return UsersUserIdGet200ResponseFromJSONTyped(json, false);
+export function UsersMeGet200ResponseFromJSON(json: any): UsersMeGet200Response {
+    return UsersMeGet200ResponseFromJSONTyped(json, false);
 }
 
-export function UsersUserIdGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UsersUserIdGet200Response {
+export function UsersMeGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UsersMeGet200Response {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function UsersUserIdGet200ResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function UsersUserIdGet200ResponseToJSON(value?: UsersUserIdGet200Response | null): any {
+export function UsersMeGet200ResponseToJSON(value?: UsersMeGet200Response | null): any {
     if (value === undefined) {
         return undefined;
     }

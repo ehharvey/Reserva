@@ -39,7 +39,7 @@ models/UpdateItem.ts
 models/UpdateUnavailability.ts
 models/UpdateUnavailabilityOwner.ts
 models/User.ts
+models/UsersMeGet200Response.ts
 models/UsersMeGroupsGet200Response.ts
-models/UsersUserIdGet200Response.ts
 models/index.ts
 runtime.ts

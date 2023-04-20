@@ -26,7 +26,7 @@ export interface GroupMembership {
      */
     group: string;
     /**
-     * id of a user. this is a uuid with the prefix "user-".
+     * id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)
      * @type {string}
      * @memberof GroupMembership
      */

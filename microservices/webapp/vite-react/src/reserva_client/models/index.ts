@@ -34,5 +34,5 @@ export * from './UpdateItem';
 export * from './UpdateUnavailability';
 export * from './UpdateUnavailabilityOwner';
 export * from './User';
+export * from './UsersMeGet200Response';
 export * from './UsersMeGroupsGet200Response';
-export * from './UsersUserIdGet200Response';

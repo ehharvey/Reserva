@@ -6,9 +6,9 @@ import unittest
 from flask import json
 from six import BytesIO
 
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.item import Item  # noqa: E501
 from openapi_server.models.items_get200_response import ItemsGet200Response  # noqa: E501
-from openapi_server.models.items_id_unavailabilities_get200_response import ItemsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.items_post201_response import ItemsPost201Response  # noqa: E501
 from openapi_server.models.new_item import NewItem  # noqa: E501
 from openapi_server.test import BaseTestCase

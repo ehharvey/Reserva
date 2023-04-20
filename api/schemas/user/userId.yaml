@@ -1,5 +1,7 @@
 ---
 type: string
-example: user-7f876542-5b07-4ba4-a380-c946964c5a84
+example: auth0|5c6b9f2d1f6ba37e16cbf2a8
 description: >
-  id of a user. this is a uuid with the prefix "user-".
+  id of a user. This is just a string, since
+  the user id is provided by the authentication provider.
+  (in this case, auth0)

@@ -1,8 +1,5 @@
 type: object
 properties:
-  username:
-    type: string
-    description: the user's username.
   firstname:
     type: string
     description: the user's first name.
@@ -11,7 +8,7 @@ properties:
     description: the user's last name.
   role:
       type: string
-      enum: [standard, admin]
+      enum: [standard, staff]
       default: standard
       description: the user's role.
 example:

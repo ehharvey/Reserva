@@ -20,12 +20,6 @@ import { exists, mapValues } from '../runtime';
  */
 export interface User {
     /**
-     * the user's username.
-     * @type {string}
-     * @memberof User
-     */
-    username?: string;
-    /**
      * the user's first name.
      * @type {string}
      * @memberof User
@@ -51,7 +45,7 @@ export interface User {
  */
 export const UserRoleEnum = {
     Standard: 'standard',
-    Admin: 'admin'
+    Staff: 'staff'
 } as const;
 export type UserRoleEnum = typeof UserRoleEnum[keyof typeof UserRoleEnum];
 
@@ -75,7 +69,6 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     }
     return {
         
-        'username': !exists(json, 'username') ? undefined : json['username'],
         'firstname': !exists(json, 'firstname') ? undefined : json['firstname'],
         'lastname': !exists(json, 'lastname') ? undefined : json['lastname'],
         'role': !exists(json, 'role') ? undefined : json['role'],
@@ -91,7 +84,6 @@ export function UserToJSON(value?: User | null): any {
     }
     return {
         
-        'username': value.username,
         'firstname': value.firstname,
         'lastname': value.lastname,
         'role': value.role,

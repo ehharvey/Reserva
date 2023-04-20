@@ -53,7 +53,7 @@ export function UnavailabilitiesPost201ResponseFromJSONTyped(json: any, ignoreDi
     }
     return {
         
-        'unavailability': !exists(json, 'unavailability') ? undefined : json['unavailability'],
+        'unavailability': !exists(json, 'unavailability') ? undefined : UnavailabilityFromJSON(json['unavailability']),
     };
 }
 
@@ -66,7 +66,7 @@ export function UnavailabilitiesPost201ResponseToJSON(value?: UnavailabilitiesPo
     }
     return {
         
-        'unavailability': value.unavailability,
+        'unavailability': UnavailabilityToJSON(value.unavailability),
     };
 }
 

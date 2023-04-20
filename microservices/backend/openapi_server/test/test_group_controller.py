@@ -7,6 +7,7 @@ from flask import json
 from six import BytesIO
 
 from openapi_server.models.group_memberships_post201_response import GroupMembershipsPost201Response  # noqa: E501
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
 from openapi_server.models.groups_post201_response import GroupsPost201Response  # noqa: E501
 from openapi_server.models.new_group import NewGroup  # noqa: E501
@@ -86,6 +87,22 @@ class TestGroupController(BaseTestCase):
             headers=headers,
             data=json.dumps(update_group),
             content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_groups_id_unavailabilities_get(self):
+        """Test case for groups_id_unavailabilities_get
+
+        gets a list of unavailability objects
+        """
+        headers = { 
+            'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+        }
+        response = self.client.open(
+            '/groups/{id}/unavailabilities'.format(id='id_example'),
+            method='GET',
+            headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

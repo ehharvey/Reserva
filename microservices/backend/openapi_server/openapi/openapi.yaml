@@ -4,6 +4,7 @@ info:
   version: 0.0.1
 servers:
 - url: https://reserva.emilharvey.ca
+- url: http://localhost:8080
 paths:
   /groupMemberships:
     post:
@@ -139,6 +140,32 @@ paths:
         - write:groups:me
         - write:groupMemberships:me
       summary: deletes a groupMembership object
+      tags:
+      - group
+      x-openapi-router-controller: openapi_server.controllers.group_controller
+  /groups/{id}/unavailabilities:
+    get:
+      description: gets a list of unavailability objects for a group
+      operationId: groups_id_unavailabilities_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/groupId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_groups__id__unavailabilities_get_200_response'
+          description: ok
+      security:
+      - standard:
+        - read:groups:associated
+      summary: gets a list of unavailability objects
       tags:
       - group
       x-openapi-router-controller: openapi_server.controllers.group_controller
@@ -376,7 +403,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_items__id__unavailabilities_get_200_response'
+                $ref: '#/components/schemas/_groups__id__unavailabilities_get_200_response'
           description: ok
         "404":
           description: |
@@ -525,7 +552,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/_groups__id__users_get_200_response'
           description: a list of users
+      security:
+      - admin: []
+      - staff: []
+      - standard: []
       summary: get all users
+      tags:
+      - user
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /users/me:
+    get:
+      description: returns the current user.
+      operationId: users_me_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_users_me_get_200_response'
+          description: the current user
+      security:
+      - standard: []
+      - admin: []
+      - staff: []
+      summary: get the current user
       tags:
       - user
       x-openapi-router-controller: openapi_server.controllers.user_controller
@@ -540,13 +590,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/_users_me_groups_get_200_response'
           description: a list of groups
+      security:
+      - standard: []
+      - admin: []
+      - staff: []
       summary: get all groups for the current user
       tags:
       - user
-      security:
-        - staff: []
-        - standard: []
-        - admin: []
       x-openapi-router-controller: openapi_server.controllers.user_controller
   /users/me/unavailabilities:
     get:
@@ -576,35 +626,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_items__id__unavailabilities_get_200_response'
+                $ref: '#/components/schemas/_groups__id__unavailabilities_get_200_response'
           description: a list of unavailabilities
+      security:
+      - standard: []
+      - admin: []
+      - staff: []
       summary: get all unavailabilities for the current user
-      tags:
-      - user
-      x-openapi-router-controller: openapi_server.controllers.user_controller
-  /users/{userId}:
-    get:
-      description: returns a single user by id.
-      operationId: users_user_id_get
-      parameters:
-      - description: the id of the user to retrieve.
-        explode: false
-        in: path
-        name: userId
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/_users__userId__get_200_response'
-          description: the requested user
-        "404":
-          description: user not found
-      summary: get a user by id
       tags:
       - user
       x-openapi-router-controller: openapi_server.controllers.user_controller
@@ -629,7 +657,7 @@ components:
           description: the name of the feature.
           type: string
         value:
-          $ref: '#/components/schemas/feature_value'
+          description: "the value of the feature. Should be a string, number, or boolean."
       required:
       - name
       - value
@@ -706,8 +734,8 @@ components:
           type: string
         user:
           description: |
-            id of a user. this is a uuid with the prefix "user-".
-          example: user-7f876542-5b07-4ba4-a380-c946964c5a84
+            id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)
+          example: auth0|5c6b9f2d1f6ba37e16cbf2a8
           title: userId
           type: string
       required:
@@ -860,9 +888,6 @@ components:
         lastname: ugg
         role: standard
       properties:
-        username:
-          description: the user's username.
-          type: string
         firstname:
           description: the user's first name.
           type: string
@@ -874,14 +899,14 @@ components:
           description: the user's role.
           enum:
           - standard
-          - admin
+          - staff
           type: string
       title: user
       type: object
     userId:
       description: |
-        id of a user. this is a uuid with the prefix "user-".
-      example: user-7f876542-5b07-4ba4-a380-c946964c5a84
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)
+      example: auth0|5c6b9f2d1f6ba37e16cbf2a8
       title: userId
       type: string
     _groupMemberships_post_201_response:
@@ -898,6 +923,18 @@ components:
         group:
           $ref: '#/components/schemas/group'
       title: _groups_post_201_response
+    _groups__id__unavailabilities_get_200_response:
+      example:
+        unavailabilities:
+        - null
+        - null
+      properties:
+        unavailabilities:
+          items:
+            $ref: '#/components/schemas/unavailability'
+          title: unavailabilities
+          type: array
+      title: _groups__id__unavailabilities_get_200_response
     _groups__id__users_get_200_response:
       example:
         users:
@@ -935,18 +972,6 @@ components:
         room:
           $ref: '#/components/schemas/item'
       title: _items_post_201_response
-    _items__id__unavailabilities_get_200_response:
-      example:
-        unavailabilities:
-        - null
-        - null
-      properties:
-        unavailabilities:
-          items:
-            $ref: '#/components/schemas/unavailability'
-          title: unavailabilities
-          type: array
-      title: _items__id__unavailabilities_get_200_response
     _unavailabilities_post_request:
       oneOf:
       - $ref: '#/components/schemas/newUnavailability'
@@ -999,6 +1024,17 @@ components:
           type: string
       title: _unavailabilities__id__delete_200_response
       type: object
+    _users_me_get_200_response:
+      example:
+        user:
+          username: debugg
+          firstname: deb
+          lastname: ugg
+          role: standard
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+      title: _users_me_get_200_response
     _users_me_groups_get_200_response:
       example:
         groups:
@@ -1011,26 +1047,6 @@ components:
           title: groups
           type: array
       title: _users_me_groups_get_200_response
-    _users__userId__get_200_response:
-      example:
-        user:
-          username: debugg
-          firstname: deb
-          lastname: ugg
-          role: standard
-      properties:
-        user:
-          $ref: '#/components/schemas/user'
-      title: _users__userId__get_200_response
-    feature_value:
-      oneOf:
-      - description: the value of the feature.
-        type: string
-      - description: the value of the feature.
-        type: number
-      - description: the value of the feature.
-        type: boolean
-      title: feature_value
     group_allOf:
       properties:
         id:
@@ -1056,8 +1072,8 @@ components:
           type: string
         owner:
           description: |
-            id of a user. this is a uuid with the prefix "user-".
-          example: user-7f876542-5b07-4ba4-a380-c946964c5a84
+            id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)
+          example: auth0|5c6b9f2d1f6ba37e16cbf2a8
           title: userId
           type: string
       title: group_allOf
@@ -1099,8 +1115,8 @@ components:
           type: string
         createdBy:
           description: |
-            id of a user. this is a uuid with the prefix "user-".
-          example: user-7f876542-5b07-4ba4-a380-c946964c5a84
+            id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)
+          example: auth0|5c6b9f2d1f6ba37e16cbf2a8
           title: userId
           type: string
       required:

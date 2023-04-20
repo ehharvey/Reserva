@@ -17,18 +17,18 @@ import * as runtime from '../runtime';
 import type {
   GroupsIdUsersGet200Response,
   ItemsIdUnavailabilitiesGet200Response,
+  UsersMeGet200Response,
   UsersMeGroupsGet200Response,
-  UsersUserIdGet200Response,
 } from '../models';
 import {
     GroupsIdUsersGet200ResponseFromJSON,
     GroupsIdUsersGet200ResponseToJSON,
     ItemsIdUnavailabilitiesGet200ResponseFromJSON,
     ItemsIdUnavailabilitiesGet200ResponseToJSON,
+    UsersMeGet200ResponseFromJSON,
+    UsersMeGet200ResponseToJSON,
     UsersMeGroupsGet200ResponseFromJSON,
     UsersMeGroupsGet200ResponseToJSON,
-    UsersUserIdGet200ResponseFromJSON,
-    UsersUserIdGet200ResponseToJSON,
 } from '../models';
 
 export interface UsersGetRequest {
@@ -40,10 +40,6 @@ export interface UsersGetRequest {
 export interface UsersMeUnavailabilitiesGetRequest {
     start?: Date;
     end?: Date;
-}
-
-export interface UsersUserIdGetRequest {
-    userId: number;
 }
 
 /**
@@ -72,6 +68,21 @@ export class UserApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("standard", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("admin", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("staff", []);
+        }
+
         const response = await this.request({
             path: `/users`,
             method: 'GET',
@@ -92,6 +103,49 @@ export class UserApi extends runtime.BaseAPI {
     }
 
     /**
+     * returns the current user.
+     * get the current user
+     */
+    async usersMeGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsersMeGet200Response>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("standard", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("admin", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("staff", []);
+        }
+
+        const response = await this.request({
+            path: `/users/me`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UsersMeGet200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * returns the current user.
+     * get the current user
+     */
+    async usersMeGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsersMeGet200Response> {
+        const response = await this.usersMeGetRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
      * returns a list of all groups for the current user.
      * get all groups for the current user
      */
@@ -99,6 +153,21 @@ export class UserApi extends runtime.BaseAPI {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("standard", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("admin", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("staff", []);
+        }
 
         const response = await this.request({
             path: `/users/me/groups`,
@@ -136,6 +205,21 @@ export class UserApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("standard", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("admin", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("staff", []);
+        }
+
         const response = await this.request({
             path: `/users/me/unavailabilities`,
             method: 'GET',
@@ -152,38 +236,6 @@ export class UserApi extends runtime.BaseAPI {
      */
     async usersMeUnavailabilitiesGet(requestParameters: UsersMeUnavailabilitiesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ItemsIdUnavailabilitiesGet200Response> {
         const response = await this.usersMeUnavailabilitiesGetRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * returns a single user by id.
-     * get a user by id
-     */
-    async usersUserIdGetRaw(requestParameters: UsersUserIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsersUserIdGet200Response>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling usersUserIdGet.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UsersUserIdGet200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * returns a single user by id.
-     * get a user by id
-     */
-    async usersUserIdGet(requestParameters: UsersUserIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsersUserIdGet200Response> {
-        const response = await this.usersUserIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

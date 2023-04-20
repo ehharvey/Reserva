@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from pathlib import Path
 import pprint
 import yaml
@@ -28,7 +30,10 @@ output_dict = {
         "title": "Main API",
         "version": "0.0.1",
     },
-    "servers": [{"url": "https://reserva.emilharvey.ca"}],
+    "servers": [
+        {"url": "https://reserva.emilharvey.ca"}, # Production
+        {"url": "http://localhost:8080"}
+    ],
     "paths": {},
     "components": {
         "schemas": {

@@ -4,18 +4,17 @@
 from __future__ import absolute_import
 # import models into model package
 from openapi_server.models.feature import Feature
-from openapi_server.models.feature_value import FeatureValue
 from openapi_server.models.group import Group
 from openapi_server.models.group_all_of import GroupAllOf
 from openapi_server.models.group_membership import GroupMembership
 from openapi_server.models.group_membership_all_of import GroupMembershipAllOf
 from openapi_server.models.group_memberships_post201_response import GroupMembershipsPost201Response
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response
 from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response
 from openapi_server.models.groups_post201_response import GroupsPost201Response
 from openapi_server.models.item import Item
 from openapi_server.models.item_all_of import ItemAllOf
 from openapi_server.models.items_get200_response import ItemsGet200Response
-from openapi_server.models.items_id_unavailabilities_get200_response import ItemsIdUnavailabilitiesGet200Response
 from openapi_server.models.items_post201_response import ItemsPost201Response
 from openapi_server.models.new_group import NewGroup
 from openapi_server.models.new_group_membership import NewGroupMembership
@@ -38,5 +37,5 @@ from openapi_server.models.update_item import UpdateItem
 from openapi_server.models.update_unavailability import UpdateUnavailability
 from openapi_server.models.update_unavailability_owner import UpdateUnavailabilityOwner
 from openapi_server.models.user import User
+from openapi_server.models.users_me_get200_response import UsersMeGet200Response
 from openapi_server.models.users_me_groups_get200_response import UsersMeGroupsGet200Response
-from openapi_server.models.users_user_id_get200_response import UsersUserIdGet200Response
