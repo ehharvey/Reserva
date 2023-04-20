@@ -39,7 +39,7 @@ class RecurringUnavailabilityAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The RecurringUnavailability_allOf of this RecurringUnavailabilityAllOf.  # noqa: E501
+        :return: The recurringUnavailability_allOf of this RecurringUnavailabilityAllOf.  # noqa: E501
         :rtype: RecurringUnavailabilityAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -48,7 +48,7 @@ class RecurringUnavailabilityAllOf(Model):
     def id(self):
         """Gets the id of this RecurringUnavailabilityAllOf.
 
-        The ID of an unavailability. This is a UUID with the prefix \"unavailability-\".   # noqa: E501
+        the id of an unavailability. this is a uuid with the prefix \"unavailability-\".   # noqa: E501
 
         :return: The id of this RecurringUnavailabilityAllOf.
         :rtype: str
@@ -59,7 +59,7 @@ class RecurringUnavailabilityAllOf(Model):
     def id(self, id):
         """Sets the id of this RecurringUnavailabilityAllOf.
 
-        The ID of an unavailability. This is a UUID with the prefix \"unavailability-\".   # noqa: E501
+        the id of an unavailability. this is a uuid with the prefix \"unavailability-\".   # noqa: E501
 
         :param id: The id of this RecurringUnavailabilityAllOf.
         :type id: str

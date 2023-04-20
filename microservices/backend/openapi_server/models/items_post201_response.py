@@ -28,7 +28,7 @@ class ItemsPost201Response(Model):
         }
 
         self.attribute_map = {
-            'room': 'Room'
+            'room': 'room'
         }
 
         self._room = room

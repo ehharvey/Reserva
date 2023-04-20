@@ -1,0 +1,31 @@
+---
+allOf:
+  - $ref: ./newItem.yaml
+  - type: object
+    properties:
+      id:
+        $ref: ./_index.yaml#/itemId
+      createDate:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-01-01t00:00:00z'
+        description: the date and time the item was created.
+      lastUpdateDate:
+        type: string
+        format: date-time
+        readOnly: true
+        example: '2019-03-01t00:00:00z'
+        description: the date and time the item was last updated.
+      createdBy:
+        $ref: '../user/_index.yaml#/userId'
+        description: the id of the user who created the item.
+    required:
+      - id
+      - createDate
+      - lastUpdateDate
+      - createdBy
+description: >
+  the data returned when an item is retrieved. this is the base schema for all
+  item retrievals. the difference between this and the newItem schema is that
+  this schema includes the id, createDate, and lastUpdateDate fields.

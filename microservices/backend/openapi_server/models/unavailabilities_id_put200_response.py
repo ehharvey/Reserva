@@ -28,7 +28,7 @@ class UnavailabilitiesIdPut200Response(Model):
         }
 
         self.attribute_map = {
-            'booking': 'Booking'
+            'booking': 'booking'
         }
 
         self._booking = booking

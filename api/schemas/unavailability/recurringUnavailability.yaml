@@ -1,0 +1,12 @@
+---
+allOf:
+- $ref: "./newRecurringUnavailability.yaml"
+- type: object
+  properties:
+    id:
+      $ref: "./unavailabilityId.yaml"
+  required:
+    - id
+description: >
+  a recurring unavailability. this could be a maintenance window, a booking, or something else.
+  the server will send this to clients

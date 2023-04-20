@@ -17,21 +17,21 @@ class ItemsGet200Response(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, items=None):  # noqa: E501
+    def __init__(self, rooms=None):  # noqa: E501
         """ItemsGet200Response - a model defined in OpenAPI
 
-        :param items: The items of this ItemsGet200Response.  # noqa: E501
-        :type items: Item
+        :param rooms: The rooms of this ItemsGet200Response.  # noqa: E501
+        :type rooms: List[Item]
         """
         self.openapi_types = {
-            'items': Item
+            'rooms': List[Item]
         }
 
         self.attribute_map = {
-            'items': 'items'
+            'rooms': 'rooms'
         }
 
-        self._items = items
+        self._rooms = rooms
 
     @classmethod
     def from_dict(cls, dikt) -> 'ItemsGet200Response':
@@ -45,22 +45,22 @@ class ItemsGet200Response(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def items(self):
-        """Gets the items of this ItemsGet200Response.
+    def rooms(self):
+        """Gets the rooms of this ItemsGet200Response.
 
 
-        :return: The items of this ItemsGet200Response.
-        :rtype: Item
+        :return: The rooms of this ItemsGet200Response.
+        :rtype: List[Item]
         """
-        return self._items
+        return self._rooms
 
-    @items.setter
-    def items(self, items):
-        """Sets the items of this ItemsGet200Response.
+    @rooms.setter
+    def rooms(self, rooms):
+        """Sets the rooms of this ItemsGet200Response.
 
 
-        :param items: The items of this ItemsGet200Response.
-        :type items: Item
+        :param rooms: The rooms of this ItemsGet200Response.
+        :type rooms: List[Item]
         """
 
-        self._items = items
+        self._rooms = rooms

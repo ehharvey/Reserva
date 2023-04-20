@@ -17,31 +17,36 @@ class GroupAllOf(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, created_at=None, last_updated_at=None):  # noqa: E501
+    def __init__(self, id=None, create_date=None, last_update_date=None, owner=None):  # noqa: E501
         """GroupAllOf - a model defined in OpenAPI
 
         :param id: The id of this GroupAllOf.  # noqa: E501
         :type id: str
-        :param created_at: The created_at of this GroupAllOf.  # noqa: E501
-        :type created_at: datetime
-        :param last_updated_at: The last_updated_at of this GroupAllOf.  # noqa: E501
-        :type last_updated_at: datetime
+        :param create_date: The create_date of this GroupAllOf.  # noqa: E501
+        :type create_date: datetime
+        :param last_update_date: The last_update_date of this GroupAllOf.  # noqa: E501
+        :type last_update_date: datetime
+        :param owner: The owner of this GroupAllOf.  # noqa: E501
+        :type owner: str
         """
         self.openapi_types = {
             'id': str,
-            'created_at': datetime,
-            'last_updated_at': datetime
+            'create_date': datetime,
+            'last_update_date': datetime,
+            'owner': str
         }
 
         self.attribute_map = {
             'id': 'id',
-            'created_at': 'createdAt',
-            'last_updated_at': 'lastUpdatedAt'
+            'create_date': 'createDate',
+            'last_update_date': 'lastUpdateDate',
+            'owner': 'owner'
         }
 
         self._id = id
-        self._created_at = created_at
-        self._last_updated_at = last_updated_at
+        self._create_date = create_date
+        self._last_update_date = last_update_date
+        self._owner = owner
 
     @classmethod
     def from_dict(cls, dikt) -> 'GroupAllOf':
@@ -49,7 +54,7 @@ class GroupAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The Group_allOf of this GroupAllOf.  # noqa: E501
+        :return: The group_allOf of this GroupAllOf.  # noqa: E501
         :rtype: GroupAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -58,7 +63,7 @@ class GroupAllOf(Model):
     def id(self):
         """Gets the id of this GroupAllOf.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :return: The id of this GroupAllOf.
         :rtype: str
@@ -69,64 +74,81 @@ class GroupAllOf(Model):
     def id(self, id):
         """Sets the id of this GroupAllOf.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :param id: The id of this GroupAllOf.
         :type id: str
         """
-        if id is None:
-            raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
         if id is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', id):  # noqa: E501
             raise ValueError("Invalid value for `id`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._id = id
 
     @property
-    def created_at(self):
-        """Gets the created_at of this GroupAllOf.
+    def create_date(self):
+        """Gets the create_date of this GroupAllOf.
 
-        The date and time the group was created.  # noqa: E501
+        the date and time the group was created.  # noqa: E501
 
-        :return: The created_at of this GroupAllOf.
+        :return: The create_date of this GroupAllOf.
         :rtype: datetime
         """
-        return self._created_at
+        return self._create_date
 
-    @created_at.setter
-    def created_at(self, created_at):
-        """Sets the created_at of this GroupAllOf.
+    @create_date.setter
+    def create_date(self, create_date):
+        """Sets the create_date of this GroupAllOf.
 
-        The date and time the group was created.  # noqa: E501
+        the date and time the group was created.  # noqa: E501
 
-        :param created_at: The created_at of this GroupAllOf.
-        :type created_at: datetime
+        :param create_date: The create_date of this GroupAllOf.
+        :type create_date: datetime
         """
-        if created_at is None:
-            raise ValueError("Invalid value for `created_at`, must not be `None`")  # noqa: E501
 
-        self._created_at = created_at
+        self._create_date = create_date
 
     @property
-    def last_updated_at(self):
-        """Gets the last_updated_at of this GroupAllOf.
+    def last_update_date(self):
+        """Gets the last_update_date of this GroupAllOf.
 
-        The date and time the group was last updated.  # noqa: E501
+        the date and time the group was last updated.  # noqa: E501
 
-        :return: The last_updated_at of this GroupAllOf.
+        :return: The last_update_date of this GroupAllOf.
         :rtype: datetime
         """
-        return self._last_updated_at
+        return self._last_update_date
 
-    @last_updated_at.setter
-    def last_updated_at(self, last_updated_at):
-        """Sets the last_updated_at of this GroupAllOf.
+    @last_update_date.setter
+    def last_update_date(self, last_update_date):
+        """Sets the last_update_date of this GroupAllOf.
 
-        The date and time the group was last updated.  # noqa: E501
+        the date and time the group was last updated.  # noqa: E501
 
-        :param last_updated_at: The last_updated_at of this GroupAllOf.
-        :type last_updated_at: datetime
+        :param last_update_date: The last_update_date of this GroupAllOf.
+        :type last_update_date: datetime
         """
-        if last_updated_at is None:
-            raise ValueError("Invalid value for `last_updated_at`, must not be `None`")  # noqa: E501
 
-        self._last_updated_at = last_updated_at
+        self._last_update_date = last_update_date
+
+    @property
+    def owner(self):
+        """Gets the owner of this GroupAllOf.
+
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
+
+        :return: The owner of this GroupAllOf.
+        :rtype: str
+        """
+        return self._owner
+
+    @owner.setter
+    def owner(self, owner):
+        """Sets the owner of this GroupAllOf.
+
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
+
+        :param owner: The owner of this GroupAllOf.
+        :type owner: str
+        """
+
+        self._owner = owner

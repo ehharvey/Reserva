@@ -1,155 +1,179 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
-  title: API Title
-  version: '1.0'
+  title: Group Management API
+  version: '0.0.1'
 servers:
-  - url: https://group.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca # production
+  - url: http://localhost:8080 # development
 paths:
   /groups/{id}:
-    parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            $ref: "#/components/schemas/GroupId"
-    get:
-      summary: Gets a Group object by id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  "Group":
-                    $ref: "#/components/schemas/Group"
-    put:
-      summary: Updates a Group object
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateGroup"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  Group:
-                    $ref: "#/components/schemas/Group"
-    delete:
-      summary: Deletes a Group object
-      responses:
-        '204':
-          description: Deleted
-  
-  /groups/{id}/memberships:
     parameters:
       - name: id
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupId"
-    get:
-      summary: Gets a list of GroupMembership objects
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  GroupMemberships:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/GroupMembership"
-    post:
-      summary: Creates a new GroupMembership object
+          $ref: "#/components/schemas/groupId"
+    put:
+      summary: updates a group object
+      description: updates a group object
+      security:
+        - standard: [write:groups:me]      
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewGroupMembership"
+              $ref: "#/components/schemas/updateGroup"
       responses:
-        '201':
-          description: OK
+        '200':
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  GroupMembership:
-                    $ref: "#/components/schemas/GroupMembership"
+                  group:
+                    $ref: "#/components/schemas/group"
+    delete:
+      summary: >
+        deletes a group object. 
+        Also deletes all groupMembership objects associated with the group.
+      description: deletes a group object
+      security:
+        - standard: [write:groups:me]
+      responses:
+        '204':
+          description: deleted
+          content:
+            application/json:
+              schema:
+                properties:
+                  group:
+                    $ref: "#/components/schemas/group"
   
+  /groups/{id}/users:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/groupId"
+    get:
+      summary: gets a list of user objects
+      description: gets a list of user objects for a group
+      security:
+        - standard: [read:groups:associated]
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/user"
+  
+  /groups/{id}/unavailabilities:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/groupId"
+    get:
+      summary: gets a list of unavailability objects
+      description: gets a list of unavailability objects for a group
+      security:
+        - standard: [read:groups:associated]
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  unavailabilities:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unavailability"
+  
+    
   /groups/{id}/memberships/{membershipId}:
     parameters:
       - name: id
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupId"
+          $ref: "#/components/schemas/groupId"
       - name: membershipId
         in: path
         required: true
         schema:
-          $ref: "#/components/schemas/GroupMembershipId"
-    get:
-      summary: Gets a GroupMembership object by id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  GroupMembership:
-                    $ref: "#/components/schemas/GroupMembership"
-        '404':
-          description: Not Found
+          $ref: "#/components/schemas/groupMembershipId"
     delete:
-      summary: Deletes a GroupMembership object
+      summary: deletes a groupMembership object
+      description: >
+        deletes a groupMembership object. 
+        The group owner can delete any membership.
+        A user can delete their own membership.
+      security:
+        - standard: 
+            - write:groups:me # Owner of the group can delete memberships
+            - write:groupMemberships:me # User can delete their own memberships
       responses:
         '204':
-          description: Deleted
+          description: deleted
         '404':
-          description: Not Found
+          description: not found
   
   /groups:
-    post:  
+    post: 
+      summary: creates a new group object
+      description: creates a new group object
+      security:
+        - standard: [write:groups:me] 
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewGroup"
+              $ref: "#/components/schemas/newGroup"
 
       responses:
         '201':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  Group:
-                    $ref: "#/components/schemas/Group"
-
-    get:
-      summary: Gets a list of Group objects
-      parameters: []
-        # TODO: Add pagination parameters
-        # TOOO: Add filter parameters
+                  group:
+                    $ref: "#/components/schemas/group"
+  
+  /groupMemberships:
+    post:
+      summary: creates a new groupMembership object
+      description: >
+        creates a new groupMembership object.
+        Only the group owner can create a membership.
+        (After a user becomes a member, they can delete their own membership.)
+      security:
+        - standard: [write:groups:me]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/newGroupMembership"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  Groups:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Group"
-            
+                  groupMembership:
+                    $ref: "#/components/schemas/groupMembership"
+  
 components:
   schemas:
     $ref: "../schemas/group/_index.yaml"
+  securitySchemes:
+    $ref: '../security/_all.yaml'

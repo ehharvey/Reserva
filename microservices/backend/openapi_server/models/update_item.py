@@ -59,7 +59,7 @@ class UpdateItem(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The UpdateItem of this UpdateItem.  # noqa: E501
+        :return: The updateItem of this UpdateItem.  # noqa: E501
         :rtype: UpdateItem
         """
         return util.deserialize_model(dikt, cls)
@@ -68,7 +68,7 @@ class UpdateItem(Model):
     def name(self):
         """Gets the name of this UpdateItem.
 
-        The name of the item. For now, these will be names of rooms  # noqa: E501
+        the name of the item. for now, these will be names of rooms  # noqa: E501
 
         :return: The name of this UpdateItem.
         :rtype: str
@@ -79,7 +79,7 @@ class UpdateItem(Model):
     def name(self, name):
         """Sets the name of this UpdateItem.
 
-        The name of the item. For now, these will be names of rooms  # noqa: E501
+        the name of the item. for now, these will be names of rooms  # noqa: E501
 
         :param name: The name of this UpdateItem.
         :type name: str
@@ -91,7 +91,7 @@ class UpdateItem(Model):
     def location(self):
         """Gets the location of this UpdateItem.
 
-        The location of the item.  # noqa: E501
+        the location of the item.  # noqa: E501
 
         :return: The location of this UpdateItem.
         :rtype: str
@@ -102,7 +102,7 @@ class UpdateItem(Model):
     def location(self, location):
         """Sets the location of this UpdateItem.
 
-        The location of the item.  # noqa: E501
+        the location of the item.  # noqa: E501
 
         :param location: The location of this UpdateItem.
         :type location: str
@@ -114,7 +114,7 @@ class UpdateItem(Model):
     def description(self):
         """Gets the description of this UpdateItem.
 
-        A description of the item.  # noqa: E501
+        a description of the item.  # noqa: E501
 
         :return: The description of this UpdateItem.
         :rtype: str
@@ -125,7 +125,7 @@ class UpdateItem(Model):
     def description(self, description):
         """Sets the description of this UpdateItem.
 
-        A description of the item.  # noqa: E501
+        a description of the item.  # noqa: E501
 
         :param description: The description of this UpdateItem.
         :type description: str
@@ -137,7 +137,7 @@ class UpdateItem(Model):
     def type(self):
         """Gets the type of this UpdateItem.
 
-        The type of the item. For now, this will only be Room.  # noqa: E501
+        the type of the item. for now, this will only be room.  # noqa: E501
 
         :return: The type of this UpdateItem.
         :rtype: str
@@ -148,12 +148,12 @@ class UpdateItem(Model):
     def type(self, type):
         """Sets the type of this UpdateItem.
 
-        The type of the item. For now, this will only be Room.  # noqa: E501
+        the type of the item. for now, this will only be room.  # noqa: E501
 
         :param type: The type of this UpdateItem.
         :type type: str
         """
-        allowed_values = ["Room"]  # noqa: E501
+        allowed_values = ["room"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"
@@ -166,7 +166,7 @@ class UpdateItem(Model):
     def features(self):
         """Gets the features of this UpdateItem.
 
-        The features of the item. For now, these will be the features of the room.   # noqa: E501
+        the features of the item. for now, these will be the features of the room.   # noqa: E501
 
         :return: The features of this UpdateItem.
         :rtype: List[Feature]
@@ -177,7 +177,7 @@ class UpdateItem(Model):
     def features(self, features):
         """Sets the features of this UpdateItem.
 
-        The features of the item. For now, these will be the features of the room.   # noqa: E501
+        the features of the item. for now, these will be the features of the room.   # noqa: E501
 
         :param features: The features of this UpdateItem.
         :type features: List[Feature]

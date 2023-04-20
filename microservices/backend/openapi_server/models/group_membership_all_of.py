@@ -39,7 +39,7 @@ class GroupMembershipAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The GroupMembership_allOf of this GroupMembershipAllOf.  # noqa: E501
+        :return: The groupMembership_allOf of this GroupMembershipAllOf.  # noqa: E501
         :rtype: GroupMembershipAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -48,7 +48,7 @@ class GroupMembershipAllOf(Model):
     def id(self):
         """Gets the id of this GroupMembershipAllOf.
 
-        The ID of a group membership.  # noqa: E501
+        the id of a group membership.  # noqa: E501
 
         :return: The id of this GroupMembershipAllOf.
         :rtype: str
@@ -59,7 +59,7 @@ class GroupMembershipAllOf(Model):
     def id(self, id):
         """Sets the id of this GroupMembershipAllOf.
 
-        The ID of a group membership.  # noqa: E501
+        the id of a group membership.  # noqa: E501
 
         :param id: The id of this GroupMembershipAllOf.
         :type id: str
