@@ -1,6 +1,0 @@
-type: object
-properties:
-  message:
-    type: string
-description: >
-  A generic error response. It has a message property, which is a string.

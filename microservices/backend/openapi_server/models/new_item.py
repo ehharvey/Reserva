@@ -59,7 +59,7 @@ class NewItem(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The NewItem of this NewItem.  # noqa: E501
+        :return: The newItem of this NewItem.  # noqa: E501
         :rtype: NewItem
         """
         return util.deserialize_model(dikt, cls)
@@ -68,7 +68,7 @@ class NewItem(Model):
     def name(self):
         """Gets the name of this NewItem.
 
-        The name of the item. For now, these will be names of rooms  # noqa: E501
+        the name of the item. for now, these will be names of rooms  # noqa: E501
 
         :return: The name of this NewItem.
         :rtype: str
@@ -79,7 +79,7 @@ class NewItem(Model):
     def name(self, name):
         """Sets the name of this NewItem.
 
-        The name of the item. For now, these will be names of rooms  # noqa: E501
+        the name of the item. for now, these will be names of rooms  # noqa: E501
 
         :param name: The name of this NewItem.
         :type name: str
@@ -93,7 +93,7 @@ class NewItem(Model):
     def location(self):
         """Gets the location of this NewItem.
 
-        The location of the item.  # noqa: E501
+        the location of the item.  # noqa: E501
 
         :return: The location of this NewItem.
         :rtype: str
@@ -104,7 +104,7 @@ class NewItem(Model):
     def location(self, location):
         """Sets the location of this NewItem.
 
-        The location of the item.  # noqa: E501
+        the location of the item.  # noqa: E501
 
         :param location: The location of this NewItem.
         :type location: str
@@ -118,7 +118,7 @@ class NewItem(Model):
     def description(self):
         """Gets the description of this NewItem.
 
-        A description of the item.  # noqa: E501
+        a description of the item.  # noqa: E501
 
         :return: The description of this NewItem.
         :rtype: str
@@ -129,7 +129,7 @@ class NewItem(Model):
     def description(self, description):
         """Sets the description of this NewItem.
 
-        A description of the item.  # noqa: E501
+        a description of the item.  # noqa: E501
 
         :param description: The description of this NewItem.
         :type description: str
@@ -143,7 +143,7 @@ class NewItem(Model):
     def type(self):
         """Gets the type of this NewItem.
 
-        The type of the item. For now, this will only be Room.  # noqa: E501
+        the type of the item. for now, this will only be room.  # noqa: E501
 
         :return: The type of this NewItem.
         :rtype: str
@@ -154,12 +154,12 @@ class NewItem(Model):
     def type(self, type):
         """Sets the type of this NewItem.
 
-        The type of the item. For now, this will only be Room.  # noqa: E501
+        the type of the item. for now, this will only be room.  # noqa: E501
 
         :param type: The type of this NewItem.
         :type type: str
         """
-        allowed_values = ["Room"]  # noqa: E501
+        allowed_values = ["room"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"
@@ -172,7 +172,7 @@ class NewItem(Model):
     def features(self):
         """Gets the features of this NewItem.
 
-        The features of the item. For now, these will be the features of the room.   # noqa: E501
+        the features of the item. for now, these will be the features of the room.   # noqa: E501
 
         :return: The features of this NewItem.
         :rtype: List[Feature]
@@ -183,7 +183,7 @@ class NewItem(Model):
     def features(self, features):
         """Sets the features of this NewItem.
 
-        The features of the item. For now, these will be the features of the room.   # noqa: E501
+        the features of the item. for now, these will be the features of the room.   # noqa: E501
 
         :param features: The features of this NewItem.
         :type features: List[Feature]

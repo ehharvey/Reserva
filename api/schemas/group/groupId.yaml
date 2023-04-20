@@ -1,0 +1,5 @@
+---
+$ref: '../meta/_index.yaml#/id'
+example: group-8fec2234-d8cf-43a7-a791-94b1fde42468
+description: >
+  the id of a group. this is a uuid with the prefix "group-".

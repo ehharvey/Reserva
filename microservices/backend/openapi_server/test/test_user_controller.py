@@ -6,178 +6,92 @@ import unittest
 from flask import json
 from six import BytesIO
 
-from openapi_server.models.new_user import NewUser  # noqa: E501
-from openapi_server.models.update_user import UpdateUser  # noqa: E501
-from openapi_server.models.user import User  # noqa: E501
-from openapi_server.models.users_user_id_groups_get200_response import UsersUserIdGroupsGet200Response  # noqa: E501
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
+from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
+from openapi_server.models.users_me_get200_response import UsersMeGet200Response  # noqa: E501
+from openapi_server.models.users_me_groups_get200_response import UsersMeGroupsGet200Response  # noqa: E501
 from openapi_server.test import BaseTestCase
 
 
 class TestUserController(BaseTestCase):
     """UserController integration test stubs"""
 
-    def test_users_admins_get(self):
-        """Test case for users_admins_get
-
-        Get all admin users
-        """
-        headers = { 
-            'Accept': 'application/json',
-        }
-        response = self.client.open(
-            '/users/admins',
-            method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_users_admins_post(self):
-        """Test case for users_admins_post
-
-        Create a new admin user
-        """
-        new_user = null
-        headers = { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-        response = self.client.open(
-            '/users/admins',
-            method='POST',
-            headers=headers,
-            data=json.dumps(new_user),
-            content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
     def test_users_get(self):
         """Test case for users_get
 
-        Get all users
+        get all users
         """
+        query_string = [('search', 'search_example'),
+                        ('page', 1),
+                        ('per_page', 10)]
         headers = { 
             'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
         }
         response = self.client.open(
             '/users',
             method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_users_post(self):
-        """Test case for users_post
-
-        Create a new user
-        """
-        new_user = null
-        headers = { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-        response = self.client.open(
-            '/users',
-            method='POST',
             headers=headers,
-            data=json.dumps(new_user),
-            content_type='application/json')
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_users_standard_get(self):
-        """Test case for users_standard_get
+    def test_users_me_get(self):
+        """Test case for users_me_get
 
-        Get all standard users
+        get the current user
         """
         headers = { 
             'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
         }
         response = self.client.open(
-            '/users/standard',
+            '/users/me',
             method='GET',
             headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_users_standard_post(self):
-        """Test case for users_standard_post
+    def test_users_me_groups_get(self):
+        """Test case for users_me_groups_get
 
-        Create a new standard user
-        """
-        new_user = null
-        headers = { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-        response = self.client.open(
-            '/users/standard',
-            method='POST',
-            headers=headers,
-            data=json.dumps(new_user),
-            content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_users_user_id_delete(self):
-        """Test case for users_user_id_delete
-
-        Delete a user by ID
-        """
-        headers = { 
-        }
-        response = self.client.open(
-            '/users/{user_id}'.format(user_id=56),
-            method='DELETE',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_users_user_id_get(self):
-        """Test case for users_user_id_get
-
-        Get a user by ID
+        get all groups for the current user
         """
         headers = { 
             'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
         }
         response = self.client.open(
-            '/users/{user_id}'.format(user_id=56),
+            '/users/me/groups',
             method='GET',
             headers=headers)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_users_user_id_groups_get(self):
-        """Test case for users_user_id_groups_get
+    def test_users_me_unavailabilities_get(self):
+        """Test case for users_me_unavailabilities_get
 
-        Get all groups for a user
+        get all unavailabilities for the current user
         """
+        query_string = [('start', '2013-10-20T19:20:30+01:00'),
+                        ('end', '2013-10-20T19:20:30+01:00')]
         headers = { 
             'Accept': 'application/json',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
+            'Authorization': 'Bearer special-key',
         }
         response = self.client.open(
-            '/users/{user_id}/groups'.format(user_id=56),
+            '/users/me/unavailabilities',
             method='GET',
-            headers=headers)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_users_user_id_put(self):
-        """Test case for users_user_id_put
-
-        Update a user by ID
-        """
-        update_user = {"password":"password","email":"email","username":"username"}
-        headers = { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-        response = self.client.open(
-            '/users/{user_id}'.format(user_id=56),
-            method='PUT',
             headers=headers,
-            data=json.dumps(update_user),
-            content_type='application/json')
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

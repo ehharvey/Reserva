@@ -1,0 +1,6 @@
+type: object
+properties:
+  message:
+    type: string
+description: >
+  a generic error response. it has a message property, which is a string.

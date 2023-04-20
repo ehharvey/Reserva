@@ -1,15 +1,15 @@
 ---
-UpdateUnavailability:
-  $ref: "./UpdateUnavailability.yaml"
-Unavailability:
-  $ref: "./Unavailability.yaml"
-NewUnavailability:
-  $ref: "./NewUnavailability.yaml"
-NewRecurringUnavailability:
-  $ref: "./NewRecurringUnavailability.yaml"
-RecurringUnavailability:
-  $ref: "./RecurringUnavailability.yaml"
-DateTime15Min:
-  $ref: "./DateTime15Min.yaml"
-UnavailabilityId:
-  $ref: "./UnavailabilityId.yaml"
+updateUnavailability:
+  $ref: "./updateUnavailability.yaml"
+unavailability:
+  $ref: "./unavailability.yaml"
+newUnavailability:
+  $ref: "./newUnavailability.yaml"
+newRecurringUnavailability:
+  $ref: "./newRecurringUnavailability.yaml"
+recurringUnavailability:
+  $ref: "./recurringUnavailability.yaml"
+datetime15min:
+  $ref: "./datetime15min.yaml"
+unavailabilityId:
+  $ref: "./unavailabilityId.yaml"

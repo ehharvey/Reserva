@@ -49,7 +49,7 @@ class GroupMembership(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The GroupMembership of this GroupMembership.  # noqa: E501
+        :return: The groupMembership of this GroupMembership.  # noqa: E501
         :rtype: GroupMembership
         """
         return util.deserialize_model(dikt, cls)
@@ -58,7 +58,7 @@ class GroupMembership(Model):
     def group(self):
         """Gets the group of this GroupMembership.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :return: The group of this GroupMembership.
         :rtype: str
@@ -69,7 +69,7 @@ class GroupMembership(Model):
     def group(self, group):
         """Sets the group of this GroupMembership.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :param group: The group of this GroupMembership.
         :type group: str
@@ -85,7 +85,7 @@ class GroupMembership(Model):
     def user(self):
         """Gets the user of this GroupMembership.
 
-        Id of a user. This is a UUID with the prefix \"user-\".   # noqa: E501
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
 
         :return: The user of this GroupMembership.
         :rtype: str
@@ -96,15 +96,13 @@ class GroupMembership(Model):
     def user(self, user):
         """Sets the user of this GroupMembership.
 
-        Id of a user. This is a UUID with the prefix \"user-\".   # noqa: E501
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
 
         :param user: The user of this GroupMembership.
         :type user: str
         """
         if user is None:
             raise ValueError("Invalid value for `user`, must not be `None`")  # noqa: E501
-        if user is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', user):  # noqa: E501
-            raise ValueError("Invalid value for `user`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._user = user
 
@@ -112,7 +110,7 @@ class GroupMembership(Model):
     def id(self):
         """Gets the id of this GroupMembership.
 
-        The ID of a group membership.  # noqa: E501
+        the id of a group membership.  # noqa: E501
 
         :return: The id of this GroupMembership.
         :rtype: str
@@ -123,7 +121,7 @@ class GroupMembership(Model):
     def id(self, id):
         """Sets the id of this GroupMembership.
 
-        The ID of a group membership.  # noqa: E501
+        the id of a group membership.  # noqa: E501
 
         :param id: The id of this GroupMembership.
         :type id: str

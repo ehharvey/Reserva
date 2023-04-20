@@ -1,0 +1,16 @@
+---
+type: object
+properties:
+  name: 
+    type: string
+    description: the name of the feature.
+  value:
+    description: the value of the feature. Should be a string, number, or boolean.
+required:
+  - name
+  - value
+description: >
+  the data required to create a new feature.
+example:
+  name: "number of beds"
+  value: 2

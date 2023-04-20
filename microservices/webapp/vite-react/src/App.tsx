@@ -6,6 +6,7 @@ import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Rooms } from "./routes/Rooms";
 import { BookingForm } from "./routes/BookingForm";
+import { BookingList } from "./routes/BookingList";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     element: <Rooms />
   },
   {
+    path: "/bookings",
+    element: <BookingList />
+  },
+  {
     path: "/groups",
     element: <Groups />
   },
@@ -31,10 +36,12 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
+  
+
   return (
     <Auth0Provider
-      domain="" // TODO: Add your Auth0 domain
-      clientId="" // TODO: Add your Auth0 client ID
+      domain={import.meta.env.VITE_AUTH_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}

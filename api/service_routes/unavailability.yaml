@@ -1,9 +1,10 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
-  title: API Title
-  version: '1.0'
+  title: api title
+  version: '0.0.1'
 servers:
-  - url: https://unavailability.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca
+  - url: http://localhost:8080
 paths:
   /unavailabilities/{id}:
     parameters:
@@ -11,12 +12,66 @@ paths:
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/UnavailabilityId"
-      description: The unavailability ID
-    get:
-      description: Retrieves information about a specific unavailability identified by the `id` parameter.
+        $ref: "#/components/schemas/unavailabilityId"
+      description: the unavailability id
+    put:
+      summary: update an unavailability
+      security:
+        - staff: [write:unavailabilities:me]
+        - standard: [write:unavailabilities:me]
+      
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  booking:
+                    type: object
+                    $ref: "#/components/schemas/updateUnavailability"
+          description: ok
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/meta/error.yaml'
+          description: bad request
+    delete:
+      summary: Delete an unavailability
+      security:
+        - staff: [write:unavailabilities:me]
+        - standard: [write:unavailabilities:me]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/meta/success.yaml"
+          description: deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/meta/error.yaml'
+          description: bad request
+          
+  /unavailabilities:   
+    post:
+      summary: Create a new unavailability
+      security:
+        - staff: [write:unavailabilities:me]
+        - standard: [write:unavailabilities:me]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/newUnavailability"
+                - $ref: "#/components/schemas/newRecurringUnavailability"
+      responses:
+        '201':
+          description: created
           content:
             application/json:
               schema:
@@ -24,94 +79,20 @@ paths:
                 properties:
                   unavailability:
                     type: object
-                    $ref: "#/components/schemas/Unavailability"
-          description: OK
+                    $ref: "#/components/schemas/unavailability"
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/meta/Error.yaml'
-          description: Bad Request
-    put:
-      description: >
-        Update a specific unavailability identified by the `id` parameter with the information 
-        provided in the request body.
-      responses:
-        '200':
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  Booking:
-                    type: object
-                    $ref: "#/components/schemas/UpdateUnavailability"
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/meta/Error.yaml'
-          description: Bad Request
-    delete:
-      description: Delete a specific unavailability identified by the `id` parameter.
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: "../schemas/meta/Success.yaml"
-          description: Deleted
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/meta/Error.yaml'
-          description: Bad Request
-  /unavailabilities:
-    get:
-      description: Retrieve all unavailability associated with a student or a room.
-      # TODO: Add query parameters for filtering
-      # TODO: Add query parameters for pagination
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  Unavailabilities:
-                    type: array
-                    items:
-                      type: object
-                      $ref: "#/components/schemas/Unavailability"
-          description: OK
-    
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: "#/components/schemas/NewUnavailability"
-                - $ref: "#/components/schemas/NewRecurringUnavailability"
-      responses:
-        '201':
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: Created
-          description: Created
-        '400':
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: Bad Request
-          description: Bad Request
+                  error:
+                    $ref: '../schemas/meta/error.yaml'
+          description: bad request
 
 
 components:
   schemas:
     $ref: "../schemas/unavailability/_index.yaml"
+  securitySchemes:
+    $ref: '../security/_all.yaml'

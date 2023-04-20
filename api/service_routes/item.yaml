@@ -1,37 +1,86 @@
-openapi: '3.1.0'
+openapi: '3.0.3'
 info:
-  title: API Title
+  title: api title
   version: 0.0.1
 servers:
-  - url: https://item.reserva.emilharvey.ca
+  - url: https://reserva.emilharvey.ca
+  - url: http://localhost:8080
 paths:
+  /items/{id}/unavailabilities:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          $ref: "#/components/schemas/itemId"
+        required: true
+    get:
+      summary: gets a list of unavailabilities for a given item.
+      parameters:
+        - name: start
+          in: query
+          description: the start date of the unavailabilities to get
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: the end date of the unavailabilities to get
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: the page of unavailabilities to get
+          required: false
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: the number of unavailabilities to get per page
+          required: false
+          schema:
+            type: integer
+            format: int64
+            maximum: 100
+            default: 10
+            minimum: 1
+
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  "unavailabilities":
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unavailability"
+        '404':
+          description: >
+            item not found
+
   /items/{id}:
     parameters:
       - name: id
         in: path
         schema:
-          $ref: "#/components/schemas/ItemId"
+          $ref: "#/components/schemas/itemId"
         required: true
-    get:
-      summary: Gets a Item object by id. For now, the only kind of item is a room.
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  "Room": # Update this when we have more than one type of item
-                    $ref: "#/components/schemas/Item"
-        '404':
-          description: >
-            Item Not Found
     put:
-      summary: Updates an item. For now, the only kind of item is a room.
+      summary: updates an item. for now, the only kind of item is a room.
+      security:
+        - staff: [write:items:me]
+        - admin: [write:items]      
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: item id
           required: true
           schema:
             type: integer
@@ -40,80 +89,118 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Item"
+              $ref: "#/components/schemas/item"
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                  "Room": # Update this when we have more than one type of item
-                    $ref: "#/components/schemas/UpdateItem"
+                  "room": # update this when we have more than one type of item
+                    $ref: "#/components/schemas/item"
         '404':
           description: >
-            Item Not Found
+            item not found
     delete:
-      summary: Delete a Room object existing in the Rooms resources
-      description: >
-        ## More Information
-
-        Request for `DELETE/rooms/{id}` requires an id
-      operationId: deleteRoomId
+      summary: delete a room object
+      security:
+        - staff: [write:items:me]
+        - admin: [write:items]
       parameters:
         - name: id
           in: path
-          description: User ID
+          description: item id
           required: true
           schema:
             type: integer
             format: int64
       responses:
         '204':
-          description: Deleted
+          description: deleted
         '404':
           description: >
-            Item Not Found
+            item not found
   
 
   /items:
     post: 
-      summary: Posts an item. For now, the only kind of item is a room.
+      summary: posts an item. for now, the only kind of item is a room.
+      security:
+        - staff: [write:items:me]
+        - admin: [write:items]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewItem"
+              $ref: "#/components/schemas/newItem"
 
       responses:
         '201':
-          description: Created
+          description: created
           content:
             application/json:
               schema:
                 properties:
-                  "Room":
-                    $ref: "#/components/schemas/Item"
+                  "room":
+                    $ref: "#/components/schemas/item"
         '400':
-          description: >
-            Bad Request
+          description: bad request
 
     get:
-      summary: Gets a list of items. For now, the only kind of item is a room.
-      # TODO: Add pagination
-      # TODO: Add filtering
+      summary: gets a list of items. for now, the only kind of item is a room.
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: nameSearch
+          in: query
+          description: Search for a room by name
+          required: false
+          schema:
+            type: string
+        - name: locationSearch
+          in: query
+          description: Search for a room by location
+          required: false
+          schema:
+            type: string
+        - name: descriptionSearch
+          in: query
+          description: Search for a room by description
+          required: false
+          schema:
+            type: string
       responses:
         '200':
-          description: OK
+          description: ok
           content:
             application/json:
               schema:
                 properties:
-                    "Rooms":
+                    "rooms":
                       type: array
                       items:
-                        $ref: "#/components/schemas/Item"
+                        $ref: "#/components/schemas/item"
             
 components:
   schemas:
     $ref: "../schemas/item/_index.yaml"
+  securitySchemes:
+    $ref: '../security/_all.yaml'

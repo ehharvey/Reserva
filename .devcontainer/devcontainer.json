@@ -15,7 +15,8 @@
 		"ghcr.io/devcontainers-contrib/features/digitalocean-cli:1": {},
 		"ghcr.io/devcontainers-contrib/features/kubectl-asdf:2": {},
 		"ghcr.io/rio/features/kustomize:1": {},
-		"ghcr.io/devcontainers/features/python:1": {}
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers/features/dotnet:1": {}
 	},
 	"customizations": {
 		"vscode": {

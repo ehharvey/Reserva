@@ -42,7 +42,7 @@ class Feature(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The Feature of this Feature.  # noqa: E501
+        :return: The feature of this Feature.  # noqa: E501
         :rtype: Feature
         """
         return util.deserialize_model(dikt, cls)
@@ -51,7 +51,7 @@ class Feature(Model):
     def name(self):
         """Gets the name of this Feature.
 
-        The name of the feature.  # noqa: E501
+        the name of the feature.  # noqa: E501
 
         :return: The name of this Feature.
         :rtype: str
@@ -62,7 +62,7 @@ class Feature(Model):
     def name(self, name):
         """Sets the name of this Feature.
 
-        The name of the feature.  # noqa: E501
+        the name of the feature.  # noqa: E501
 
         :param name: The name of this Feature.
         :type name: str
@@ -76,7 +76,7 @@ class Feature(Model):
     def value(self):
         """Gets the value of this Feature.
 
-        The value of the feature.  # noqa: E501
+        the value of the feature. Should be a string, number, or boolean.  # noqa: E501
 
         :return: The value of this Feature.
         :rtype: object
@@ -87,7 +87,7 @@ class Feature(Model):
     def value(self, value):
         """Sets the value of this Feature.
 
-        The value of the feature.  # noqa: E501
+        the value of the feature. Should be a string, number, or boolean.  # noqa: E501
 
         :param value: The value of this Feature.
         :type value: object

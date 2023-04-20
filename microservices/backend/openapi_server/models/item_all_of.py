@@ -17,31 +17,36 @@ class ItemAllOf(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, created_at=None, last_updated_at=None):  # noqa: E501
+    def __init__(self, id=None, create_date=None, last_update_date=None, created_by=None):  # noqa: E501
         """ItemAllOf - a model defined in OpenAPI
 
         :param id: The id of this ItemAllOf.  # noqa: E501
         :type id: str
-        :param created_at: The created_at of this ItemAllOf.  # noqa: E501
-        :type created_at: datetime
-        :param last_updated_at: The last_updated_at of this ItemAllOf.  # noqa: E501
-        :type last_updated_at: datetime
+        :param create_date: The create_date of this ItemAllOf.  # noqa: E501
+        :type create_date: datetime
+        :param last_update_date: The last_update_date of this ItemAllOf.  # noqa: E501
+        :type last_update_date: datetime
+        :param created_by: The created_by of this ItemAllOf.  # noqa: E501
+        :type created_by: str
         """
         self.openapi_types = {
             'id': str,
-            'created_at': datetime,
-            'last_updated_at': datetime
+            'create_date': datetime,
+            'last_update_date': datetime,
+            'created_by': str
         }
 
         self.attribute_map = {
             'id': 'id',
-            'created_at': 'createdAt',
-            'last_updated_at': 'lastUpdatedAt'
+            'create_date': 'createDate',
+            'last_update_date': 'lastUpdateDate',
+            'created_by': 'createdBy'
         }
 
         self._id = id
-        self._created_at = created_at
-        self._last_updated_at = last_updated_at
+        self._create_date = create_date
+        self._last_update_date = last_update_date
+        self._created_by = created_by
 
     @classmethod
     def from_dict(cls, dikt) -> 'ItemAllOf':
@@ -49,7 +54,7 @@ class ItemAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The Item_allOf of this ItemAllOf.  # noqa: E501
+        :return: The item_allOf of this ItemAllOf.  # noqa: E501
         :rtype: ItemAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -58,7 +63,7 @@ class ItemAllOf(Model):
     def id(self):
         """Gets the id of this ItemAllOf.
 
-        The ID of the item. This is a UUID with a prefix of \"item-\".   # noqa: E501
+        the id of the item. this is a uuid with a prefix of \"item-\".   # noqa: E501
 
         :return: The id of this ItemAllOf.
         :rtype: str
@@ -69,7 +74,7 @@ class ItemAllOf(Model):
     def id(self, id):
         """Sets the id of this ItemAllOf.
 
-        The ID of the item. This is a UUID with a prefix of \"item-\".   # noqa: E501
+        the id of the item. this is a uuid with a prefix of \"item-\".   # noqa: E501
 
         :param id: The id of this ItemAllOf.
         :type id: str
@@ -82,47 +87,76 @@ class ItemAllOf(Model):
         self._id = id
 
     @property
-    def created_at(self):
-        """Gets the created_at of this ItemAllOf.
+    def create_date(self):
+        """Gets the create_date of this ItemAllOf.
 
-        The date and time the item was created.  # noqa: E501
+        the date and time the item was created.  # noqa: E501
 
-        :return: The created_at of this ItemAllOf.
+        :return: The create_date of this ItemAllOf.
         :rtype: datetime
         """
-        return self._created_at
+        return self._create_date
 
-    @created_at.setter
-    def created_at(self, created_at):
-        """Sets the created_at of this ItemAllOf.
+    @create_date.setter
+    def create_date(self, create_date):
+        """Sets the create_date of this ItemAllOf.
 
-        The date and time the item was created.  # noqa: E501
+        the date and time the item was created.  # noqa: E501
 
-        :param created_at: The created_at of this ItemAllOf.
-        :type created_at: datetime
+        :param create_date: The create_date of this ItemAllOf.
+        :type create_date: datetime
         """
+        if create_date is None:
+            raise ValueError("Invalid value for `create_date`, must not be `None`")  # noqa: E501
 
-        self._created_at = created_at
+        self._create_date = create_date
 
     @property
-    def last_updated_at(self):
-        """Gets the last_updated_at of this ItemAllOf.
+    def last_update_date(self):
+        """Gets the last_update_date of this ItemAllOf.
 
-        The date and time the item was last updated.  # noqa: E501
+        the date and time the item was last updated.  # noqa: E501
 
-        :return: The last_updated_at of this ItemAllOf.
+        :return: The last_update_date of this ItemAllOf.
         :rtype: datetime
         """
-        return self._last_updated_at
+        return self._last_update_date
 
-    @last_updated_at.setter
-    def last_updated_at(self, last_updated_at):
-        """Sets the last_updated_at of this ItemAllOf.
+    @last_update_date.setter
+    def last_update_date(self, last_update_date):
+        """Sets the last_update_date of this ItemAllOf.
 
-        The date and time the item was last updated.  # noqa: E501
+        the date and time the item was last updated.  # noqa: E501
 
-        :param last_updated_at: The last_updated_at of this ItemAllOf.
-        :type last_updated_at: datetime
+        :param last_update_date: The last_update_date of this ItemAllOf.
+        :type last_update_date: datetime
         """
+        if last_update_date is None:
+            raise ValueError("Invalid value for `last_update_date`, must not be `None`")  # noqa: E501
 
-        self._last_updated_at = last_updated_at
+        self._last_update_date = last_update_date
+
+    @property
+    def created_by(self):
+        """Gets the created_by of this ItemAllOf.
+
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
+
+        :return: The created_by of this ItemAllOf.
+        :rtype: str
+        """
+        return self._created_by
+
+    @created_by.setter
+    def created_by(self, created_by):
+        """Sets the created_by of this ItemAllOf.
+
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
+
+        :param created_by: The created_by of this ItemAllOf.
+        :type created_by: str
+        """
+        if created_by is None:
+            raise ValueError("Invalid value for `created_by`, must not be `None`")  # noqa: E501
+
+        self._created_by = created_by

@@ -1,145 +1,86 @@
 import connexion
+from pymongo import MongoClient
 import six
 from typing import Dict
 from typing import Tuple
 from typing import Union
+from openapi_server.models.user import User
 
-from openapi_server.models.new_user import NewUser  # noqa: E501
-from openapi_server.models.update_user import UpdateUser  # noqa: E501
-from openapi_server.models.user import User  # noqa: E501
-from openapi_server.models.users_user_id_groups_get200_response import UsersUserIdGroupsGet200Response  # noqa: E501
+from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
+from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
+from openapi_server.models.users_me_get200_response import UsersMeGet200Response  # noqa: E501
+from openapi_server.models.users_me_groups_get200_response import UsersMeGroupsGet200Response, GroupMembership  # noqa: E501
 from openapi_server import util
+from openapi_server.user_utils import get_user_details
 
 
-def users_admins_get():  # noqa: E501
-    """Get all admin users
+def users_get(search=None, page=None, per_page=None):  # noqa: E501
+    """get all users
 
-    Returns a list of all admin users. # noqa: E501
+    returns a list of all users. # noqa: E501
 
+    :param search: a search string to filter users by.
+    :type search: str
+    :param page: the page of users to retrieve.
+    :type page: int
+    :param per_page: the number of users to retrieve per page.
+    :type per_page: int
 
-    :rtype: Union[List[User], Tuple[List[User], int], Tuple[List[User], int, Dict[str, str]]
+    :rtype: Union[GroupsIdUsersGet200Response, Tuple[GroupsIdUsersGet200Response, int], Tuple[GroupsIdUsersGet200Response, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def users_admins_post(new_user):  # noqa: E501
-    """Create a new admin user
+@get_user_details
+def users_me_get(user_details: User):  # noqa: E501
+    """get the current user
 
-    Creates a new admin user account. # noqa: E501
+    returns the current user. # noqa: E501
 
-    :param new_user: 
-    :type new_user: dict | bytes
 
-    :rtype: Union[User, Tuple[User, int], Tuple[User, int, Dict[str, str]]
+    :rtype: Union[UsersMeGet200Response, Tuple[UsersMeGet200Response, int], Tuple[UsersMeGet200Response, int, Dict[str, str]]
     """
-    if connexion.request.is_json:
-        new_user = NewUser.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    
+    return UsersMeGet200Response(
+        user=user_details
+    ).to_dict()
 
 
-def users_get():  # noqa: E501
-    """Get all users
+def users_me_groups_get(user, db: MongoClient):  # noqa: E501
+    """get all groups for the current user
 
-    Returns a list of all users. # noqa: E501
+    returns a list of all groups for the current user. # noqa: E501
 
 
-    :rtype: Union[List[User], Tuple[List[User], int], Tuple[List[User], int, Dict[str, str]]
+    :rtype: Union[UsersMeGroupsGet200Response, Tuple[UsersMeGroupsGet200Response, int], Tuple[UsersMeGroupsGet200Response, int, Dict[str, str]]
     """
-    return 'do some magic!'
 
+    groups = [
+        GroupMembership(
+            **group
+        )
+        for group in db.main.groupMemberships.find({"user": user})
+    ]
+    
 
-def users_post(new_user):  # noqa: E501
-    """Create a new user
+    result = UsersMeGroupsGet200Response(
+        groups=groups
+    )
 
-    Creates a new user account. # noqa: E501
+    return result.to_dict()
 
-    :param new_user: 
-    :type new_user: dict | bytes
+def users_me_unavailabilities_get(start=None, end=None):  # noqa: E501
+    """get all unavailabilities for the current user
 
-    :rtype: Union[User, Tuple[User, int], Tuple[User, int, Dict[str, str]]
+    returns a list of all unavailabilities for the current user. # noqa: E501
+
+    :param start: the start of the time range to retrieve unavailabilities for.
+    :type start: str
+    :param end: the end of the time range to retrieve unavailabilities for.
+    :type end: str
+
+    :rtype: Union[GroupsIdUnavailabilitiesGet200Response, Tuple[GroupsIdUnavailabilitiesGet200Response, int], Tuple[GroupsIdUnavailabilitiesGet200Response, int, Dict[str, str]]
     """
-    if connexion.request.is_json:
-        new_user = NewUser.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
-
-
-def users_standard_get():  # noqa: E501
-    """Get all standard users
-
-    Returns a list of all standard users. # noqa: E501
-
-
-    :rtype: Union[List[User], Tuple[List[User], int], Tuple[List[User], int, Dict[str, str]]
-    """
-    return 'do some magic!'
-
-
-def users_standard_post(new_user):  # noqa: E501
-    """Create a new standard user
-
-    Creates a new standard user account. # noqa: E501
-
-    :param new_user: 
-    :type new_user: dict | bytes
-
-    :rtype: Union[User, Tuple[User, int], Tuple[User, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        new_user = NewUser.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
-
-
-def users_user_id_delete(user_id):  # noqa: E501
-    """Delete a user by ID
-
-    Deletes an existing user account. # noqa: E501
-
-    :param user_id: The ID of the user to delete.
-    :type user_id: int
-
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
-    """
-    return 'do some magic!'
-
-
-def users_user_id_get(user_id):  # noqa: E501
-    """Get a user by ID
-
-    Returns a single user by ID. # noqa: E501
-
-    :param user_id: The ID of the user to retrieve.
-    :type user_id: int
-
-    :rtype: Union[User, Tuple[User, int], Tuple[User, int, Dict[str, str]]
-    """
-    return 'do some magic!'
-
-
-def users_user_id_groups_get(user_id):  # noqa: E501
-    """Get all groups for a user
-
-    Returns a list of all groups for a user. # noqa: E501
-
-    :param user_id: The ID of the user to retrieve groups for.
-    :type user_id: int
-
-    :rtype: Union[UsersUserIdGroupsGet200Response, Tuple[UsersUserIdGroupsGet200Response, int], Tuple[UsersUserIdGroupsGet200Response, int, Dict[str, str]]
-    """
-    return 'do some magic!'
-
-
-def users_user_id_put(user_id, update_user):  # noqa: E501
-    """Update a user by ID
-
-    Updates an existing user account. # noqa: E501
-
-    :param user_id: The ID of the user to update.
-    :type user_id: int
-    :param update_user: 
-    :type update_user: dict | bytes
-
-    :rtype: Union[User, Tuple[User, int], Tuple[User, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        update_user = UpdateUser.from_dict(connexion.request.get_json())  # noqa: E501
+    start = util.deserialize_datetime(start)
+    end = util.deserialize_datetime(end)
     return 'do some magic!'
