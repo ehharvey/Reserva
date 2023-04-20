@@ -30,8 +30,8 @@ jobs: # please work
                 pip install -r api/requirements.txt
             - name: Generate OpenAPI singleton
               run: |
-                python api/schemas/create_all_schemas.py
-                python api/service_routes/create_all_routes.py
+                python api/create_all_schemas.py
+                python api/create_all_routes.py
                 swagger-cli bundle api/service_routes/_all.yaml --outfile all.json
             - name: Generate Swagger UI
               uses: Legion2/swagger-ui-action@v1
