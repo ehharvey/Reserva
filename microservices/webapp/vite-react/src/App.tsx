@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Profile } from "./routes/Profile";
 import { Root } from "./routes/Root";
+import { Profile } from "./routes/Profile";
+import { Groups } from "./routes/Groups";
 import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { BookingForm } from "./routes/BookingForm";
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/me",
     element: <Profile />
+  },
+  {
+    path: "/groups",
+    element: <Groups />
   },
   {
     path: "/booking-request/:roomId",

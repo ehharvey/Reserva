@@ -10,9 +10,9 @@ import {
   ScrollArea,
   rem,
 } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import { AuthButtons } from '../authentication/AuthButtons';
+import { AvatarProfile } from '../header/Avatar';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -81,7 +81,6 @@ export function AppHeader() {
     <Box ml={0} mr={0}>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          <MantineLogo size={30} />
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/" className={classes.link}>
@@ -91,9 +90,20 @@ export function AppHeader() {
             <a href="/me" className={classes.link}>
               Profile
             </a>
-          </Group>
 
+            <a href="/groups" className={classes.link}>
+              Groups 
+            </a>
+
+            <a href="/booking-request/3" className={classes.link}>
+              Book a Room
+            </a>
+            
+          </Group>
+          <Group position="apart" sx={{ height: '100%' }}>
+          <AvatarProfile/> 
           <AuthButtons />
+          </Group>
         </Group>
       </Header>
     </Box>
