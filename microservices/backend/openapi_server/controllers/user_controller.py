@@ -7,7 +7,7 @@ from typing import Union
 from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
 from openapi_server.models.users_me_get200_response import UsersMeGet200Response  # noqa: E501
-from openapi_server.models.users_me_groups_get200_response import UsersMeGroupsGet200Response  # noqa: E501
+from openapi_server.models.users_me_groups_get200_response import UsersMeGroupsGet200Response, GroupMembership  # noqa: E501
 from openapi_server import util
 
 
@@ -36,10 +36,13 @@ def users_me_get():  # noqa: E501
 
     :rtype: Union[UsersMeGet200Response, Tuple[UsersMeGet200Response, int], Tuple[UsersMeGet200Response, int, Dict[str, str]]
     """
+    
+
+
     return 'do some magic!'
 
 
-def users_me_groups_get():  # noqa: E501
+def users_me_groups_get(user):  # noqa: E501
     """get all groups for the current user
 
     returns a list of all groups for the current user. # noqa: E501
@@ -47,8 +50,18 @@ def users_me_groups_get():  # noqa: E501
 
     :rtype: Union[UsersMeGroupsGet200Response, Tuple[UsersMeGroupsGet200Response, int], Tuple[UsersMeGroupsGet200Response, int, Dict[str, str]]
     """
-    return 'do some magic!'
 
+    result = UsersMeGroupsGet200Response(
+        groups=[
+            GroupMembership(
+                id="groupmembership-026ce71f-2dfc-4dfa-b609-59d71929556f",
+                user=user,
+                group="group-026ce71f-2dfc-4dfa-b609-59d71929556f",
+            )
+        ]
+    )
+
+    return result.to_dict()
 
 def users_me_unavailabilities_get(start=None, end=None):  # noqa: E501
     """get all unavailabilities for the current user

@@ -80,7 +80,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: user id
+          description: item id
           required: true
           schema:
             type: integer
@@ -110,7 +110,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: user id
+          description: item id
           required: true
           schema:
             type: integer

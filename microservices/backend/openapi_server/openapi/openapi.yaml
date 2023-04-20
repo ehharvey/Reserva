@@ -286,7 +286,7 @@ paths:
     delete:
       operationId: items_id_delete
       parameters:
-      - description: user id
+      - description: item id
         explode: false
         in: path
         name: id
@@ -313,7 +313,7 @@ paths:
     put:
       operationId: items_id_put
       parameters:
-      - description: user id
+      - description: item id
         explode: false
         in: path
         name: id

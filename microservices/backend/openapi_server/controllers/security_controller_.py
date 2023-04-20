@@ -1,5 +1,19 @@
 from typing import List
 
+# TODO: This is a temporary solution to get the scopes from the token
+# REMOVE THIS ONCE WE HAVE A REAL AUTHENTICATION SYSTEM
+ALL_SCOPES = [
+    'write:groups:me',
+    'read:unavailabilities:me',
+    'write:unavailabilities:me',
+    'write:items:me',
+    'read:items:me',
+    'write:items',
+    'read:items',
+    'read:groups:associated',
+    'write:groupmemberships:me',
+]
+
 
 def info_from_admin(token):
     """
@@ -13,7 +27,7 @@ def info_from_admin(token):
     :return: Decoded token information or None if token is invalid
     :rtype: dict | None
     """
-    return {'scopes': ['read:pets', 'write:pets'], 'uid': 'user_id'}
+    return {'scopes': ALL_SCOPES, 'uid': 'user_id'}
 
 
 def validate_scope_admin(required_scopes, token_scopes):
@@ -42,7 +56,7 @@ def info_from_standard(token):
     :return: Decoded token information or None if token is invalid
     :rtype: dict | None
     """
-    return {'scopes': ['read:pets', 'write:pets'], 'uid': 'user_id'}
+    return {'scopes': ALL_SCOPES, 'uid': 'user_id'}
 
 
 def validate_scope_standard(required_scopes, token_scopes):
@@ -71,7 +85,7 @@ def info_from_staff(token):
     :return: Decoded token information or None if token is invalid
     :rtype: dict | None
     """
-    return {'scopes': ['read:pets', 'write:pets'], 'uid': 'user_id'}
+    return {'scopes': ALL_SCOPES, 'uid': 'user_id'}
 
 
 def validate_scope_staff(required_scopes, token_scopes):
