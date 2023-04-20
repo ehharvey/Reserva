@@ -4,6 +4,22 @@ import { MultiSelect } from '@mantine/core';
 import { TextInput } from '@mantine/core';
 import { Room } from "../entities/Room";
 
+
+interface paramsObj {
+  name: string;
+  location: string;
+  description: string;
+  [key:string]: string;
+}
+
+
+const paramsObj: paramsObj = {
+  "name": "",
+  "location": "",
+  "description": "",
+  "type": ""
+}; 
+
 function searchAPI(searchParams:URLSearchParams) {
   const rooms = [
     {
@@ -63,12 +79,14 @@ function searchAPI(searchParams:URLSearchParams) {
   const description = searchParams.get('description');
 
   const filteredRooms = rooms.filter((room) => {
-    return (
-      (name === '' || room.name.toLowerCase().includes(name.toLowerCase())) &&
-      (location === '' || room.location.toLowerCase().includes(location.toLowerCase())) &&
-      (description === '' || room.description.toLowerCase().includes(description.toLowerCase()))
-    );
+    return Object.entries(paramsObj).reduce((result, [key, value]) => {
+      if (value === "") {
+        return result;
+      }
+      return result && room[key].toLowerCase().includes(value.toLowerCase());
+    }, true);
   });
+  
 
   const rows = filteredRooms.map((room) => {
     const theRoute = `/rooms/${room.id}`;
@@ -85,15 +103,11 @@ function searchAPI(searchParams:URLSearchParams) {
     );
   });
 
+  
+
   return rows;
 }
 
-interface paramsObj {
-  name: string;
-  location: string;
-  description: string;
-  [key:string]: string;
-}
 
 export function Rooms() {
 
@@ -101,19 +115,13 @@ export function Rooms() {
   const [textValue, setTextValue] = useState('');
 
   
-  const paramsObj: paramsObj = {
-    "name": "",
-    "location": "",
-    "description": ""
-}; 
-
 
 paramsObj[featureValue] = textValue;
 const searchParams = new URLSearchParams(paramsObj);
   
 
 
-  //console.log(searchParams.toString())
+  console.log(searchParams.toString())
 
 
 
@@ -207,11 +215,12 @@ const searchParams = new URLSearchParams(paramsObj);
       <NativeSelect
         value={featureValue}
         onChange={(event) => {
+          paramsObj[featureValue]='';
           setFeatureValue(event.currentTarget.value);
           setTextValue('');
         }
         }
-        data={['name', 'type', 'description']}
+        data={['name', 'type', 'location', 'description']}
       />
       <TextInput
         placeholder={"type here ..."}
