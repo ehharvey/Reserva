@@ -80,10 +80,10 @@ function searchAPI(searchParams:URLSearchParams) {
 
   const filteredRooms = rooms.filter((room) => {
     return Object.entries(paramsObj).reduce((result, [key, value]) => {
-      if (value === "") {
+      if (typeof(key)!== "string" || value === "") {
         return result;
       }
-      return result && room[key].toLowerCase().includes(value.toLowerCase());
+      return result && (room[key as keyof typeof room || '']).toString().toLowerCase().includes(value.toLowerCase());
     }, true);
   });
   
