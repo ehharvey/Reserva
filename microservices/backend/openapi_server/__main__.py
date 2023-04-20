@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import datetime
 from dotenv import load_dotenv
 import connexion
 from injector import SingletonScope
@@ -9,9 +10,13 @@ from flask_cors import CORS
 from flask_injector import FlaskInjector, RequestScope
 from pymongo import MongoClient
 from pymongo.database import Database
+from bson import ObjectId
 
 from openapi_server.config import get_env_config
 from openapi_server.user_utils import configure as configure_user_utils, configure_dev
+
+from openapi_server.models import NewItem, NewGroup, NewGroupMembership, NewUnavailability, Feature
+from openapi_server.db_utils import create_item, create_group, create_group_membership, create_unavailability
 
 config = get_env_config()
 
@@ -29,6 +34,73 @@ def configure(binder):
     binder.bind(MongoClient, to=mongo_client(), scope=RequestScope)
 
 
+def seed_db():
+    client = mongo_client()
+    db = client["main"]
+
+    # Clear all collections
+    db["items"].delete_many({})
+    db["groups"].delete_many({})
+    db["unavailabilities"].delete_many({})
+    db["group_memberships"].delete_many({})
+
+    # Seed items
+    items = [
+        NewItem(
+            name="Room 1", 
+            description="Description A",
+            location="Location A",
+            type="Room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Item 2",
+            description="Description B",
+            location="Location B",
+            type="Room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+    ]
+
+    created_items = [
+        create_item(item, "auth0|643db743a891bec857308e2f", client)
+        for item in items
+    ]
+
+    # Seed groups
+    groups = [
+        NewGroup(
+            name="Group 1"
+        )
+    ]
+
+    for group in groups:
+        create_group(group, "auth0|643db743a891bec857308e2f", client)
+
+    # Seed unavailable times
+    unavailabilities = [
+        NewUnavailability(
+            item=item,
+            owner="auth0|643db743a891bec857308e2f",
+            start_date=datetime.datetime.now(),
+            end_date=datetime.datetime.now() + datetime.timedelta(hours=1),
+            type="Booking"
+        )
+        for item in created_items
+    ]
+
+    for unavailability in unavailabilities:
+        create_unavailability(unavailability, client)
+
+
 def main():
     app = connexion.App(__name__, specification_dir='./openapi/')
     app.app.json_encoder = encoder.JSONEncoder
@@ -41,6 +113,7 @@ def main():
     # Configure user utils
     if config.FLASK_ENV == "development":
         configure_dev()
+        seed_db()
     else:
         configure_user_utils(
             domain=config.AUTH0_DOMAIN,

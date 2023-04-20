@@ -15,9 +15,10 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, picture=None, email=None, name=None, nickname=None, role='standard'):  # noqa: E501
+    def __init__(self, id=None, picture=None, email=None, name=None, nickname=None, role='standard'):  # noqa: E501
         """User - a model defined in OpenAPI
 
+        :param id: The id of this User.  # noqa: E501
         :param picture: The picture of this User.  # noqa: E501
         :type picture: str
         :param email: The email of this User.  # noqa: E501
@@ -30,6 +31,7 @@ class User(Model):
         :type role: str
         """
         self.openapi_types = {
+            'id': str,
             'picture': str,
             'email': str,
             'name': str,
@@ -38,6 +40,7 @@ class User(Model):
         }
 
         self.attribute_map = {
+            'id': 'id',
             'picture': 'picture',
             'email': 'email',
             'name': 'name',
@@ -45,6 +48,7 @@ class User(Model):
             'role': 'role'
         }
 
+        self._id = id
         self._picture = picture
         self._email = email
         self._name = name
@@ -61,6 +65,26 @@ class User(Model):
         :rtype: User
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def id(self):
+        """Gets the id of this User
+
+        the user's id  # noqa: E501
+        :return: The id of this User
+        :rtype: str
+        """
+        return self._id
+    
+    @id.setter
+    def id(self, id):
+        """Sets the id of this User
+
+        the user's id
+        :param id: The id of this User
+        :type id: str
+        """
+        self._id = id
 
     @property
     def picture(self):

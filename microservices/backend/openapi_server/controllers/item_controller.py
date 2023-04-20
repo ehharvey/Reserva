@@ -3,6 +3,7 @@ import six
 from typing import Dict
 from typing import Tuple
 from typing import Union
+from openapi_server.db_utils import create_item
 
 from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.item import Item  # noqa: E501
@@ -99,4 +100,6 @@ def items_post(new_item=None):  # noqa: E501
     """
     if connexion.request.is_json:
         new_item = NewItem.from_dict(connexion.request.get_json())  # noqa: E501
+        created = create_item(new_item)
+        return ItemsPost201Response(room=created), 201
     return 'do some magic!'
