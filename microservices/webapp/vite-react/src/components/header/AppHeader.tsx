@@ -95,7 +95,7 @@ export function AppHeader() {
               Groups 
             </a>
 
-            <a href="/bookingroom" className={classes.link}>
+            <a href="/booking-request/3" className={classes.link}>
               Book a Room
             </a>
             
