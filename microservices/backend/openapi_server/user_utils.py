@@ -75,6 +75,7 @@ def get_user_details_dev(func):
         kwargs["db"] = db
         kwargs["user"] = user
         kwargs["user_details"] = User(
+            id="auth0|643db743a891bec857308e2f",
             email="test@example.com",
             name="Test User",
             role="standard",

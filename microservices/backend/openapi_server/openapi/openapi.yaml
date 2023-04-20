@@ -678,9 +678,7 @@ components:
       title: group
     groupId:
       description: |
-        the id of a group. this is a uuid with the prefix "group-".
-      format: uuid
-      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        the id of a group.
       title: groupId
       type: string
     groupMembership:
@@ -690,14 +688,10 @@ components:
       title: groupMembership
     groupMembershipId:
       description: the id of a group membership.
-      format: uuid
-      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
       title: groupMembershipId
       type: string
     id:
-      description: "a uuid. this is a string that is a uuid. \n"
-      format: uuid
-      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      description: an ID
       type: string
     item:
       allOf:
@@ -708,9 +702,7 @@ components:
       title: item
     itemId:
       description: |
-        the id of the item. this is a uuid with a prefix of "item-".
-      format: uuid
-      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        the id of the item.
       title: itemId
       type: string
     newGroup:
@@ -727,9 +719,7 @@ components:
       properties:
         group:
           description: |
-            the id of a group. this is a uuid with the prefix "group-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of a group.
           title: groupId
           type: string
         user:
@@ -789,9 +779,7 @@ components:
       title: unavailability
     unavailabilityId:
       description: |
-        the id of an unavailability. this is a uuid with the prefix "unavailability-".
-      format: uuid
-      pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        the id of an unavailability.
       title: unavailabilityId
       type: string
     updateGroup:
@@ -852,9 +840,7 @@ components:
       properties:
         item:
           description: |
-            the id of the item. this is a uuid with a prefix of "item-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of the item. 
           title: itemId
           type: string
         startDate:
@@ -887,8 +873,12 @@ components:
         email: emil@example.com
         name: Emil Harvey
         nickname: ehharvey
+        id: auth0|5c6b9f2d1f6ba37e16cbf2a8
         role: standard
       properties:
+        id:
+          description: the user's id.
+          type: string
         picture:
           description: the user's picture URL
           type: string
@@ -1061,9 +1051,7 @@ components:
       properties:
         id:
           description: |
-            the id of a group. this is a uuid with the prefix "group-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of a group.
           title: groupId
           type: string
         createDate:
@@ -1093,8 +1081,6 @@ components:
       properties:
         id:
           description: the id of a group membership.
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
           title: groupMembershipId
           type: string
       title: groupMembership_allOf
@@ -1104,9 +1090,7 @@ components:
       properties:
         id:
           description: |
-            the id of the item. this is a uuid with a prefix of "item-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of the item.
           title: itemId
           type: string
         createDate:
@@ -1154,9 +1138,7 @@ components:
       properties:
         id:
           description: |
-            the id of an unavailability. this is a uuid with the prefix "unavailability-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of an unavailability.
           title: unavailabilityId
           type: string
       required:
@@ -1170,9 +1152,7 @@ components:
       properties:
         id:
           description: |
-            the id of an unavailability. this is a uuid with the prefix "unavailability-".
-          format: uuid
-          pattern: "^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            the id of an unavailability.
           title: unavailabilityId
           type: string
         createDate:
