@@ -20,17 +20,29 @@ import { exists, mapValues } from '../runtime';
  */
 export interface User {
     /**
-     * the user's first name.
+     * the user's picture URL
      * @type {string}
      * @memberof User
      */
-    firstname?: string;
+    picture?: string;
     /**
-     * the user's last name.
+     * the user's email.
      * @type {string}
      * @memberof User
      */
-    lastname?: string;
+    email?: string;
+    /**
+     * the user's name.
+     * @type {string}
+     * @memberof User
+     */
+    name?: string;
+    /**
+     * the user's nickname.
+     * @type {string}
+     * @memberof User
+     */
+    nickname?: string;
     /**
      * the user's role.
      * @type {string}
@@ -69,8 +81,10 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     }
     return {
         
-        'firstname': !exists(json, 'firstname') ? undefined : json['firstname'],
-        'lastname': !exists(json, 'lastname') ? undefined : json['lastname'],
+        'picture': !exists(json, 'picture') ? undefined : json['picture'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'nickname': !exists(json, 'nickname') ? undefined : json['nickname'],
         'role': !exists(json, 'role') ? undefined : json['role'],
     };
 }
@@ -84,8 +98,10 @@ export function UserToJSON(value?: User | null): any {
     }
     return {
         
-        'firstname': value.firstname,
-        'lastname': value.lastname,
+        'picture': value.picture,
+        'email': value.email,
+        'name': value.name,
+        'nickname': value.nickname,
         'role': value.role,
     };
 }

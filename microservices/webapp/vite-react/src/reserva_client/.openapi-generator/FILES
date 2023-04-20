@@ -11,12 +11,12 @@ models/GroupAllOf.ts
 models/GroupMembership.ts
 models/GroupMembershipAllOf.ts
 models/GroupMembershipsPost201Response.ts
+models/GroupsIdUnavailabilitiesGet200Response.ts
 models/GroupsIdUsersGet200Response.ts
 models/GroupsPost201Response.ts
 models/Item.ts
 models/ItemAllOf.ts
 models/ItemsGet200Response.ts
-models/ItemsIdUnavailabilitiesGet200Response.ts
 models/ItemsPost201Response.ts
 models/NewGroup.ts
 models/NewGroupMembership.ts

@@ -1,4 +1,5 @@
 import connexion
+from pymongo import MongoClient
 import six
 from typing import Dict
 from typing import Tuple
@@ -30,7 +31,8 @@ def users_get(search=None, page=None, per_page=None):  # noqa: E501
     return 'do some magic!'
 
 
-def users_me_get():  # noqa: E501
+@get_user_details
+def users_me_get(user_details: User):  # noqa: E501
     """get the current user
 
     returns the current user. # noqa: E501
@@ -39,13 +41,12 @@ def users_me_get():  # noqa: E501
     :rtype: Union[UsersMeGet200Response, Tuple[UsersMeGet200Response, int], Tuple[UsersMeGet200Response, int, Dict[str, str]]
     """
     
+    return UsersMeGet200Response(
+        user=user_details
+    ).to_dict()
 
 
-    return 'do some magic!'
-
-
-@get_user_details
-def users_me_groups_get(user_details: User):  # noqa: E501
+def users_me_groups_get(user, db: MongoClient):  # noqa: E501
     """get all groups for the current user
 
     returns a list of all groups for the current user. # noqa: E501
@@ -54,14 +55,16 @@ def users_me_groups_get(user_details: User):  # noqa: E501
     :rtype: Union[UsersMeGroupsGet200Response, Tuple[UsersMeGroupsGet200Response, int], Tuple[UsersMeGroupsGet200Response, int, Dict[str, str]]
     """
 
+    groups = [
+        GroupMembership(
+            **group
+        )
+        for group in db.main.groupMemberships.find({"user": user})
+    ]
+    
+
     result = UsersMeGroupsGet200Response(
-        groups=[
-            GroupMembership(
-                id="groupmembership-026ce71f-2dfc-4dfa-b609-59d71929556f",
-                user=user_details,
-                group="group-026ce71f-2dfc-4dfa-b609-59d71929556f",
-            )
-        ]
+        groups=groups
     )
 
     return result.to_dict()

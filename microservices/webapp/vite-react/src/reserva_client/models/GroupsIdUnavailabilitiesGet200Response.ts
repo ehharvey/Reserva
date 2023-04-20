@@ -23,31 +23,31 @@ import {
 /**
  * 
  * @export
- * @interface ItemsIdUnavailabilitiesGet200Response
+ * @interface GroupsIdUnavailabilitiesGet200Response
  */
-export interface ItemsIdUnavailabilitiesGet200Response {
+export interface GroupsIdUnavailabilitiesGet200Response {
     /**
      * 
      * @type {Array<Unavailability>}
-     * @memberof ItemsIdUnavailabilitiesGet200Response
+     * @memberof GroupsIdUnavailabilitiesGet200Response
      */
     unavailabilities?: Array<Unavailability>;
 }
 
 /**
- * Check if a given object implements the ItemsIdUnavailabilitiesGet200Response interface.
+ * Check if a given object implements the GroupsIdUnavailabilitiesGet200Response interface.
  */
-export function instanceOfItemsIdUnavailabilitiesGet200Response(value: object): boolean {
+export function instanceOfGroupsIdUnavailabilitiesGet200Response(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function ItemsIdUnavailabilitiesGet200ResponseFromJSON(json: any): ItemsIdUnavailabilitiesGet200Response {
-    return ItemsIdUnavailabilitiesGet200ResponseFromJSONTyped(json, false);
+export function GroupsIdUnavailabilitiesGet200ResponseFromJSON(json: any): GroupsIdUnavailabilitiesGet200Response {
+    return GroupsIdUnavailabilitiesGet200ResponseFromJSONTyped(json, false);
 }
 
-export function ItemsIdUnavailabilitiesGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ItemsIdUnavailabilitiesGet200Response {
+export function GroupsIdUnavailabilitiesGet200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GroupsIdUnavailabilitiesGet200Response {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function ItemsIdUnavailabilitiesGet200ResponseFromJSONTyped(json: any, ig
     };
 }
 
-export function ItemsIdUnavailabilitiesGet200ResponseToJSON(value?: ItemsIdUnavailabilitiesGet200Response | null): any {
+export function GroupsIdUnavailabilitiesGet200ResponseToJSON(value?: GroupsIdUnavailabilitiesGet200Response | null): any {
     if (value === undefined) {
         return undefined;
     }

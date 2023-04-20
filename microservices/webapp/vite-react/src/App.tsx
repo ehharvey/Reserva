@@ -26,6 +26,8 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
+  
+
   return (
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH_DOMAIN}

@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   GroupMembershipsPost201Response,
+  GroupsIdUnavailabilitiesGet200Response,
   GroupsIdUsersGet200Response,
   GroupsPost201Response,
   NewGroup,
@@ -25,6 +26,8 @@ import type {
 import {
     GroupMembershipsPost201ResponseFromJSON,
     GroupMembershipsPost201ResponseToJSON,
+    GroupsIdUnavailabilitiesGet200ResponseFromJSON,
+    GroupsIdUnavailabilitiesGet200ResponseToJSON,
     GroupsIdUsersGet200ResponseFromJSON,
     GroupsIdUsersGet200ResponseToJSON,
     GroupsPost201ResponseFromJSON,
@@ -53,6 +56,10 @@ export interface GroupsIdMembershipsMembershipIdDeleteRequest {
 export interface GroupsIdPutRequest {
     id: string;
     updateGroup?: UpdateGroup;
+}
+
+export interface GroupsIdUnavailabilitiesGetRequest {
+    id: string;
 }
 
 export interface GroupsIdUsersGetRequest {
@@ -218,6 +225,43 @@ export class GroupApi extends runtime.BaseAPI {
      */
     async groupsIdPut(requestParameters: GroupsIdPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GroupsPost201Response> {
         const response = await this.groupsIdPutRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * gets a list of unavailability objects for a group
+     * gets a list of unavailability objects
+     */
+    async groupsIdUnavailabilitiesGetRaw(requestParameters: GroupsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GroupsIdUnavailabilitiesGet200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling groupsIdUnavailabilitiesGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("standard", ["read:groups:associated"]);
+        }
+
+        const response = await this.request({
+            path: `/groups/{id}/unavailabilities`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GroupsIdUnavailabilitiesGet200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * gets a list of unavailability objects for a group
+     * gets a list of unavailability objects
+     */
+    async groupsIdUnavailabilitiesGet(requestParameters: GroupsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GroupsIdUnavailabilitiesGet200Response> {
+        const response = await this.groupsIdUnavailabilitiesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

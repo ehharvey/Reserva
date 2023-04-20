@@ -28,7 +28,7 @@ export function AuthButtons() {
                 
                 var foo = new UserApi(config);
     
-                foo.usersMeGroupsGet().then((response) => {
+                foo.usersMeGet().then((response) => {
                     console.log(response);
                 });
             });

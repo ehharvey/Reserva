@@ -15,19 +15,19 @@
 
 import * as runtime from '../runtime';
 import type {
+  GroupsIdUnavailabilitiesGet200Response,
   Item,
   ItemsGet200Response,
-  ItemsIdUnavailabilitiesGet200Response,
   ItemsPost201Response,
   NewItem,
 } from '../models';
 import {
+    GroupsIdUnavailabilitiesGet200ResponseFromJSON,
+    GroupsIdUnavailabilitiesGet200ResponseToJSON,
     ItemFromJSON,
     ItemToJSON,
     ItemsGet200ResponseFromJSON,
     ItemsGet200ResponseToJSON,
-    ItemsIdUnavailabilitiesGet200ResponseFromJSON,
-    ItemsIdUnavailabilitiesGet200ResponseToJSON,
     ItemsPost201ResponseFromJSON,
     ItemsPost201ResponseToJSON,
     NewItemFromJSON,
@@ -199,7 +199,7 @@ export class ItemApi extends runtime.BaseAPI {
     /**
      * gets a list of unavailabilities for a given item.
      */
-    async itemsIdUnavailabilitiesGetRaw(requestParameters: ItemsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ItemsIdUnavailabilitiesGet200Response>> {
+    async itemsIdUnavailabilitiesGetRaw(requestParameters: ItemsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GroupsIdUnavailabilitiesGet200Response>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling itemsIdUnavailabilitiesGet.');
         }
@@ -239,13 +239,13 @@ export class ItemApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ItemsIdUnavailabilitiesGet200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => GroupsIdUnavailabilitiesGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * gets a list of unavailabilities for a given item.
      */
-    async itemsIdUnavailabilitiesGet(requestParameters: ItemsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ItemsIdUnavailabilitiesGet200Response> {
+    async itemsIdUnavailabilitiesGet(requestParameters: ItemsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GroupsIdUnavailabilitiesGet200Response> {
         const response = await this.itemsIdUnavailabilitiesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
