@@ -883,16 +883,23 @@ components:
       type: object
     user:
       example:
-        username: debugg
-        firstname: deb
-        lastname: ugg
+        picture: https://github.com/ehharvey.png
+        email: emil@example.com
+        name: Emil Harvey
+        nickname: ehharvey
         role: standard
       properties:
-        firstname:
-          description: the user's first name.
+        picture:
+          description: the user's picture URL
           type: string
-        lastname:
-          description: the user's last name.
+        email:
+          description: the user's email.
+          type: string
+        name:
+          description: the user's name.
+          type: string
+        nickname:
+          description: the user's nickname.
           type: string
         role:
           default: standard
@@ -938,13 +945,15 @@ components:
     _groups__id__users_get_200_response:
       example:
         users:
-        - username: debugg
-          firstname: deb
-          lastname: ugg
+        - picture: https://github.com/ehharvey.png
+          email: emil@example.com
+          name: Emil Harvey
+          nickname: ehharvey
           role: standard
-        - username: debugg
-          firstname: deb
-          lastname: ugg
+        - picture: https://github.com/ehharvey.png
+          email: emil@example.com
+          name: Emil Harvey
+          nickname: ehharvey
           role: standard
       properties:
         users:
@@ -1027,9 +1036,10 @@ components:
     _users_me_get_200_response:
       example:
         user:
-          username: debugg
-          firstname: deb
-          lastname: ugg
+          picture: https://github.com/ehharvey.png
+          email: emil@example.com
+          name: Emil Harvey
+          nickname: ehharvey
           role: standard
       properties:
         user:

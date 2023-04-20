@@ -8,14 +8,13 @@ from flask_cors import CORS
 
 def main():
     app = connexion.App(__name__, specification_dir='./openapi/')
-    app.app.json_provider_class = encoder.JSONEncoder
+    app.app.json_encoder = encoder.JSONEncoder
     app.add_api('openapi.yaml',
                 arguments={'title': 'Main API'},
                 pythonic_params=True)
-    
 
+    # Enable CORS
     CORS(app.app)
-
     app.run(port=8080)
 
 

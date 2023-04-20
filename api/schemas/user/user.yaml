@@ -1,18 +1,25 @@
 type: object
 properties:
-  firstname:
+  picture:
     type: string
-    description: the user's first name.
-  lastname:
+    description: the user's picture URL
+  email:
     type: string
-    description: the user's last name.
+    description: the user's email.
+  name:
+    type: string
+    description: the user's name.
+  nickname:
+    type: string
+    description: the user's nickname.
   role:
       type: string
       enum: [standard, staff]
       default: standard
       description: the user's role.
 example:
-  username: "debugg"
-  firstname: "deb"
-  lastname: "ugg" 
-  role: standard
+  picture: "https://github.com/ehharvey.png"
+  email: "emil@example.com"
+  name: "Emil Harvey"
+  nickname: "ehharvey"
+  role: "standard"

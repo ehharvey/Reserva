@@ -15,30 +15,40 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, firstname=None, lastname=None, role='standard'):  # noqa: E501
+    def __init__(self, picture=None, email=None, name=None, nickname=None, role='standard'):  # noqa: E501
         """User - a model defined in OpenAPI
 
-        :param firstname: The firstname of this User.  # noqa: E501
-        :type firstname: str
-        :param lastname: The lastname of this User.  # noqa: E501
-        :type lastname: str
+        :param picture: The picture of this User.  # noqa: E501
+        :type picture: str
+        :param email: The email of this User.  # noqa: E501
+        :type email: str
+        :param name: The name of this User.  # noqa: E501
+        :type name: str
+        :param nickname: The nickname of this User.  # noqa: E501
+        :type nickname: str
         :param role: The role of this User.  # noqa: E501
         :type role: str
         """
         self.openapi_types = {
-            'firstname': str,
-            'lastname': str,
+            'picture': str,
+            'email': str,
+            'name': str,
+            'nickname': str,
             'role': str
         }
 
         self.attribute_map = {
-            'firstname': 'firstname',
-            'lastname': 'lastname',
+            'picture': 'picture',
+            'email': 'email',
+            'name': 'name',
+            'nickname': 'nickname',
             'role': 'role'
         }
 
-        self._firstname = firstname
-        self._lastname = lastname
+        self._picture = picture
+        self._email = email
+        self._name = name
+        self._nickname = nickname
         self._role = role
 
     @classmethod
@@ -53,50 +63,96 @@ class User(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def firstname(self):
-        """Gets the firstname of this User.
+    def picture(self):
+        """Gets the picture of this User.
 
-        the user's first name.  # noqa: E501
+        the user's picture URL  # noqa: E501
 
-        :return: The firstname of this User.
+        :return: The picture of this User.
         :rtype: str
         """
-        return self._firstname
+        return self._picture
 
-    @firstname.setter
-    def firstname(self, firstname):
-        """Sets the firstname of this User.
+    @picture.setter
+    def picture(self, picture):
+        """Sets the picture of this User.
 
-        the user's first name.  # noqa: E501
+        the user's picture URL  # noqa: E501
 
-        :param firstname: The firstname of this User.
-        :type firstname: str
+        :param picture: The picture of this User.
+        :type picture: str
         """
 
-        self._firstname = firstname
+        self._picture = picture
 
     @property
-    def lastname(self):
-        """Gets the lastname of this User.
+    def email(self):
+        """Gets the email of this User.
 
-        the user's last name.  # noqa: E501
+        the user's email.  # noqa: E501
 
-        :return: The lastname of this User.
+        :return: The email of this User.
         :rtype: str
         """
-        return self._lastname
+        return self._email
 
-    @lastname.setter
-    def lastname(self, lastname):
-        """Sets the lastname of this User.
+    @email.setter
+    def email(self, email):
+        """Sets the email of this User.
 
-        the user's last name.  # noqa: E501
+        the user's email.  # noqa: E501
 
-        :param lastname: The lastname of this User.
-        :type lastname: str
+        :param email: The email of this User.
+        :type email: str
         """
 
-        self._lastname = lastname
+        self._email = email
+
+    @property
+    def name(self):
+        """Gets the name of this User.
+
+        the user's name.  # noqa: E501
+
+        :return: The name of this User.
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Sets the name of this User.
+
+        the user's name.  # noqa: E501
+
+        :param name: The name of this User.
+        :type name: str
+        """
+
+        self._name = name
+
+    @property
+    def nickname(self):
+        """Gets the nickname of this User.
+
+        the user's nickname.  # noqa: E501
+
+        :return: The nickname of this User.
+        :rtype: str
+        """
+        return self._nickname
+
+    @nickname.setter
+    def nickname(self, nickname):
+        """Sets the nickname of this User.
+
+        the user's nickname.  # noqa: E501
+
+        :param nickname: The nickname of this User.
+        :type nickname: str
+        """
+
+        self._nickname = nickname
 
     @property
     def role(self):

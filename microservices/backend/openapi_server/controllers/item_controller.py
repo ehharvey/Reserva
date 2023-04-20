@@ -38,7 +38,7 @@ def items_id_delete(id):  # noqa: E501
 
      # noqa: E501
 
-    :param id: user id
+    :param id: item id
     :type id: int
 
     :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
@@ -51,7 +51,7 @@ def items_id_put(id, item=None):  # noqa: E501
 
      # noqa: E501
 
-    :param id: user id
+    :param id: item id
     :type id: int
     :param item: 
     :type item: dict | bytes
