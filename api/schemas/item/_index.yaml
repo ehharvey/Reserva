@@ -1,11 +1,13 @@
 ---
-Feature:
-  $ref: "./Feature.yaml"
-Item:
-  $ref: "./Item.yaml"
-ItemId:
-  $ref: "./ItemId.yaml"
-NewItem:
-  $ref: "./NewItem.yaml"
-UpdateItem:
-  $ref: "./UpdateItem.yaml"
+feature:
+  $ref: "./feature.yaml"
+item:
+  $ref: "./item.yaml"
+itemId:
+  $ref: "./itemId.yaml"
+newItem:
+  $ref: "./newItem.yaml"
+updateItem:
+  $ref: "./updateItem.yaml"
+unavailability:
+  $ref: "../unavailability/_index.yaml#/unavailability"

@@ -1,7 +1,9 @@
 ---
-User:
-  $ref: "./User.yaml"
-UserId:
-  $ref: "./UserId.yaml"
-GroupMembership:
-  $ref: "../group/GroupMembership.yaml"
+user:
+  $ref: "./user.yaml"
+userId:
+  $ref: "./userId.yaml"
+groupMembership:
+  $ref: "../group/groupMembership.yaml"
+unavailability:
+  $ref: "../unavailability/_index.yaml#/unavailability"

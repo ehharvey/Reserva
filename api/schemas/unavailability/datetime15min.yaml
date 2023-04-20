@@ -1,0 +1,4 @@
+type: string
+pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$'
+description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
+example: "2023-04-02t15:00:00"

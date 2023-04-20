@@ -44,7 +44,7 @@ class NewGroupMembership(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The NewGroupMembership of this NewGroupMembership.  # noqa: E501
+        :return: The newGroupMembership of this NewGroupMembership.  # noqa: E501
         :rtype: NewGroupMembership
         """
         return util.deserialize_model(dikt, cls)
@@ -53,7 +53,7 @@ class NewGroupMembership(Model):
     def group(self):
         """Gets the group of this NewGroupMembership.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :return: The group of this NewGroupMembership.
         :rtype: str
@@ -64,7 +64,7 @@ class NewGroupMembership(Model):
     def group(self, group):
         """Sets the group of this NewGroupMembership.
 
-        The ID of a group. This is a UUID with the prefix \"group-\".   # noqa: E501
+        the id of a group. this is a uuid with the prefix \"group-\".   # noqa: E501
 
         :param group: The group of this NewGroupMembership.
         :type group: str
@@ -80,7 +80,7 @@ class NewGroupMembership(Model):
     def user(self):
         """Gets the user of this NewGroupMembership.
 
-        Id of a user. This is a UUID with the prefix \"user-\".   # noqa: E501
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
 
         :return: The user of this NewGroupMembership.
         :rtype: str
@@ -91,14 +91,12 @@ class NewGroupMembership(Model):
     def user(self, user):
         """Sets the user of this NewGroupMembership.
 
-        Id of a user. This is a UUID with the prefix \"user-\".   # noqa: E501
+        id of a user. This is just a string, since the user id is provided by the authentication provider. (in this case, auth0)   # noqa: E501
 
         :param user: The user of this NewGroupMembership.
         :type user: str
         """
         if user is None:
             raise ValueError("Invalid value for `user`, must not be `None`")  # noqa: E501
-        if user is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', user):  # noqa: E501
-            raise ValueError("Invalid value for `user`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._user = user

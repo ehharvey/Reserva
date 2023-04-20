@@ -17,31 +17,31 @@ class UnavailabilityAllOf(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, created_at=None, last_updated_at=None):  # noqa: E501
+    def __init__(self, id=None, create_date=None, last_updated_date=None):  # noqa: E501
         """UnavailabilityAllOf - a model defined in OpenAPI
 
         :param id: The id of this UnavailabilityAllOf.  # noqa: E501
         :type id: str
-        :param created_at: The created_at of this UnavailabilityAllOf.  # noqa: E501
-        :type created_at: datetime
-        :param last_updated_at: The last_updated_at of this UnavailabilityAllOf.  # noqa: E501
-        :type last_updated_at: datetime
+        :param create_date: The create_date of this UnavailabilityAllOf.  # noqa: E501
+        :type create_date: datetime
+        :param last_updated_date: The last_updated_date of this UnavailabilityAllOf.  # noqa: E501
+        :type last_updated_date: datetime
         """
         self.openapi_types = {
             'id': str,
-            'created_at': datetime,
-            'last_updated_at': datetime
+            'create_date': datetime,
+            'last_updated_date': datetime
         }
 
         self.attribute_map = {
             'id': 'id',
-            'created_at': 'createdAt',
-            'last_updated_at': 'lastUpdatedAt'
+            'create_date': 'createDate',
+            'last_updated_date': 'lastUpdatedDate'
         }
 
         self._id = id
-        self._created_at = created_at
-        self._last_updated_at = last_updated_at
+        self._create_date = create_date
+        self._last_updated_date = last_updated_date
 
     @classmethod
     def from_dict(cls, dikt) -> 'UnavailabilityAllOf':
@@ -49,7 +49,7 @@ class UnavailabilityAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The Unavailability_allOf of this UnavailabilityAllOf.  # noqa: E501
+        :return: The unavailability_allOf of this UnavailabilityAllOf.  # noqa: E501
         :rtype: UnavailabilityAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -58,7 +58,7 @@ class UnavailabilityAllOf(Model):
     def id(self):
         """Gets the id of this UnavailabilityAllOf.
 
-        The ID of an unavailability. This is a UUID with the prefix \"unavailability-\".   # noqa: E501
+        the id of an unavailability. this is a uuid with the prefix \"unavailability-\".   # noqa: E501
 
         :return: The id of this UnavailabilityAllOf.
         :rtype: str
@@ -69,7 +69,7 @@ class UnavailabilityAllOf(Model):
     def id(self, id):
         """Sets the id of this UnavailabilityAllOf.
 
-        The ID of an unavailability. This is a UUID with the prefix \"unavailability-\".   # noqa: E501
+        the id of an unavailability. this is a uuid with the prefix \"unavailability-\".   # noqa: E501
 
         :param id: The id of this UnavailabilityAllOf.
         :type id: str
@@ -82,51 +82,51 @@ class UnavailabilityAllOf(Model):
         self._id = id
 
     @property
-    def created_at(self):
-        """Gets the created_at of this UnavailabilityAllOf.
+    def create_date(self):
+        """Gets the create_date of this UnavailabilityAllOf.
 
-        The date and time the unavailability was created.  # noqa: E501
+        the date and time the unavailability was created.  # noqa: E501
 
-        :return: The created_at of this UnavailabilityAllOf.
+        :return: The create_date of this UnavailabilityAllOf.
         :rtype: datetime
         """
-        return self._created_at
+        return self._create_date
 
-    @created_at.setter
-    def created_at(self, created_at):
-        """Sets the created_at of this UnavailabilityAllOf.
+    @create_date.setter
+    def create_date(self, create_date):
+        """Sets the create_date of this UnavailabilityAllOf.
 
-        The date and time the unavailability was created.  # noqa: E501
+        the date and time the unavailability was created.  # noqa: E501
 
-        :param created_at: The created_at of this UnavailabilityAllOf.
-        :type created_at: datetime
+        :param create_date: The create_date of this UnavailabilityAllOf.
+        :type create_date: datetime
         """
-        if created_at is None:
-            raise ValueError("Invalid value for `created_at`, must not be `None`")  # noqa: E501
+        if create_date is None:
+            raise ValueError("Invalid value for `create_date`, must not be `None`")  # noqa: E501
 
-        self._created_at = created_at
+        self._create_date = create_date
 
     @property
-    def last_updated_at(self):
-        """Gets the last_updated_at of this UnavailabilityAllOf.
+    def last_updated_date(self):
+        """Gets the last_updated_date of this UnavailabilityAllOf.
 
-        The date and time the unavailability was last updated.  # noqa: E501
+        the date and time the unavailability was last updated.  # noqa: E501
 
-        :return: The last_updated_at of this UnavailabilityAllOf.
+        :return: The last_updated_date of this UnavailabilityAllOf.
         :rtype: datetime
         """
-        return self._last_updated_at
+        return self._last_updated_date
 
-    @last_updated_at.setter
-    def last_updated_at(self, last_updated_at):
-        """Sets the last_updated_at of this UnavailabilityAllOf.
+    @last_updated_date.setter
+    def last_updated_date(self, last_updated_date):
+        """Sets the last_updated_date of this UnavailabilityAllOf.
 
-        The date and time the unavailability was last updated.  # noqa: E501
+        the date and time the unavailability was last updated.  # noqa: E501
 
-        :param last_updated_at: The last_updated_at of this UnavailabilityAllOf.
-        :type last_updated_at: datetime
+        :param last_updated_date: The last_updated_date of this UnavailabilityAllOf.
+        :type last_updated_date: datetime
         """
-        if last_updated_at is None:
-            raise ValueError("Invalid value for `last_updated_at`, must not be `None`")  # noqa: E501
+        if last_updated_date is None:
+            raise ValueError("Invalid value for `last_updated_date`, must not be `None`")  # noqa: E501
 
-        self._last_updated_at = last_updated_at
+        self._last_updated_date = last_updated_date

@@ -39,7 +39,7 @@ class NewRecurringUnavailabilityAllOf(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The NewRecurringUnavailability_allOf of this NewRecurringUnavailabilityAllOf.  # noqa: E501
+        :return: The newRecurringUnavailability_allOf of this NewRecurringUnavailabilityAllOf.  # noqa: E501
         :rtype: NewRecurringUnavailabilityAllOf
         """
         return util.deserialize_model(dikt, cls)
@@ -48,7 +48,7 @@ class NewRecurringUnavailabilityAllOf(Model):
     def recurrence(self):
         """Gets the recurrence of this NewRecurringUnavailabilityAllOf.
 
-        Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00  # noqa: E501
+        date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
         :return: The recurrence of this NewRecurringUnavailabilityAllOf.
         :rtype: str
@@ -59,14 +59,14 @@ class NewRecurringUnavailabilityAllOf(Model):
     def recurrence(self, recurrence):
         """Sets the recurrence of this NewRecurringUnavailabilityAllOf.
 
-        Date-time string with 15-minute interval, e.g., 2023-04-02T12:00:00  # noqa: E501
+        date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00  # noqa: E501
 
         :param recurrence: The recurrence of this NewRecurringUnavailabilityAllOf.
         :type recurrence: str
         """
         if recurrence is None:
             raise ValueError("Invalid value for `recurrence`, must not be `None`")  # noqa: E501
-        if recurrence is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$', recurrence):  # noqa: E501
-            raise ValueError("Invalid value for `recurrence`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+        if recurrence is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', recurrence):  # noqa: E501
+            raise ValueError("Invalid value for `recurrence`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
 
         self._recurrence = recurrence

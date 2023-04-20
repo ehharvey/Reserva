@@ -28,7 +28,7 @@ class GroupsPost201Response(Model):
         }
 
         self.attribute_map = {
-            'group': 'Group'
+            'group': 'group'
         }
 
         self._group = group

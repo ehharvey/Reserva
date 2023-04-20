@@ -1,0 +1,30 @@
+---
+type: object
+properties:
+  name:
+    type: string
+    example: large room
+    description: the name of the item. for now, these will be names of rooms
+  location:
+    type: string
+    example: 1st floor
+    description: the location of the item.
+  description:
+    type: string
+    example: large room with low ceilings
+    description: a description of the item.
+  type:
+    type: string
+    example: room
+    enum:
+      - room
+    description: the type of the item. for now, this will only be room.
+  features:
+    type: array
+    items:
+      $ref: "./feature.yaml"
+    description: >
+      the features of the item. for now, these will be the features of the room.
+description: >
+  the data required to update an item. this is the base schema for all item
+  updates.

@@ -1,0 +1,13 @@
+---
+allOf:
+  - $ref: ./updateItem.yaml
+required:
+  - name
+  - location
+  - description
+  - type
+  - features
+description: >
+  the data required to create a new item. this is the base schema for all item
+  creations. the difference between this and the updateItem schema is that this
+  schema requires all fields to be present.

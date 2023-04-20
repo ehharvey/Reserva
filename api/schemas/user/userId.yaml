@@ -1,0 +1,7 @@
+---
+type: string
+example: auth0|5c6b9f2d1f6ba37e16cbf2a8
+description: >
+  id of a user. This is just a string, since
+  the user id is provided by the authentication provider.
+  (in this case, auth0)

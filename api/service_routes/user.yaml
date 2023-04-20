@@ -1,18 +1,49 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: User Service API
-  description: This API manages user authentication, authorization, and admin management.
-  version: 0.0.2
+  title: user service api
+  description: this api manages user authentication, authorization, and admin management.
+  version: 0.0.1
 servers:
-  - url: http://user.reserva.emilharvey.ca
+  - url: http://reserva.emilharvey.ca
+  - url: http://localhost:8080
 paths:
   /users:
     get:
-      summary: Get all users
-      description: Returns a list of all users.
+      security:
+        - admin: []
+        - staff: []
+        - standard: []      
+      summary: get all users
+      description: returns a list of all users.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          description: a search string to filter users by.
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: the page of users to retrieve.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          required: false
+          description: the number of users to retrieve per page.
+          schema:
+            type: integer
+            format: int64
+            maximum: 100
+            default: 10
+            minimum: 1
       responses:
         "200":
-          description: A list of users
+          description: a list of users
           content:
             application/json:
               schema:
@@ -20,67 +51,71 @@ paths:
                   users:
                     type: array
                     items:
-                      $ref: "#/components/schemas/User"
-  /users/{userId}:
+                      $ref: "#/components/schemas/user"
+
+  /users/me:
     get:
-      summary: Get a user by ID
-      description: Returns a single user by ID.
+      summary: get the current user
+      description: returns the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
+      responses:
+        "200":
+          description: the current user
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    $ref: "#/components/schemas/user"
+
+  /users/me/unavailabilities:
+    get:
+      summary: get all unavailabilities for the current user
+      description: returns a list of all unavailabilities for the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
       parameters:
-        - name: userId
-          in: path
-          required: true
-          description: The ID of the user to retrieve.
+        - name: start
+          in: query
+          required: false
+          description: the start of the time range to retrieve unavailabilities for.
           schema:
-            type: integer
-      responses:
-        "200":
-          description: The requested user
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        "404":
-          description: User not found
-  /users/admins:
-    get:
-      summary: Get all admin users
-      description: Returns a list of all admin users.
-      responses:
-        "200":
-          description: A list of admin users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-  /users/standard:
-    get:
-      summary: Get all standard users
-      description: Returns a list of all standard users.
-      responses:
-        "200":
-          description: A list of standard users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-  /users/{userId}/groups:
-    get:
-      summary: Get all groups for a user
-      description: Returns a list of all groups for a user.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: The ID of the user to retrieve groups for.
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          required: false
+          description: the end of the time range to retrieve unavailabilities for.
           schema:
-            type: integer
+            type: string
+            format: date-time
       responses:
         "200":
-          description: A list of groups
+          description: a list of unavailabilities
+          content:
+            application/json:
+              schema:
+                properties:  
+                  unavailabilities:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unavailability"
+  /users/me/groups:
+    get:
+      summary: get all groups for the current user
+      description: returns a list of all groups for the current user.
+      security:
+        - standard: []
+        - admin: []
+        - staff: []
+      responses:
+        "200":
+          description: a list of groups
           content:
             application/json:
               schema:
@@ -88,8 +123,10 @@ paths:
                   groups:
                     type: array
                     items:
-                      $ref: "#/components/schemas/GroupMembership"
+                      $ref: "#/components/schemas/groupMembership"
         
 components:
   schemas:
     $ref: "../schemas/user/_index.yaml"
+  securitySchemes:
+    $ref: '../security/_all.yaml'
