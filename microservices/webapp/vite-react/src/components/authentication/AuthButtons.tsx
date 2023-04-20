@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { GroupApi, Configuration, GroupsPostRequest, UserApi } from "../../reserva_client";
 
 
-
 export function AuthButtons() {
     const { logout, isAuthenticated, user, loginWithRedirect, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
     const [test, setTest] = useState<string | null>(null);

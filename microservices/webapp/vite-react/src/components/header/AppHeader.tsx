@@ -98,11 +98,12 @@ export function AppHeader() {
             <a href="/groups" className={classes.link}>
               Groups 
             </a>
-
             <a href="/booking-request/3" className={classes.link}>
               Book a Room
             </a>
-            
+            <a href="/rooms" className={classes.link}>
+              Rooms
+            </a>
           </Group>
           <Group position="apart" sx={{ height: '100%' }}>
           <AvatarProfile/> 
