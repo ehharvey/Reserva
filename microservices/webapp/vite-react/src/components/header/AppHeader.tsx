@@ -91,6 +91,10 @@ export function AppHeader() {
               Profile
             </a>
 
+            <a href="/bookings" className={classes.link}>
+              Bookings
+            </a>
+
             <a href="/groups" className={classes.link}>
               Groups 
             </a>

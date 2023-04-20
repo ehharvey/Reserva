@@ -5,6 +5,7 @@ import { Groups } from "./routes/Groups";
 import { AppHeader } from "./components/header/AppHeader";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { BookingForm } from "./routes/BookingForm";
+import { BookingList } from "./routes/BookingList";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/me",
     element: <Profile />
+  },
+  {
+    path: "/bookings",
+    element: <BookingList />
   },
   {
     path: "/groups",
