@@ -3,9 +3,7 @@
 from auth0.management import Auth0
 from openapi_server.models import User
 
-domain = "dev-mnj1i4nq.us.auth0.com"
-
-auth0 = Auth0(domain, mgmt_api_token)
+auth0: Auth0 = None
 
 def get_user_details(func):
     """Decorator to get the user from the user header"""
@@ -21,6 +19,7 @@ def get_user_details(func):
         auth0_user_details: dict = auth0.users.get("auth0|643db743a891bec857308e2f")
 
         # Determine role of user
+        # TODO: Change this to pull from the database
         role = "standard"
 
         # Determine parameters for User object constructor
@@ -56,3 +55,13 @@ def get_user_details(func):
     
 
     return wrapper
+
+def configure(domain, management_api_token):
+    """
+    Configure the user utils
+    
+    :param domain: The domain of the Auth0 account
+    :param management_api_token: The management API token for the Auth0 account
+    """
+    global auth0
+    auth0 = Auth0(domain, management_api_token)
