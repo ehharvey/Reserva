@@ -53,4 +53,5 @@ def unavailabilities_post(unavailabilities_post_request=None):  # noqa: E501
     """
     if connexion.request.is_json:
         unavailabilities_post_request = UnavailabilitiesPostRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    
     return 'do some magic!'

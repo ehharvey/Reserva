@@ -641,7 +641,7 @@ components:
     datetime15min:
       description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
       example: 2023-04-02t15:00:00
-      pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$"
+      pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
       title: datetime15min
       type: string
     error:
@@ -760,7 +760,6 @@ components:
       required:
       - endDate
       - item
-      - room
       - startDate
       - type
       title: newUnavailability
@@ -846,17 +845,21 @@ components:
         startDate:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
         endDate:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
         owner:
-          $ref: '#/components/schemas/updateUnavailability_owner'
+          description: |
+            the id of the owner of the unavailability.
+            It can be a group or a user
+          type: string
+          title: owner
         type:
           enum:
           - maintenance
@@ -972,10 +975,12 @@ components:
           $ref: '#/components/schemas/item'
       title: _items_post_201_response
     _unavailabilities_post_request:
+      $ref: '#/components/schemas/_unavailabilities_post_oneOf'
+      title: _unavailabilities_post_request
+    _unavailabilities_post_oneOf:
       oneOf:
       - $ref: '#/components/schemas/newUnavailability'
       - $ref: '#/components/schemas/newRecurringUnavailability'
-      title: _unavailabilities_post_request
     _unavailabilities_post_201_response:
       example:
         unavailability: null
@@ -1126,7 +1131,7 @@ components:
         recurrence:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$"
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
       required:
