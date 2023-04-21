@@ -76,8 +76,6 @@ class GroupMembership(Model):
         """
         if group is None:
             raise ValueError("Invalid value for `group`, must not be `None`")  # noqa: E501
-        if group is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', group):  # noqa: E501
-            raise ValueError("Invalid value for `group`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._group = group
 

@@ -66,7 +66,6 @@ class NewRecurringUnavailabilityAllOf(Model):
         """
         if recurrence is None:
             raise ValueError("Invalid value for `recurrence`, must not be `None`")  # noqa: E501
-        if recurrence is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', recurrence):  # noqa: E501
-            raise ValueError("Invalid value for `recurrence`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+
 
         self._recurrence = recurrence
