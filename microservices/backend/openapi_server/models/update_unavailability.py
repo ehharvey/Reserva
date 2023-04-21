@@ -29,7 +29,7 @@ class UpdateUnavailability(Model):
         :param end_date: The end_date of this UpdateUnavailability.  # noqa: E501
         :type end_date: str
         :param owner: The owner of this UpdateUnavailability.  # noqa: E501
-        :type owner: UpdateUnavailabilityOwner
+        :type owner: str
         :param type: The type of this UpdateUnavailability.  # noqa: E501
         :type type: str
         """
@@ -37,7 +37,7 @@ class UpdateUnavailability(Model):
             'item': str,
             'start_date': str,
             'end_date': str,
-            'owner': UpdateUnavailabilityOwner,
+            'owner': str,
             'type': str
         }
 
@@ -111,7 +111,7 @@ class UpdateUnavailability(Model):
         :param start_date: The start_date of this UpdateUnavailability.
         :type start_date: str
         """
-        if start_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', start_date):  # noqa: E501
+        if start_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', start_date):  # noqa: E501
             raise ValueError("Invalid value for `start_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
 
         self._start_date = start_date
@@ -136,7 +136,7 @@ class UpdateUnavailability(Model):
         :param end_date: The end_date of this UpdateUnavailability.
         :type end_date: str
         """
-        if end_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$', end_date):  # noqa: E501
+        if end_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', end_date):  # noqa: E501
             raise ValueError("Invalid value for `end_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
 
         self._end_date = end_date
@@ -157,7 +157,7 @@ class UpdateUnavailability(Model):
 
 
         :param owner: The owner of this UpdateUnavailability.
-        :type owner: UpdateUnavailabilityOwner
+        :type owner: str
         """
 
         self._owner = owner
