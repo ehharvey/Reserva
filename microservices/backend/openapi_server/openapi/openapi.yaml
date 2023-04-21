@@ -641,7 +641,6 @@ components:
     datetime15min:
       description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
       example: 2023-04-02t15:00:00
-      pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
       title: datetime15min
       type: string
     error:
@@ -845,13 +844,11 @@ components:
         startDate:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
         endDate:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
         owner:
@@ -1131,7 +1128,6 @@ components:
         recurrence:
           description: "date-time string with 15-minute interval, e.g., 2023-04-02t12:00:00"
           example: 2023-04-02t15:00:00
-          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$"
           title: datetime15min
           type: string
       required:
