@@ -98,9 +98,7 @@ class RecurringUnavailability(Model):
         """
         if item is None:
             raise ValueError("Invalid value for `item`, must not be `None`")  # noqa: E501
-        if item is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', item):  # noqa: E501
-            raise ValueError("Invalid value for `item`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
-
+       
         self._item = item
 
     @property
@@ -125,9 +123,7 @@ class RecurringUnavailability(Model):
         """
         if start_date is None:
             raise ValueError("Invalid value for `start_date`, must not be `None`")  # noqa: E501
-        if start_date is not None:  # noqa: E501
-            raise ValueError("Invalid value for `start_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
-
+       
         self._start_date = start_date
 
     @property
@@ -152,8 +148,7 @@ class RecurringUnavailability(Model):
         """
         if end_date is None:
             raise ValueError("Invalid value for `end_date`, must not be `None`")  # noqa: E501
-        if end_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', end_date):  # noqa: E501
-            raise ValueError("Invalid value for `end_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+        
 
         self._end_date = end_date
 
@@ -227,8 +222,7 @@ class RecurringUnavailability(Model):
         """
         if recurrence is None:
             raise ValueError("Invalid value for `recurrence`, must not be `None`")  # noqa: E501
-        if recurrence is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', recurrence):  # noqa: E501
-            raise ValueError("Invalid value for `recurrence`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+
 
         self._recurrence = recurrence
 

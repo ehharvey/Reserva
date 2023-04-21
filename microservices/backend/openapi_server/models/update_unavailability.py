@@ -86,9 +86,7 @@ class UpdateUnavailability(Model):
         :param item: The item of this UpdateUnavailability.
         :type item: str
         """
-        if item is not None and not re.search(r'^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', item):  # noqa: E501
-            raise ValueError("Invalid value for `item`, must be a follow pattern or equal to `/^[a-z]+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
-
+       
         self._item = item
 
     @property
@@ -111,9 +109,7 @@ class UpdateUnavailability(Model):
         :param start_date: The start_date of this UpdateUnavailability.
         :type start_date: str
         """
-        if start_date is not None:  # noqa: E501
-            raise ValueError("Invalid value for `start_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
-
+       
         self._start_date = start_date
 
     @property
@@ -136,8 +132,7 @@ class UpdateUnavailability(Model):
         :param end_date: The end_date of this UpdateUnavailability.
         :type end_date: str
         """
-        if end_date is not None and not re.search(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}[tT]([01][0-9]|2[0-3]):(00|15|30|45):00$', end_date):  # noqa: E501
-            raise ValueError("Invalid value for `end_date`, must be a follow pattern or equal to `/^[0-9]{4}-[0-9]{2}-[0-9]{2}t([01][0-9]|2[0-3]):(00|15|30|45):00$/`")  # noqa: E501
+        
 
         self._end_date = end_date
 
