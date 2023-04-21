@@ -1,43 +1,39 @@
 import { Button, Group } from "@mantine/core";
-import { useAuth0 } from "@auth0/auth0-react";
-import { User } from "../../entities/User";
-import { useEffect, useState } from "react";
-import { GroupApi, Configuration, GroupsPostRequest, UserApi } from "../../reserva_client";
-
+import { RedirectLoginOptions, useAuth0 } from "@auth0/auth0-react";
+import { ConfigContext } from "../../contexts/ConfigProvider";
+import { useContext } from "react";
 
 export function AuthButtons() {
-    const { logout, isAuthenticated, user, loginWithRedirect, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
-    const [test, setTest] = useState<string | null>(null);
+    const { logout, isAuthenticated, user, loginWithRedirect } = useAuth0();
+    const config = useContext(ConfigContext);
 
-    var loginOptions = {
+    var standardLoginOptions = {
         redirectUri: window.location.origin,
-        audience: "http://localhost:8080",
-        scope: "openid profile email",
-    };
+        audience: config?.api.baseUrl,
+        scope: `
+            read:groups:associated
+            read:unavailabilities:me
+            write:groupmemberships:me
+            write:groups:me
+            write:unavailabilities:me
+        `,
+    } as RedirectLoginOptions;
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            getAccessTokenWithPopup({ authorizationParams: {
-                audience: "http://localhost:8080",
-                scope: "write:groups:me"
-            }}).then((token) => {
-                var config = new Configuration({
-                    basePath: "http://localhost:8080", accessToken: "Bearer " + token, 
-                });
-                
-                var foo = new UserApi(config);
-    
-                foo.usersMeGet().then((response) => {
-                    console.log(response);
-                });
-            });
-
-            
-        }
-    }, [isAuthenticated]);
+    var adminLoginOptions = {
+        redirectUri: window.location.origin,
+        audience: config?.api.baseUrl,
+        scope: `
+            read:items:me
+            read:unavailabilities:me
+            write:items:me
+            write:unavailabilities:me
+            read:items
+            write:items
+        `,
+    } as RedirectLoginOptions;
 
     return (
-        <Group position="center" grow pb="xl" px="md">
+        <Group position="center">
             {isAuthenticated ? (
                 <>
                     Hello, {user?.name}!
@@ -45,8 +41,8 @@ export function AuthButtons() {
                 </>
             ) : (
                 <>
-                    <Button variant="default" onClick={() => { loginWithRedirect() }}>Log in</Button>
-                    <Button>Sign up</Button>
+                    <Button variant="default" onClick={() => { loginWithRedirect(standardLoginOptions) }}>Log in as standard user</Button>
+                    <Button variant="default" onClick={() => { loginWithRedirect(adminLoginOptions) }}>Log in as Admin</Button>
                 </>
             )}
         </Group>
