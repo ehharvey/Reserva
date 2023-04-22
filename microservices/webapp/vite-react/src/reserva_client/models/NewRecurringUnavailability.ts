@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
-import {
-    UpdateUnavailabilityOwnerFromJSON,
-    UpdateUnavailabilityOwnerFromJSONTyped,
-    UpdateUnavailabilityOwnerToJSON,
-} from './UpdateUnavailabilityOwner';
-
 /**
  * a recurring unavailability. this could be a maintenance window, a booking, or something else. the client will send this when they want to create a new recurring unavailability.
  * @export
@@ -27,7 +20,7 @@ import {
  */
 export interface NewRecurringUnavailability {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item. 
      * @type {string}
      * @memberof NewRecurringUnavailability
      */
@@ -45,11 +38,12 @@ export interface NewRecurringUnavailability {
      */
     endDate: string;
     /**
-     * 
-     * @type {UpdateUnavailabilityOwner}
+     * the id of the owner of the unavailability.
+     * It can be a group or a user
+     * @type {string}
      * @memberof NewRecurringUnavailability
      */
-    owner?: UpdateUnavailabilityOwner;
+    owner?: string;
     /**
      * 
      * @type {string}
@@ -104,7 +98,7 @@ export function NewRecurringUnavailabilityFromJSONTyped(json: any, ignoreDiscrim
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
-        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
+        'owner': !exists(json, 'owner') ? undefined : json['owner'],
         'type': json['type'],
         'recurrence': json['recurrence'],
     };
@@ -122,7 +116,7 @@ export function NewRecurringUnavailabilityToJSON(value?: NewRecurringUnavailabil
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
-        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
+        'owner': value.owner,
         'type': value.type,
         'recurrence': value.recurrence,
     };

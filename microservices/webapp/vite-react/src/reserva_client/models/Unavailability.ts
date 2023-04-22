@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
-import {
-    UpdateUnavailabilityOwnerFromJSON,
-    UpdateUnavailabilityOwnerFromJSONTyped,
-    UpdateUnavailabilityOwnerToJSON,
-} from './UpdateUnavailabilityOwner';
-
 /**
  * 
  * @export
@@ -27,7 +20,7 @@ import {
  */
 export interface Unavailability {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item. 
      * @type {string}
      * @memberof Unavailability
      */
@@ -45,11 +38,12 @@ export interface Unavailability {
      */
     endDate: string;
     /**
-     * 
-     * @type {UpdateUnavailabilityOwner}
+     * the id of the owner of the unavailability.
+     * It can be a group or a user
+     * @type {string}
      * @memberof Unavailability
      */
-    owner?: UpdateUnavailabilityOwner;
+    owner?: string;
     /**
      * 
      * @type {string}
@@ -57,7 +51,7 @@ export interface Unavailability {
      */
     type: UnavailabilityTypeEnum;
     /**
-     * the id of an unavailability. this is a uuid with the prefix "unavailability-".
+     * the id of an unavailability.
      * @type {string}
      * @memberof Unavailability
      */
@@ -118,7 +112,7 @@ export function UnavailabilityFromJSONTyped(json: any, ignoreDiscriminator: bool
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
-        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
+        'owner': !exists(json, 'owner') ? undefined : json['owner'],
         'type': json['type'],
         'id': json['id'],
         'createDate': (new Date(json['createDate'])),
@@ -138,7 +132,7 @@ export function UnavailabilityToJSON(value?: Unavailability | null): any {
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
-        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
+        'owner': value.owner,
         'type': value.type,
         'id': value.id,
     };

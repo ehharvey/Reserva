@@ -20,7 +20,7 @@ import { exists, mapValues } from '../runtime';
  */
 export interface UnavailabilityAllOf {
     /**
-     * the id of an unavailability. this is a uuid with the prefix "unavailability-".
+     * the id of an unavailability.
      * @type {string}
      * @memberof UnavailabilityAllOf
      */

@@ -20,6 +20,12 @@ import { exists, mapValues } from '../runtime';
  */
 export interface User {
     /**
+     * the user's id.
+     * @type {string}
+     * @memberof User
+     */
+    id?: string;
+    /**
      * the user's picture URL
      * @type {string}
      * @memberof User
@@ -81,6 +87,7 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'picture': !exists(json, 'picture') ? undefined : json['picture'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'name': !exists(json, 'name') ? undefined : json['name'],
@@ -98,6 +105,7 @@ export function UserToJSON(value?: User | null): any {
     }
     return {
         
+        'id': value.id,
         'picture': value.picture,
         'email': value.email,
         'name': value.name,

@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
-import {
-    UpdateUnavailabilityOwnerFromJSON,
-    UpdateUnavailabilityOwnerFromJSONTyped,
-    UpdateUnavailabilityOwnerToJSON,
-} from './UpdateUnavailabilityOwner';
-
 /**
  * a recurring unavailability. this could be a maintenance window, a booking, or something else. the server will send this to clients
  * @export
@@ -27,7 +20,7 @@ import {
  */
 export interface RecurringUnavailability {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item. 
      * @type {string}
      * @memberof RecurringUnavailability
      */
@@ -45,11 +38,12 @@ export interface RecurringUnavailability {
      */
     endDate: string;
     /**
-     * 
-     * @type {UpdateUnavailabilityOwner}
+     * the id of the owner of the unavailability.
+     * It can be a group or a user
+     * @type {string}
      * @memberof RecurringUnavailability
      */
-    owner?: UpdateUnavailabilityOwner;
+    owner?: string;
     /**
      * 
      * @type {string}
@@ -63,7 +57,7 @@ export interface RecurringUnavailability {
      */
     recurrence: string;
     /**
-     * the id of an unavailability. this is a uuid with the prefix "unavailability-".
+     * the id of an unavailability.
      * @type {string}
      * @memberof RecurringUnavailability
      */
@@ -111,7 +105,7 @@ export function RecurringUnavailabilityFromJSONTyped(json: any, ignoreDiscrimina
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
-        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
+        'owner': !exists(json, 'owner') ? undefined : json['owner'],
         'type': json['type'],
         'recurrence': json['recurrence'],
         'id': json['id'],
@@ -130,7 +124,7 @@ export function RecurringUnavailabilityToJSON(value?: RecurringUnavailability | 
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
-        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
+        'owner': value.owner,
         'type': value.type,
         'recurrence': value.recurrence,
         'id': value.id,

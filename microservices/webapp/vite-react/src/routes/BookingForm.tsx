@@ -4,7 +4,7 @@ import { ResetTimeBlocks, TimeBlocks } from '../components/timeselector/TimeBloc
 import { Form, useParams, useNavigate } from "react-router-dom";
 import { DatePicker } from '@mantine/dates'
 import { PopupMessage } from '../components/Utilities/PopupMessage'
-import { Configuration, UnavailabilitiesPostOperationRequest, UnavailabilityApi, ItemApi  } from '../reserva_client'
+import { Configuration, UnavailabilitiesPostRequest, UnavailabilityApi, ItemApi  } from '../reserva_client'
 import { ConfigContext } from '../contexts/ConfigProvider'
 import { GetTokenSilentlyOptions, useAuth0 } from '@auth0/auth0-react'
 
@@ -22,7 +22,7 @@ export function BookingForm() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
 
-    const [bookingFormData, setBookingFormData] = useState<UnavailabilitiesPostOperationRequest>({});
+    const [bookingFormData, setBookingFormData] = useState<UnavailabilitiesPostRequest>({});
 
     const { roomId } = useParams(); // This is the roomId from the URL 
 
@@ -60,12 +60,11 @@ export function BookingForm() {
             //console.log(value);
             return value;//.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         }
-        else
-            return new Date();
+        else return new Date();
     }
-
+    
     function GetStartTime() {
-        var startTime:Date = new Date();
+        var startTime: Date = new Date();
         if(GetDate()){
             startTime = GetDate();
         }
@@ -117,15 +116,15 @@ export function BookingForm() {
                 new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
             );
     
-            unavailabilityApi.unavailabilitiesPost({
-                unavailabilitiesPostRequest: {
+            unavailabilityApi.unavailabilitiesPost(
+                {
                     item: (roomId) ? roomId : "",
                     startDate: GetStartTime().toISOString(),
                     endDate: GetEndTime().toISOString(),
                     owner: user?.sub,
                     type: "booking"
-                }
-            }).then((response) => {
+                } as UnavailabilitiesPostRequest
+            ).then((response) => {
                 console.log(response);
                 navigate('/bookings');
             }
@@ -234,4 +233,5 @@ export function BookingForm() {
             </Card>
         </Stack>
     )
+    
 }

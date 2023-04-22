@@ -28,24 +28,24 @@ import {
 } from './NewUnavailability';
 
 /**
- * @type UnavailabilitiesPostRequest
+ * @type UnavailabilitiesPostOneOf
  * 
  * @export
  */
-export type UnavailabilitiesPostRequest = NewRecurringUnavailability | NewUnavailability;
+export type UnavailabilitiesPostOneOf = NewRecurringUnavailability | NewUnavailability;
 
-export function UnavailabilitiesPostRequestFromJSON(json: any): UnavailabilitiesPostRequest {
-    return UnavailabilitiesPostRequestFromJSONTyped(json, false);
+export function UnavailabilitiesPostOneOfFromJSON(json: any): UnavailabilitiesPostOneOf {
+    return UnavailabilitiesPostOneOfFromJSONTyped(json, false);
 }
 
-export function UnavailabilitiesPostRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UnavailabilitiesPostRequest {
+export function UnavailabilitiesPostOneOfFromJSONTyped(json: any, ignoreDiscriminator: boolean): UnavailabilitiesPostOneOf {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return { ...NewRecurringUnavailabilityFromJSONTyped(json, true), ...NewUnavailabilityFromJSONTyped(json, true) };
 }
 
-export function UnavailabilitiesPostRequestToJSON(value?: UnavailabilitiesPostRequest | null): any {
+export function UnavailabilitiesPostOneOfToJSON(value?: UnavailabilitiesPostOneOf | null): any {
     if (value === undefined) {
         return undefined;
     }

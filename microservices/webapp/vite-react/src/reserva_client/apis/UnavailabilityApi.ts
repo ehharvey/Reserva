@@ -20,7 +20,7 @@ import type {
   UnavailabilitiesIdPut400Response,
   UnavailabilitiesPost201Response,
   UnavailabilitiesPost400Response,
-  UnavailabilitiesPostRequest,
+  UnavailabilitiesPostOneOf,
 } from '../models';
 import {
     UnavailabilitiesIdDelete200ResponseFromJSON,
@@ -33,8 +33,8 @@ import {
     UnavailabilitiesPost201ResponseToJSON,
     UnavailabilitiesPost400ResponseFromJSON,
     UnavailabilitiesPost400ResponseToJSON,
-    UnavailabilitiesPostRequestFromJSON,
-    UnavailabilitiesPostRequestToJSON,
+    UnavailabilitiesPostOneOfFromJSON,
+    UnavailabilitiesPostOneOfToJSON,
 } from '../models';
 
 export interface UnavailabilitiesIdDeleteRequest {
@@ -45,8 +45,8 @@ export interface UnavailabilitiesIdPutRequest {
     id: string;
 }
 
-export interface UnavailabilitiesPostOperationRequest {
-    unavailabilitiesPostRequest?: UnavailabilitiesPostRequest;
+export interface UnavailabilitiesPostRequest {
+    body?: UnavailabilitiesPostOneOf;
 }
 
 /**
@@ -137,7 +137,7 @@ export class UnavailabilityApi extends runtime.BaseAPI {
     /**
      * Create a new unavailability
      */
-    async unavailabilitiesPostRaw(requestParameters: UnavailabilitiesPostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UnavailabilitiesPost201Response>> {
+    async unavailabilitiesPostRaw(requestParameters: UnavailabilitiesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UnavailabilitiesPost201Response>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -159,7 +159,7 @@ export class UnavailabilityApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UnavailabilitiesPostRequestToJSON(requestParameters.unavailabilitiesPostRequest),
+            body: requestParameters.body as any,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnavailabilitiesPost201ResponseFromJSON(jsonValue));
@@ -168,7 +168,7 @@ export class UnavailabilityApi extends runtime.BaseAPI {
     /**
      * Create a new unavailability
      */
-    async unavailabilitiesPost(requestParameters: UnavailabilitiesPostOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UnavailabilitiesPost201Response> {
+    async unavailabilitiesPost(requestParameters: UnavailabilitiesPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UnavailabilitiesPost201Response> {
         const response = await this.unavailabilitiesPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
