@@ -293,7 +293,7 @@ paths:
         required: true
         schema:
           format: int64
-          type: integer
+          type: string
         style: simple
       responses:
         "204":
@@ -326,7 +326,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/item'
+              $ref: '#/components/schemas/updateItem'
       responses:
         "200":
           content:
@@ -361,7 +361,7 @@ paths:
         explode: true
         in: query
         name: start
-        required: true
+        required: false
         schema:
           format: date-time
           type: string
@@ -370,7 +370,7 @@ paths:
         explode: true
         in: query
         name: end
-        required: true
+        required: false
         schema:
           format: date-time
           type: string

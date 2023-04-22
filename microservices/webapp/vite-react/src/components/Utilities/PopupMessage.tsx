@@ -1,5 +1,5 @@
 import { ActionIcon, Card, CloseButton, Group, Text } from "@mantine/core";
-import { IconCalendarEvent, IconClock } from "@tabler/icons-react";
+import { IconCalendarEvent, IconMoodSad } from "@tabler/icons-react";
 import { useState } from "react";
 
 export interface PopupMessageProps {
@@ -15,7 +15,7 @@ export function PopupMessage(props: PopupMessageProps) {
 
     const getIcon = () => {
         if (iconType === 'error') {
-            return <IconClock size="xs" color="grey" />;
+            return <IconMoodSad size="xs" color="red" />;
         }
         if (iconType === 'calendarEvent') {
             return <IconCalendarEvent size="xs" color="grey" />

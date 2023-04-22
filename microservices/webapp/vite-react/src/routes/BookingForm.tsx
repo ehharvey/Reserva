@@ -55,7 +55,6 @@ export function BookingForm() {
         ResetTimeBlocks();
     };
 
-
     function GetDate() {
         if(value !== null){
             //console.log(value);
