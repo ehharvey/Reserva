@@ -41,8 +41,7 @@ export function AuthButtons() {
                 </>
             ) : (
                 <>
-                    <Button variant="default" onClick={() => { loginWithRedirect(standardLoginOptions) }}>Log in as standard user</Button>
-                    <Button variant="default" onClick={() => { loginWithRedirect(adminLoginOptions) }}>Log in as Admin</Button>
+                    <Button variant="default" onClick={() => { loginWithRedirect(standardLoginOptions) }}>Login</Button>
                 </>
             )}
         </Group>

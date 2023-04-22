@@ -104,6 +104,7 @@ def users_me_unavailabilities_get(user_details: User, db: MongoClient, start=Non
         for unavailability in db.main.unavailabilities.find({"owner": user_details.id})
     ]
 
+
     result = GroupsIdUnavailabilitiesGet200Response(
         unavailabilities=unavailabilities
     )

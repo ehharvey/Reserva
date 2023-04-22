@@ -1,7 +1,10 @@
-import { Table } from "@mantine/core"
-import { useState } from 'react';
+import { Button, Table } from "@mantine/core"
+import { useContext, useEffect, useState } from 'react';
 import { TextInput } from '@mantine/core';
-import { useAuth0 } from "@auth0/auth0-react";
+import { GetTokenSilentlyOptions, useAuth0 } from "@auth0/auth0-react";
+import { ItemApi, Configuration, ItemsGetRequest } from "../reserva_client";
+import { ConfigContext } from "../contexts/ConfigProvider";
+import { useNavigate } from "react-router-dom";
 
 
 interface searchParams {
@@ -10,34 +13,14 @@ interface searchParams {
   descriptionSearch: string;
 }
 
-function searchAPI(search: searchParams) {
-  
-
-  const rows = filteredRooms.map((room) => {
-    const theRoute = `/rooms/${room.id}`;
-    return (
-      <tr key={room.id} onClick={() => { window.location.href = theRoute; }}>
-        <td>{room.name}</td>
-        <td>{room.location}</td>
-        <td>{room.description}</td>
-        <td>{room.features}</td>
-        <td>{room.created_at}</td>
-        <td>{room.last_updated_at}</td>
-      </tr>
-    );
-  });
-
-  
-
-  return rows;
-}
-
-
 export function Rooms() {
+  const config = useContext(ConfigContext);
   const { getAccessTokenSilently, user } = useAuth0();
   const [nameSearch, setNameSearch] = useState('');
   const [locationSearch, setLocationSearch] = useState('');
   const [descriptionSearch, setDescriptionSearch] = useState('');
+  const [rows, setRows] = useState<JSX.Element[]>();
+  const navigate = useNavigate();
 
   const search = {
     nameSearch: nameSearch,
@@ -45,8 +28,39 @@ export function Rooms() {
     descriptionSearch: descriptionSearch
   } as searchParams;
 
-  var rows = searchAPI(search); // searchAPI is just a dummy function 
+  const accessTokenOptions: GetTokenSilentlyOptions = {
+    authorizationParams: {
+      audience: config?.api.baseUrl,
+    }
+  };
 
+  const itemApi = new ItemApi(
+    new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
+  );
+
+  useEffect(() => {
+    const itemsGetRequest = {
+      nameSearch: nameSearch,
+      locationSearch: locationSearch,
+      descriptionSearch: descriptionSearch
+    } as ItemsGetRequest
+
+    itemApi.itemsGet(itemsGetRequest).then((response) =>  {
+      const rows = response.rooms?.map((item) => {
+        return (
+          <tr key={item.id}>
+            <td>{item.name}</td>
+            <td>{item.location}</td>
+            <td>{item.description}</td>
+            <td><Button onClick={() => navigate("/booking-request/" + item.id)}>Book</Button></td>
+          </tr>
+        )
+      });
+      setRows(rows);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, [nameSearch, locationSearch, descriptionSearch]);
 
   return (
     <div>
@@ -77,9 +91,7 @@ export function Rooms() {
             <th>Name</th>
             <th>Room Location</th>
             <th>Room Description</th>
-            <th>Room Features </th>
-            <th>Room Created At</th>
-            <th>Room Last Updated At</th>
+            <th>Book</th>
           </tr>
         </thead>
         <tbody> {rows}</tbody>

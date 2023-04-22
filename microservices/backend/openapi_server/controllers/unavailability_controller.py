@@ -64,8 +64,10 @@ def unavailabilities_post(client: MongoClient ,unavailabilities_post_request=Non
 
     :rtype: Union[UnavailabilitiesPost201Response, Tuple[UnavailabilitiesPost201Response, int], Tuple[UnavailabilitiesPost201Response, int, Dict[str, str]]
     """
+
     if connexion.request.is_json:
         new_item = NewUnavailability.from_dict(connexion.request.get_json())  # noqa: E501
+
         created = create_unavailability(new_item, client)
         return UnavailabilitiesPost201Response(unavailability=created).to_dict() , 201
 

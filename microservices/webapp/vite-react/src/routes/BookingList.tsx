@@ -1,6 +1,6 @@
 import { Card, Divider, Group, Stack, Text } from "@mantine/core"
 import { useContext, useEffect, useState } from "react";
-import { UsersMeUnavailabilitiesGetRequest, UserApi, Configuration, Unavailability } from '../reserva_client'
+import { UsersMeUnavailabilitiesGetRequest, UserApi, Configuration, Unavailability, ItemApi } from '../reserva_client'
 import { GetTokenSilentlyOptions, useAuth0 } from "@auth0/auth0-react";
 import { ConfigContext } from "../contexts/ConfigProvider";
 
@@ -9,6 +9,17 @@ export function BookingList() {
     const { getAccessTokenSilently, user } = useAuth0();
     const [unavailabilities, setUnavailabilities] = useState<Unavailability[]>([]);
     const [reversedUnavailabilities, setReversedUnavailabilities] = useState<Unavailability[]>([]);
+
+    var accessTokenOptions = {
+        authorizationParams: {
+            audience: config?.api.baseUrl,
+        }
+    } as GetTokenSilentlyOptions;
+
+    const itemApi = new ItemApi(
+        new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
+    );
+
 
     useEffect(() => {
         var accessTokenOptions = {
@@ -27,10 +38,8 @@ export function BookingList() {
         unavailabilityApi.usersMeUnavailabilitiesGet({}).then((response) => {
             const newUnavailabilities: Unavailability[] = [];
             response.unavailabilities?.forEach((unavailability, index) => {
-                if (index > 1) {
-                    console.log(index);
-                    newUnavailabilities.push(unavailability);
-                }
+                console.log(index);
+                newUnavailabilities.push(unavailability);
             });
 
             newUnavailabilities.sort((a, b) => {
@@ -42,9 +51,9 @@ export function BookingList() {
             setUnavailabilities(newUnavailabilities);
             setReversedUnavailabilities([...newUnavailabilities].reverse());
         })
-            .catch((error) => {
-                console.log(error);
-            });
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     const bookingCard = (unavailability: Unavailability, active: boolean) => {
