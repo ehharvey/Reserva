@@ -102,4 +102,6 @@ def create_unavailability(new_unavailability: NewUnavailability, client: MongoCl
 
     unavailabilities.insert_one(unavailability_dict)
 
+    unavailability.id = unavailability_dict["_id"].__str__()
+    
     return unavailability
