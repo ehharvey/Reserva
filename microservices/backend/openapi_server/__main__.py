@@ -104,7 +104,7 @@ def seed_db():
     # Seed unavailable times
     unavailabilities = [
         NewUnavailability(
-            item=item,
+            item=item.id,
             owner="auth0|643db743a891bec857308e2f",
             start_date=datetime.datetime.now(),
             end_date=datetime.datetime.now() + datetime.timedelta(hours=1),
