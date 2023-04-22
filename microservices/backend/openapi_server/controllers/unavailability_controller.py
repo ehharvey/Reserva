@@ -1,8 +1,17 @@
 import connexion
+from pymongo import MongoClient
 import six
 from typing import Dict
 from typing import Tuple
 from typing import Union
+
+from openapi_server.models.user import User
+from openapi_server.user_utils import get_user_details_dev
+
+
+from openapi_server.db_utils import create_unavailability
+from openapi_server.models.new_unavailability import NewUnavailability
+
 
 from openapi_server.models.unavailabilities_id_delete200_response import UnavailabilitiesIdDelete200Response  # noqa: E501
 from openapi_server.models.unavailabilities_id_put200_response import UnavailabilitiesIdPut200Response  # noqa: E501
@@ -40,8 +49,7 @@ def unavailabilities_id_put(id):  # noqa: E501
     """
     return 'do some magic!'
 
-
-def unavailabilities_post(unavailabilities_post_request=None):  # noqa: E501
+def unavailabilities_post(client: MongoClient ,unavailabilities_post_request=None):  # noqa: E501
     """Create a new unavailability
 
      # noqa: E501
@@ -52,6 +60,9 @@ def unavailabilities_post(unavailabilities_post_request=None):  # noqa: E501
     :rtype: Union[UnavailabilitiesPost201Response, Tuple[UnavailabilitiesPost201Response, int], Tuple[UnavailabilitiesPost201Response, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        unavailabilities_post_request = UnavailabilitiesPostRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    
-    return 'do some magic!'
+        new_item = NewUnavailability.from_dict(connexion.request.get_json())  # noqa: E501
+        created = create_unavailability(new_item, client)
+        #client.main.unavailabilities.insert_one(unavailabilities_post_request.to_dict())
+        return UnavailabilitiesPost201Response(unavailability=created).to_dict() , 201
+
+    return "do some magic!"
