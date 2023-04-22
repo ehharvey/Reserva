@@ -4,6 +4,7 @@ import datetime
 from dotenv import load_dotenv
 import connexion
 from injector import SingletonScope
+from openapi_server.controllers.security_controller_ import configure_jwk_client_dev, configure_jwk_client
 
 from openapi_server import encoder
 from flask_cors import CORS
@@ -123,16 +124,17 @@ def main():
                 arguments={'title': 'Main API'},
                 pythonic_params=True)
 
-    
-
-    # Configure user utils
     if config.FLASK_ENV == "development":
         configure_dev()
         seed_db()
+        configure_jwk_client_dev()
     else:
         configure_user_utils(
             domain=config.AUTH0_DOMAIN,
             management_api_token=config.AUTH0_API_TOKEN
+        )
+        configure_jwk_client(
+            domain=config.AUTH0_DOMAIN
         )
 
     # Configure FlaskInjector
