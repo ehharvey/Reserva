@@ -26,7 +26,7 @@ export * from './UnavailabilitiesIdPut200Response';
 export * from './UnavailabilitiesIdPut400Response';
 export * from './UnavailabilitiesPost201Response';
 export * from './UnavailabilitiesPost400Response';
-export * from './UnavailabilitiesPostRequest';
+export * from './UnavailabilitiesPostOneOf';
 export * from './Unavailability';
 export * from './UnavailabilityAllOf';
 export * from './UpdateGroup';

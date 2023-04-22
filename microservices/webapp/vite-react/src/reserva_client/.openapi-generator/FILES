@@ -31,7 +31,7 @@ models/UnavailabilitiesIdPut200Response.ts
 models/UnavailabilitiesIdPut400Response.ts
 models/UnavailabilitiesPost201Response.ts
 models/UnavailabilitiesPost400Response.ts
-models/UnavailabilitiesPostRequest.ts
+models/UnavailabilitiesPostOneOf.ts
 models/Unavailability.ts
 models/UnavailabilityAllOf.ts
 models/UpdateGroup.ts

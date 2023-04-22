@@ -51,7 +51,7 @@ def seed_db():
             name="Room 1", 
             description="Description A",
             location="Location A",
-            type="Room",
+            type="room",
             features=[
                 Feature(name="Feature 1", value="Value 1"),
                 Feature(name="Feature 2", value="Value 2"),
@@ -59,16 +59,104 @@ def seed_db():
             ],
         ),
         NewItem(
-            name="Item 2",
+            name="Room 2",
             description="Description B",
             location="Location B",
-            type="Room",
+            type="room",
             features=[
                 Feature(name="Feature 1", value="Value 1"),
                 Feature(name="Feature 2", value="Value 2"),
                 Feature(name="Feature 3", value="Value 3"),
             ],
         ),
+        NewItem(
+            name="Room 3",
+            description="Description C",
+            location="Location C",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 4",
+            description="Description D",
+            location="Location D",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 5",
+            description="Description E",
+            location="Location E",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 6",
+            description="Description F",
+            location="Location F",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 7",
+            description="Description G",
+            location="Location G",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 8",
+            description="Description H",
+            location="Location H",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 9",
+            description="Description I",
+            location="Location I",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        ),
+        NewItem(
+            name="Room 10",
+            description="Description J",
+            location="Location J",
+            type="room",
+            features=[
+                Feature(name="Feature 1", value="Value 1"),
+                Feature(name="Feature 2", value="Value 2"),
+                Feature(name="Feature 3", value="Value 3"),
+            ],
+        )
     ]
 
     created_items = [

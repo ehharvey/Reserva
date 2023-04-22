@@ -87,20 +87,16 @@ export function AppHeader() {
               Home
             </a>
 
-            <a href="/me" className={classes.link}>
-              Profile
-            </a>
-
             <a href="/bookings" className={classes.link}>
               Bookings
             </a>
 
-            <a href="/groups" className={classes.link}>
+            {/* <a href="/groups" className={classes.link}>
               Groups 
-            </a>
-            <a href="/booking-request/3" className={classes.link}>
+            </a> */}
+            {/* <a href="/booking-request/3" className={classes.link}>
               Book a Room
-            </a>
+            </a> */}
             <a href="/rooms" className={classes.link}>
               Rooms
             </a>

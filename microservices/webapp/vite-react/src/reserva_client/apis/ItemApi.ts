@@ -16,22 +16,22 @@
 import * as runtime from '../runtime';
 import type {
   GroupsIdUnavailabilitiesGet200Response,
-  Item,
   ItemsGet200Response,
   ItemsPost201Response,
   NewItem,
+  UpdateItem,
 } from '../models';
 import {
     GroupsIdUnavailabilitiesGet200ResponseFromJSON,
     GroupsIdUnavailabilitiesGet200ResponseToJSON,
-    ItemFromJSON,
-    ItemToJSON,
     ItemsGet200ResponseFromJSON,
     ItemsGet200ResponseToJSON,
     ItemsPost201ResponseFromJSON,
     ItemsPost201ResponseToJSON,
     NewItemFromJSON,
     NewItemToJSON,
+    UpdateItemFromJSON,
+    UpdateItemToJSON,
 } from '../models';
 
 export interface ItemsGetRequest {
@@ -43,18 +43,18 @@ export interface ItemsGetRequest {
 }
 
 export interface ItemsIdDeleteRequest {
-    id: number;
+    id: string;
 }
 
 export interface ItemsIdPutRequest {
     id: number;
-    item?: Item;
+    updateItem?: UpdateItem;
 }
 
 export interface ItemsIdUnavailabilitiesGetRequest {
     id: string;
-    start: Date;
-    end: Date;
+    start?: Date;
+    end?: Date;
     page?: number;
     perPage?: number;
 }
@@ -182,7 +182,7 @@ export class ItemApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: ItemToJSON(requestParameters.item),
+            body: UpdateItemToJSON(requestParameters.updateItem),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ItemsPost201ResponseFromJSON(jsonValue));
@@ -202,14 +202,6 @@ export class ItemApi extends runtime.BaseAPI {
     async itemsIdUnavailabilitiesGetRaw(requestParameters: ItemsIdUnavailabilitiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GroupsIdUnavailabilitiesGet200Response>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling itemsIdUnavailabilitiesGet.');
-        }
-
-        if (requestParameters.start === null || requestParameters.start === undefined) {
-            throw new runtime.RequiredError('start','Required parameter requestParameters.start was null or undefined when calling itemsIdUnavailabilitiesGet.');
-        }
-
-        if (requestParameters.end === null || requestParameters.end === undefined) {
-            throw new runtime.RequiredError('end','Required parameter requestParameters.end was null or undefined when calling itemsIdUnavailabilitiesGet.');
         }
 
         const queryParameters: any = {};

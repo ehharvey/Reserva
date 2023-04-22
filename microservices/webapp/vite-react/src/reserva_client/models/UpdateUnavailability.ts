@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
-import {
-    UpdateUnavailabilityOwnerFromJSON,
-    UpdateUnavailabilityOwnerFromJSONTyped,
-    UpdateUnavailabilityOwnerToJSON,
-} from './UpdateUnavailabilityOwner';
-
 /**
  * an update to an unavailability. this could be a maintenance window, a booking, or something else. this is the base type for all unavailability updates. as a result, it does not have an id, because it is not a complete unavailability. it also has no required fields, because only need to send a fragment of this data to update an unavailability.
  * @export
@@ -27,7 +20,7 @@ import {
  */
 export interface UpdateUnavailability {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item. 
      * @type {string}
      * @memberof UpdateUnavailability
      */
@@ -45,11 +38,12 @@ export interface UpdateUnavailability {
      */
     endDate?: string;
     /**
-     * 
-     * @type {UpdateUnavailabilityOwner}
+     * the id of the owner of the unavailability.
+     * It can be a group or a user
+     * @type {string}
      * @memberof UpdateUnavailability
      */
-    owner?: UpdateUnavailabilityOwner;
+    owner?: string;
     /**
      * 
      * @type {string}
@@ -93,7 +87,7 @@ export function UpdateUnavailabilityFromJSONTyped(json: any, ignoreDiscriminator
         'item': !exists(json, 'item') ? undefined : json['item'],
         'startDate': !exists(json, 'startDate') ? undefined : json['startDate'],
         'endDate': !exists(json, 'endDate') ? undefined : json['endDate'],
-        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
+        'owner': !exists(json, 'owner') ? undefined : json['owner'],
         'type': !exists(json, 'type') ? undefined : json['type'],
     };
 }
@@ -110,7 +104,7 @@ export function UpdateUnavailabilityToJSON(value?: UpdateUnavailability | null):
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
-        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
+        'owner': value.owner,
         'type': value.type,
     };
 }

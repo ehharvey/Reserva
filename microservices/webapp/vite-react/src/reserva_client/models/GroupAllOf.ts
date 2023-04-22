@@ -20,7 +20,7 @@ import { exists, mapValues } from '../runtime';
  */
 export interface GroupAllOf {
     /**
-     * the id of a group. this is a uuid with the prefix "group-".
+     * the id of a group.
      * @type {string}
      * @memberof GroupAllOf
      */

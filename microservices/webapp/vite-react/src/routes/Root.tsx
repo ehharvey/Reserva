@@ -4,7 +4,7 @@ import { Button } from '@mantine/core'
 import './Root.css'
 
 export function Root() {
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
 
   return (
     <div>
@@ -21,11 +21,6 @@ export function Root() {
         <br></br>
         Start booking your study room today and elevate your academic success! 
       </p>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          CLICK ME! {count}
-        </Button>
-      </div>
     </div>
   )
 }

@@ -20,7 +20,7 @@ import { exists, mapValues } from '../runtime';
  */
 export interface ItemAllOf {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item.
      * @type {string}
      * @memberof ItemAllOf
      */

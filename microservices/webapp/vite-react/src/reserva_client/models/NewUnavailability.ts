@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UpdateUnavailabilityOwner } from './UpdateUnavailabilityOwner';
-import {
-    UpdateUnavailabilityOwnerFromJSON,
-    UpdateUnavailabilityOwnerFromJSONTyped,
-    UpdateUnavailabilityOwnerToJSON,
-} from './UpdateUnavailabilityOwner';
-
 /**
  * a new unavailability. this is sent when a client wants to create a new unavailability.
  * @export
@@ -27,7 +20,7 @@ import {
  */
 export interface NewUnavailability {
     /**
-     * the id of the item. this is a uuid with a prefix of "item-".
+     * the id of the item. 
      * @type {string}
      * @memberof NewUnavailability
      */
@@ -45,11 +38,12 @@ export interface NewUnavailability {
      */
     endDate: string;
     /**
-     * 
-     * @type {UpdateUnavailabilityOwner}
+     * the id of the owner of the unavailability.
+     * It can be a group or a user
+     * @type {string}
      * @memberof NewUnavailability
      */
-    owner?: UpdateUnavailabilityOwner;
+    owner?: string;
     /**
      * 
      * @type {string}
@@ -97,7 +91,7 @@ export function NewUnavailabilityFromJSONTyped(json: any, ignoreDiscriminator: b
         'item': json['item'],
         'startDate': json['startDate'],
         'endDate': json['endDate'],
-        'owner': !exists(json, 'owner') ? undefined : UpdateUnavailabilityOwnerFromJSON(json['owner']),
+        'owner': !exists(json, 'owner') ? undefined : json['owner'],
         'type': json['type'],
     };
 }
@@ -114,7 +108,7 @@ export function NewUnavailabilityToJSON(value?: NewUnavailability | null): any {
         'item': value.item,
         'startDate': value.startDate,
         'endDate': value.endDate,
-        'owner': UpdateUnavailabilityOwnerToJSON(value.owner),
+        'owner': value.owner,
         'type': value.type,
     };
 }

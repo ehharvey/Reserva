@@ -4,7 +4,7 @@ import { ResetTimeBlocks, TimeBlocks } from '../components/timeselector/TimeBloc
 import { Form, useParams, useNavigate } from "react-router-dom";
 import { DatePicker } from '@mantine/dates'
 import { PopupMessage } from '../components/Utilities/PopupMessage'
-import { Configuration, UnavailabilitiesPostOperationRequest, UnavailabilityApi, ItemApi  } from '../reserva_client'
+import { Configuration, UnavailabilitiesPostRequest, UnavailabilityApi, ItemApi, ItemsGetRequest  } from '../reserva_client'
 import { ConfigContext } from '../contexts/ConfigProvider'
 import { GetTokenSilentlyOptions, useAuth0 } from '@auth0/auth0-react'
 
@@ -22,11 +22,19 @@ export function BookingForm() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
 
-    const [bookingFormData, setBookingFormData] = useState<UnavailabilitiesPostOperationRequest>({});
+    const [bookingFormData, setBookingFormData] = useState<UnavailabilitiesPostRequest>({});
+    var accessTokenOptions = {
+        authorizationParams: {
+            audience: config?.api.baseUrl,
+        }
+    } as GetTokenSilentlyOptions;
+
+    const itemApi = new ItemApi(
+        new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
+    );
 
     const { roomId } = useParams(); // This is the roomId from the URL 
 
-    const roomName = roomId;
 
     useEffect(() => {
         ResetTimeBlocks();
@@ -60,12 +68,11 @@ export function BookingForm() {
             //console.log(value);
             return value;//.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         }
-        else
-            return new Date();
+        else return new Date();
     }
-
+    
     function GetStartTime() {
-        var startTime:Date = new Date();
+        var startTime: Date = new Date();
         if(GetDate()){
             startTime = GetDate();
         }
@@ -116,16 +123,20 @@ export function BookingForm() {
             const unavailabilityApi = new UnavailabilityApi(
                 new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
             );
-    
-            unavailabilityApi.unavailabilitiesPost({
-                unavailabilitiesPostRequest: {
+
+            const request = {
+                body: {
                     item: (roomId) ? roomId : "",
                     startDate: GetStartTime().toISOString(),
                     endDate: GetEndTime().toISOString(),
-                    owner: user?.sub,
+                    owner: user?.sub,    
                     type: "booking"
                 }
-            }).then((response) => {
+            } as UnavailabilitiesPostRequest
+            
+            unavailabilityApi.unavailabilitiesPost(
+                request
+            ).then((response) => {
                 console.log(response);
                 navigate('/bookings');
             }
@@ -145,9 +156,7 @@ export function BookingForm() {
             }
         } as GetTokenSilentlyOptions;
 
-        const itemApi = new ItemApi(
-            new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
-        );
+        
         
         itemApi.itemsIdUnavailabilitiesGet({
             id: (roomId) ? roomId : "",
@@ -161,10 +170,27 @@ export function BookingForm() {
         });
     }
 
+    // Get room name
+    const itemsGetRequest = {} as ItemsGetRequest
+
+    const [roomName, setRoomName] = useState<string>("");
+
+    useEffect(() => {
+        itemApi.itemsGet(itemsGetRequest).then((response) => {
+            // Find room with matching ID
+            const room = response.rooms?.find((room) => room.id === roomId);
+
+            if (room) {
+                setRoomName(room.name);
+            }
+        });
+    }, []);
+    
+
     return (
         <Stack align='center'>
             <Text size={24} weight={700} >Booking Form for {roomName}</Text>
-            <Card w="75%" sx={{ maxWidth: 500 }}>
+            {/* <Card w="75%" sx={{ maxWidth: 500 }}>
                 <Card.Section mb={5}>
                     <Text size={18} weight="bold" align='left'>Room Summary</Text>
                 </Card.Section>
@@ -184,7 +210,7 @@ export function BookingForm() {
                         </Stack>
                     </Group>
                 </Card.Section>
-            </Card>
+            </Card> */}
             <Card w="75%" sx={{ maxWidth: 500 }}>
                 <Card.Section mb={5}>
                     <Text size={18} weight="bold" align='left'>Booking Details</Text>
@@ -219,10 +245,10 @@ export function BookingForm() {
                         <PopupMessage iconType={'error'} message={ConstructErrorMessage()} size={'xs'} onClose={() => { handlePopupClose() }} />
                     </Card.Section>
                 }
-                <Card.Section mb={5}>
+                {/* <Card.Section mb={5}>
                     <Checkbox size='xs' mb={5} label="Make this a group session" />
                     <Checkbox size='xs' mb={5} label="Make this a Study with me session" />
-                </Card.Section>
+                </Card.Section> */}
                 <Card.Section>
                     <Form>
                         <Group position='center'>
@@ -234,4 +260,5 @@ export function BookingForm() {
             </Card>
         </Stack>
     )
+    
 }
