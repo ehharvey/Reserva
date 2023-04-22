@@ -55,24 +55,48 @@ export function BookingForm() {
         ResetTimeBlocks();
     };
 
+    function GetDate() {
+        if(value !== null){
+            //console.log(value);
+            return value;//.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+        else
+            return new Date();
+    }
+
     function GetStartTime() {
-        const startTime = new Date(selectedTime.startTime?.getTime() || 0);
-        return startTime.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        var startTime:Date = new Date();
+        if(GetDate()){
+            startTime = GetDate();
+        }
+        if(selectedTime.startTime){
+            startTime.setHours(selectedTime.startTime.getHours());
+            startTime.setMinutes(selectedTime.startTime.getMinutes());
+            startTime.setSeconds(selectedTime.startTime.getSeconds());
+            startTime.setMilliseconds(selectedTime.startTime.getMilliseconds());
+        }
+        return startTime;//.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
     }
 
     function GetEndTime() {
-        const endTime = new Date((selectedTime.endTime) ? selectedTime.endTime?.getTime() || 0 : selectedTime.startTime?.getTime() || 0);
-        endTime?.setMinutes(endTime.getMinutes() + 29);
-        return endTime.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        var endTime:Date = new Date();
+        if(GetDate()){
+            endTime = GetDate();
+        }
+        if(selectedTime.endTime){
+            endTime.setHours(selectedTime.endTime.getHours());
+            endTime.setMinutes(selectedTime.endTime.getMinutes() + 29);
+            endTime.setSeconds(selectedTime.endTime.getSeconds());
+            endTime.setMilliseconds(selectedTime.endTime.getMilliseconds());
+        }
+        return endTime;//.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
     }
 
-    function GetDate() {
-        return value || new Date();//.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    }
+
 
     function ConstructMessage() {
-        const startTimeText = GetStartTime();//.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
-        const endTimeText = GetEndTime();//.toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        const startTimeText = GetStartTime().toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        const endTimeText = GetEndTime().toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
         const dateTimeText = GetDate().toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         return "You've selected " + startTimeText + (selectedTime.endTime ? " - " + endTimeText : "") + " on " + dateTimeText;
     }
@@ -93,18 +117,17 @@ export function BookingForm() {
                 new Configuration({ basePath: config?.api.baseUrl, accessToken: "Bearer " + getAccessTokenSilently(accessTokenOptions) })
             );
     
-            console.log(GetEndTime());
-    
             unavailabilityApi.unavailabilitiesPost({
                 unavailabilitiesPostRequest: {
                     item: (roomId) ? roomId : "",
-                    startDate: GetDate() + " " + GetStartTime(),
-                    endDate: GetDate() + " " + GetEndTime(),
+                    startDate: GetStartTime().toISOString(),
+                    endDate: GetEndTime().toISOString(),
                     owner: user?.sub,
                     type: "booking"
                 }
             }).then((response) => {
                 console.log(response);
+                navigate('/bookings');
             }
             ).catch((error) => {
                 console.log(error);

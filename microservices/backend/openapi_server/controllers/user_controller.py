@@ -4,7 +4,9 @@ import six
 from typing import Dict
 from typing import Tuple
 from typing import Union
+from openapi_server.models.unavailability import Unavailability
 from openapi_server.models.user import User
+
 
 from openapi_server.models.groups_id_unavailabilities_get200_response import GroupsIdUnavailabilitiesGet200Response  # noqa: E501
 from openapi_server.models.groups_id_users_get200_response import GroupsIdUsersGet200Response  # noqa: E501
@@ -74,7 +76,8 @@ def users_me_groups_get(user_details: User, db: MongoClient):  # noqa: E501
 
     return result.to_dict()
 
-def users_me_unavailabilities_get(start=None, end=None):  # noqa: E501
+@get_user_details
+def users_me_unavailabilities_get(user_details: User, db: MongoClient, start=None, end=None):  # noqa: E501
     """get all unavailabilities for the current user
 
     returns a list of all unavailabilities for the current user. # noqa: E501
@@ -88,3 +91,22 @@ def users_me_unavailabilities_get(start=None, end=None):  # noqa: E501
     """
     start = util.deserialize_datetime(start)
     end = util.deserialize_datetime(end)
+
+    unavailabilities = [
+        Unavailability(
+            end_date=unavailability["end_date"].__str__(),
+            id=unavailability["_id"].__str__(),
+            item=unavailability["item"].__str__(),
+            owner=unavailability["owner"].__str__(),
+            start_date=unavailability["start_date"].__str__(),
+            type=unavailability["type"]
+        )
+        for unavailability in db.main.unavailabilities.find({"owner": user_details.id})
+    ]
+
+    result = GroupsIdUnavailabilitiesGet200Response(
+        unavailabilities=unavailabilities
+    )
+
+    return result
+

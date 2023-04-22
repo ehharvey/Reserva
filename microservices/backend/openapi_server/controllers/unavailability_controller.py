@@ -33,6 +33,11 @@ def unavailabilities_id_delete(id):  # noqa: E501
 
     :rtype: Union[UnavailabilitiesIdDelete200Response, Tuple[UnavailabilitiesIdDelete200Response, int], Tuple[UnavailabilitiesIdDelete200Response, int, Dict[str, str]]
     """
+    #Delete unavailability given unavailability id
+
+    if connexion.request.is_json:
+        unavailability = connexion.request.get_json()
+
     return 'do some magic!'
 
 
@@ -62,7 +67,6 @@ def unavailabilities_post(client: MongoClient ,unavailabilities_post_request=Non
     if connexion.request.is_json:
         new_item = NewUnavailability.from_dict(connexion.request.get_json())  # noqa: E501
         created = create_unavailability(new_item, client)
-        #client.main.unavailabilities.insert_one(unavailabilities_post_request.to_dict())
         return UnavailabilitiesPost201Response(unavailability=created).to_dict() , 201
 
     return "do some magic!"
