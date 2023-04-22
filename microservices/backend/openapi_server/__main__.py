@@ -13,7 +13,7 @@ from pymongo.database import Database
 from bson import ObjectId
 
 from openapi_server.config import get_env_config
-from openapi_server.user_utils import configure as configure_user_utils, configure_dev
+from openapi_server.user_utils import configure_prod as configure_user_utils, configure_dev
 
 from openapi_server.models import NewItem, NewGroup, NewGroupMembership, NewUnavailability, Feature
 from openapi_server.db_utils import create_item, create_group, create_group_membership, create_unavailability
@@ -30,7 +30,7 @@ def mongo_client():
     return client
 
 # Configure dependency injection
-def configure(binder):
+def configure_prod(binder):
     binder.bind(MongoClient, to=mongo_client(), scope=RequestScope)
 
 
@@ -82,8 +82,23 @@ def seed_db():
         )
     ]
 
-    for group in groups:
+    created_groups = [
         create_group(group, "auth0|643db743a891bec857308e2f", client)
+        for group in groups
+    ]
+
+    # Seed group memberships
+    group_memberships = [
+        NewGroupMembership(
+            group=cg.id,
+            user="auth0|643db743a891bec857308e2f",
+        )
+
+        for cg in created_groups
+    ]
+
+    for group_membership in group_memberships:
+        create_group_membership(group_membership, client)
 
     # Seed unavailable times
     unavailabilities = [
@@ -121,7 +136,7 @@ def main():
         )
 
     # Configure FlaskInjector
-    FlaskInjector(app=app.app, modules=[configure])
+    FlaskInjector(app=app.app, modules=[configure_prod])
 
     # Enable CORS
     CORS(app.app)
