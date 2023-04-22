@@ -86,10 +86,17 @@ def get_user_details_dev(func):
 
         # Determine parameters of func
         func_params = func.__code__.co_varnames
+
         
-        # Only supply relevant kwargs to func
         func_kwargs = kwargs.copy()
+
+        # Rename kwargs ending with _ to remove the _
         for arg in kwargs:
+            if arg.endswith("_"):
+                func_kwargs[arg[:-1]] = func_kwargs.pop(arg)
+
+        # Only supply relevant kwargs to func
+        for arg in func_kwargs.copy():
             if arg not in func_params:
                 func_kwargs.pop(arg)
 
