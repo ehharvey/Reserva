@@ -3,7 +3,7 @@ import { IconCalendarEvent, IconClock } from "@tabler/icons-react";
 import { useState } from "react";
 
 export interface PopupMessageProps {
-    iconType: 'clock' | 'calendarEvent'; // define the prop for icon type
+    iconType: 'error' | 'calendarEvent'; // define the prop for icon type
     message: string;
     size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     w?: number;
@@ -14,7 +14,7 @@ export function PopupMessage(props: PopupMessageProps) {
     const { iconType, message, size, w, onClose } = props;
 
     const getIcon = () => {
-        if (iconType === 'clock') {
+        if (iconType === 'error') {
             return <IconClock size="xs" color="grey" />;
         }
         if (iconType === 'calendarEvent') {
