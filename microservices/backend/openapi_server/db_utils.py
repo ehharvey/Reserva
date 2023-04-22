@@ -1,6 +1,7 @@
 import datetime
 from bson import ObjectId
 from pymongo import MongoClient
+from openapi_server.models.base_model_ import Model
 from openapi_server.models import NewItem, NewGroup, NewGroupMembership, NewUnavailability
 from openapi_server.models import Item, Group, GroupMembership, Unavailability
 
@@ -102,6 +103,20 @@ def create_unavailability(new_unavailability: NewUnavailability, client: MongoCl
 
     unavailabilities.insert_one(unavailability_dict)
 
-    unavailability.id = unavailability_dict["_id"].__str__()
-    
-    return unavailability
+    return get_model_from_mongo(unavailability_dict)
+
+def get_model_from_mongo(mongo: dict) -> Model:
+    """
+    Convert a mongo dict to a model
+
+    :param mongo: The mongo dict
+    """
+
+    mongo["id"] = mongo.pop("_id")
+
+    # Convert any ObjectId to a string
+    for key in mongo:
+        if isinstance(mongo[key], ObjectId):
+            mongo[key] = str(mongo[key])
+
+    return Model.from_dict(mongo)
