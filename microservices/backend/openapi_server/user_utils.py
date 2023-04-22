@@ -17,6 +17,7 @@ def get_user_details_prod(func):
         """
 
         kwargs["db"] = db
+        kwargs["client"] = db
         kwargs["user"] = user
         auth0_user_details: dict = auth0.users.get("auth0|643db743a891bec857308e2f")
         auth0_user_roles: list = auth0.users.list_roles("auth0|643db743a891bec857308e2f")
@@ -49,12 +50,18 @@ def get_user_details_prod(func):
         
         # Determine parameters of func
         func_params = func.__code__.co_varnames
-        
-        # Only supply relevant kwargs to func
+         # Only supply relevant kwargs to func
         func_kwargs = kwargs.copy()
+
+        # Rename kwardgs ending with _ to kwargs
+        for arg in kwargs:
+            if arg.endswith("_"):
+                func_kwargs[arg[:-1]] = func_kwargs.pop(arg)
+        
         for arg in kwargs:
             if arg not in func_params:
                 func_kwargs.pop(arg)
+        
 
 
         return func(*args, **func_kwargs)
@@ -65,14 +72,15 @@ def get_user_details_prod(func):
 def get_user_details_dev(func):
     """Decorator to get the user from the user header. DEVELOPMENT ONLY"""
 
-    def wrapper(user, db: MongoClient = None, *args, **kwargs):
+    def wrapper(user, client: MongoClient = None, *args, **kwargs):
         """
         Wrapper to get the user from the user header
         
         :param user: The user id
         """
 
-        kwargs["db"] = db
+        kwargs["db"] = client
+        kwargs["client"] = client
         kwargs["user"] = user
         kwargs["user_details"] = User(
             id="auth0|643db743a891bec857308e2f",
@@ -86,12 +94,18 @@ def get_user_details_dev(func):
         # Determine parameters of func
         func_params = func.__code__.co_varnames
         
-        # Only supply relevant kwargs to func
+        
         func_kwargs = kwargs.copy()
+
+        # Rename kwardgs ending with _ to kwargs
         for arg in kwargs:
+            if arg.endswith("_"):
+                func_kwargs[arg[:-1]] = func_kwargs.pop(arg)
+
+        # Only supply relevant kwargs to func
+        for arg in func_kwargs.copy():
             if arg not in func_params:
                 func_kwargs.pop(arg)
-
 
         return func(*args, **func_kwargs)
     

@@ -110,22 +110,15 @@ paths:
       tags:
       - group
       x-openapi-router-controller: openapi_server.controllers.group_controller
-  /groups/{id}/memberships/{membershipId}:
+  /groups_memberships/{id}:
     delete:
       description: |
         deletes a groupMembership object.  The group owner can delete any membership. A user can delete their own membership.
-      operationId: groups_id_memberships_membership_id_delete
+      operationId: groups_memberships_id_delete
       parameters:
       - explode: false
         in: path
         name: id
-        required: true
-        schema:
-          $ref: '#/components/schemas/groupId'
-        style: simple
-      - explode: false
-        in: path
-        name: membershipId
         required: true
         schema:
           $ref: '#/components/schemas/groupMembershipId'

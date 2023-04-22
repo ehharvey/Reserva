@@ -55,7 +55,7 @@ def create_group(new_group: NewGroup, user, client: MongoClient) -> Group:
 
     groups.insert_one(group_dict)
 
-    return group
+    return get_model_from_mongo(group_dict)
 
 def create_group_membership(new_group_membership: NewGroupMembership,  client: MongoClient) -> GroupMembership:
     """
@@ -77,6 +77,8 @@ def create_group_membership(new_group_membership: NewGroupMembership,  client: M
     group_membership_dict["_id"] = group_membership_dict.pop("id")
 
     group_memberships.insert_one(group_membership_dict)
+
+    group_membership.id = group_membership_dict["_id"].__str__()
 
     return group_membership
 
@@ -112,6 +114,9 @@ def get_model_from_mongo(mongo: dict) -> Model:
     :param mongo: The mongo dict
     """
 
+    if mongo is None:
+        return None
+
     mongo["id"] = mongo.pop("_id")
 
     # Convert any ObjectId to a string
@@ -120,3 +125,34 @@ def get_model_from_mongo(mongo: dict) -> Model:
             mongo[key] = str(mongo[key])
 
     return Model.from_dict(mongo)
+
+def get_group_membership(id: str, client: MongoClient) -> GroupMembership:
+    """
+    Get a group membership from the database
+
+    :param id: The id of the group membership
+    :param client: The database client
+    """
+
+    db = client["main"]
+    group_memberships = db["group_memberships"]
+
+    group_membership = group_memberships.find_one({"_id": ObjectId(id)})
+
+    return get_model_from_mongo(group_membership)
+
+def get_group(id: str, client: MongoClient) -> Group:
+    """
+    Get a group from the database
+    
+    :param id: The id of the group
+    :param client: The database client
+    """
+
+    db = client["main"]
+    groups = db["groups"]
+
+    group = groups.find_one({"_id": ObjectId(id)})
+    
+
+    return get_model_from_mongo(group)
